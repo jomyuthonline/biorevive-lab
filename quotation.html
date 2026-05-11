@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบเสนอราคา (Quotation) - BioRevive Lab</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --navy-blue: #162C4E;
+            --gold: #C5A059;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            font-family: 'Sarabun', sans-serif;
+            color: #333;
+            font-size: 14pt;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 20mm;
+            margin: 10mm auto;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10mm;
+            border-bottom: 2px solid var(--navy-blue);
+            padding-bottom: 5mm;
+        }
+
+        .company-info {
+            width: 68%;
+        }
+
+        .logo {
+            height: 90px;
+            margin-bottom: 15px;
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 15pt;
+            color: var(--navy-blue);
+            margin: 0 0 5px 0;
+            white-space: nowrap;
+        }
+
+        .company-address {
+            margin: 0;
+            line-height: 1.4;
+            font-size: 12pt;
+        }
+
+        .doc-title-container {
+            width: 30%;
+            text-align: right;
+        }
+
+        .doc-title {
+            font-size: 24pt;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 0 0 10px 0;
+        }
+
+        .doc-meta {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .doc-meta td {
+            padding: 3px 0;
+            font-size: 12pt;
+            text-align: left;
+        }
+
+        .doc-meta td:first-child {
+            font-weight: 600;
+            width: 40px;
+        }
+
+        .input-inline {
+            border: none;
+            border-bottom: 1px dotted #ccc;
+            outline: none;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 12pt;
+            width: 100%;
+            background: transparent;
+        }
+
+        .customer-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10mm;
+        }
+
+        .customer-box {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .customer-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--navy-blue);
+            font-size: 12pt;
+        }
+
+        table.items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10mm;
+        }
+
+        .items-table th {
+            background-color: var(--navy-blue);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 12pt;
+            border: 1px solid var(--navy-blue);
+        }
+
+        .items-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            font-size: 12pt;
+        }
+
+        .items-table input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 12pt;
+            background: transparent;
+        }
+        
+        .items-table input.num {
+            text-align: center;
+        }
+
+        .items-table input.right {
+            text-align: right;
+        }
+
+        .summary-table {
+            width: 40%;
+            margin-left: auto;
+            border-collapse: collapse;
+            margin-bottom: 15mm;
+        }
+
+        .summary-table td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            font-size: 12pt;
+        }
+
+        .summary-table td:first-child {
+            font-weight: 600;
+            text-align: right;
+            background-color: #f9f9f9;
+        }
+        
+        .summary-table input {
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: right;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: auto;
+        }
+
+        .sig-box {
+            text-align: center;
+            width: 40%;
+        }
+
+        .sig-line {
+            border-bottom: 1px dashed #666;
+            margin-bottom: 5px;
+            height: 30px;
+        }
+
+        .sig-desc {
+            font-size: 11pt;
+            color: #666;
+        }
+
+        /* Printable area styles */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                border: none;
+                border-radius: 0;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .input-inline, .items-table input, .summary-table input {
+                border-bottom: none;
+            }
+            .input-inline::placeholder, .items-table input::placeholder, .summary-table input::placeholder {
+                color: transparent; /* Hide placeholders when printing */
+            }
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="company-info">
+                <img src="assets/logo_transparent.png" alt="BioRevive Lab Logo" class="logo">
+                <h1 class="company-name">BioRevive Thailand - ไบโอรีไวฟ์ ไทยแลนด์</h1>
+                <p class="company-address">
+                    918/147 ซ.ประชาอุทิศ 90 ต.ในคลองบางปลากด<br>
+                    อ.พระสมุทรเจดีย์ จ.สมุทรปราการ 10290<br>
+                    โทร. <input type="text" class="input-inline" style="width: 150px;" placeholder="0XX-XXXXXXX"> | เว็บไซต์: biorevive-lab.vercel.app
+                </p>
+            </div>
+            <div class="doc-title-container">
+                <h2 class="doc-title">ใบเสนอราคา</h2>
+                <table class="doc-meta">
+                    <tr>
+                        <td>เลขที่</td>
+                        <td><input type="text" class="input-inline" placeholder="QU-202X-001"></td>
+                    </tr>
+                    <tr>
+                        <td>วันที่</td>
+                        <td><input type="text" class="input-inline" placeholder="DD/MM/YYYY"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="customer-section">
+            <div class="customer-box">
+                <h4>เสนอราคาให้ (Customer Information)</h4>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="width: 70px; padding: 4px 0; font-size: 12pt;">ชื่อลูกค้า:</td>
+                        <td><input type="text" class="input-inline" placeholder="กรอกชื่อลูกค้า หรือ ชื่อบริษัท"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 0; font-size: 12pt;">ที่อยู่:</td>
+                        <td><input type="text" class="input-inline" placeholder="กรอกที่อยู่ลูกค้า"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 4px 0; font-size: 12pt;">ผู้ติดต่อ:</td>
+                        <td><input type="text" class="input-inline" placeholder="กรอกชื่อผู้ติดต่อ และเบอร์โทรศัพท์"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Items Table -->
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%;">ลำดับ</th>
+                    <th style="width: 45%;">รายการสินค้า (Description)</th>
+                    <th style="width: 12%;">จำนวน</th>
+                    <th style="width: 15%;">หน่วยละ</th>
+                    <th style="width: 20%;">จำนวนเงิน</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="center"><input type="text" class="num" value="1"></td>
+                    <td><input type="text" value="จุลินทรีย์เชื้อสด สูตรน้ำ (Active Microbes - Liquid) - 1 L."></td>
+                    <td align="center"><input type="text" class="num" placeholder="0"></td>
+                    <td align="right"><input type="text" class="right" placeholder="0.00"></td>
+                    <td align="right"><input type="text" class="right" placeholder="0.00"></td>
+                </tr>
+                <tr>
+                    <td align="center"><input type="text" class="num" value="2"></td>
+                    <td><input type="text" value="จุลินทรีย์เชื้อสด สูตรพรีเมี่ยม (Active Microbes - Premium) - 1 kg."></td>
+                    <td align="center"><input type="text" class="num" placeholder="0"></td>
+                    <td align="right"><input type="text" class="right" placeholder="0.00"></td>
+                    <td align="right"><input type="text" class="right" placeholder="0.00"></td>
+                </tr>
+                <tr>
+                    <td align="center"><input type="text" class="num"></td>
+                    <td><input type="text"></td>
+                    <td align="center"><input type="text" class="num"></td>
+                    <td align="right"><input type="text" class="right"></td>
+                    <td align="right"><input type="text" class="right"></td>
+                </tr>
+                <tr>
+                    <td align="center"><input type="text" class="num"></td>
+                    <td><input type="text"></td>
+                    <td align="center"><input type="text" class="num"></td>
+                    <td align="right"><input type="text" class="right"></td>
+                    <td align="right"><input type="text" class="right"></td>
+                </tr>
+                <tr>
+                    <td align="center"><input type="text" class="num"></td>
+                    <td><input type="text"></td>
+                    <td align="center"><input type="text" class="num"></td>
+                    <td align="right"><input type="text" class="right"></td>
+                    <td align="right"><input type="text" class="right"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Summary -->
+        <table class="summary-table">
+            <tr>
+                <td>รวมเป็นเงิน</td>
+                <td><input type="text" placeholder="0.00"></td>
+            </tr>
+            <tr>
+                <td>ภาษีมูลค่าเพิ่ม (VAT 7%)</td>
+                <td><input type="text" placeholder="0.00"></td>
+            </tr>
+            <tr>
+                <td style="color: var(--navy-blue);">ยอดรวมสุทธิ</td>
+                <td><input type="text" style="color: var(--navy-blue);" placeholder="0.00"></td>
+            </tr>
+        </table>
+
+        <!-- Signatures -->
+        <div class="signature-section">
+            <div class="sig-box">
+                <div class="sig-line"></div>
+                <div class="sig-desc">ผู้เสนอราคา / Authorized Signature</div>
+                <div class="sig-desc" style="margin-top: 5px;">วันที่ (Date) : _____/_____/_____</div>
+            </div>
+            <div class="sig-box">
+                <div class="sig-line"></div>
+                <div class="sig-desc">ผู้อนุมัติสั่งซื้อ / Accepted By</div>
+                <div class="sig-desc" style="margin-top: 5px;">วันที่ (Date) : _____/_____/_____</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

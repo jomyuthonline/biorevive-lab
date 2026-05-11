@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หัวจดหมาย - BioRevive Lab - ไบโอรีไวฟ์ แลปส์</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --navy-blue: #162C4E;
+            --gold: #C5A059;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            font-family: 'Sarabun', sans-serif;
+            color: #333;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 10mm auto;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15mm;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 5mm;
+        }
+
+        .logo {
+            height: 130px;
+            object-fit: contain;
+        }
+
+        .content {
+            min-height: 150mm;
+            font-size: 16pt;
+            line-height: 1.6;
+            outline: none; /* Removes the blue glow when typing */
+        }
+        
+        .content[contenteditable="true"]:empty:before {
+            content: "คลิกเพื่อพิมพ์ข้อความในจดหมาย...";
+            color: #999;
+        }
+
+        /* Printable area styles */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                border: none;
+                border-radius: 0;
+                width: 210mm;
+                height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <!-- Logo Only Header -->
+        <div class="header">
+            <img src="assets/logo_transparent.png" alt="BioRevive Lab Logo" class="logo">
+        </div>
+        
+        <!-- Editable Content Area -->
+        <div class="content" contenteditable="true"></div>
+        
+    </div>
+
+</body>
+</html>

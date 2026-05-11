@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice / Receipt - BioRevive Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy-blue: #162C4E;
+            --gold: #C5A059;
+            --light-blue: #f0f4f8;
+            --border-color: #e2e8f0;
+            --text-main: #334155;
+            --text-light: #64748b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            font-family: 'Prompt', sans-serif;
+            color: var(--text-main);
+            font-size: 10pt;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8mm;
+        }
+
+        .logo-container {
+            width: 40%;
+        }
+        .logo {
+            height: 120px;
+            object-fit: contain;
+        }
+
+        .company-details {
+            width: 55%;
+            font-size: 9pt;
+        }
+        .company-name {
+            font-size: 16pt;
+            color: var(--navy-blue);
+            font-weight: 500;
+            margin: 0 0 5px 0;
+            border-top: 2px solid var(--gold);
+            padding-top: 5px;
+            display: inline-block;
+        }
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+        .contact-list li {
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .contact-list i {
+            color: var(--navy-blue);
+            width: 14px;
+            text-align: center;
+        }
+
+        /* Document Title */
+        .doc-title-wrapper {
+            text-align: center;
+            margin-bottom: 8mm;
+        }
+        .doc-title {
+            font-size: 14pt;
+            color: var(--text-main);
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        .doc-subtitle {
+            font-size: 10pt;
+            color: var(--text-light);
+            margin: 3px 0 0 0;
+            letter-spacing: 1px;
+        }
+
+        /* Middle Info Boxes */
+        .info-boxes {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8mm;
+            gap: 5mm;
+        }
+        
+        .box-issued {
+            flex: 1.2;
+            padding: 10px 15px;
+            position: relative;
+        }
+        .box-issued-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--navy-blue);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+        .box-issued-title i {
+            font-size: 14pt;
+        }
+        .textarea-transparent {
+            width: 100%;
+            height: 80px;
+            border: 1px dotted transparent;
+            font-family: 'Prompt', sans-serif;
+            font-size: 9pt;
+            color: var(--text-main);
+            resize: none;
+            outline: none;
+            background: transparent;
+            line-height: 1.5;
+        }
+        .textarea-transparent:hover, .textarea-transparent:focus {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+        }
+
+        .box-meta {
+            flex: 1;
+            border-left: 1px solid var(--border-color);
+            padding-left: 15px;
+        }
+        .meta-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 9pt;
+        }
+        .meta-icon {
+            width: 25px;
+            color: var(--navy-blue);
+            font-size: 12pt;
+        }
+        .meta-label {
+            width: 130px;
+            font-weight: 600;
+            color: var(--navy-blue);
+        }
+        .meta-value {
+            flex: 1;
+        }
+        .input-transparent {
+            width: 100%;
+            border: 1px dotted transparent;
+            font-family: 'Prompt', sans-serif;
+            font-size: 9pt;
+            color: var(--text-main);
+            outline: none;
+            background: transparent;
+        }
+        .input-transparent:hover, .input-transparent:focus {
+            border-bottom-color: #cbd5e1;
+        }
+
+        /* Table */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5mm;
+        }
+        .invoice-table th {
+            background-color: var(--navy-blue);
+            color: white;
+            padding: 8px;
+            font-weight: 500;
+            font-size: 9pt;
+            letter-spacing: 0.5px;
+        }
+        .invoice-table td {
+            padding: 8px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        .invoice-table .col-no { width: 8%; text-align: center; }
+        .invoice-table .col-desc { width: 52%; }
+        .invoice-table .col-price { width: 15%; text-align: center; }
+        .invoice-table .col-qty { width: 10%; text-align: center; }
+        .invoice-table .col-total { width: 15%; text-align: center; }
+
+        .item-title { font-weight: 500; color: var(--navy-blue); margin-bottom: 2px; }
+        .item-subtitle { font-size: 8.5pt; color: var(--text-light); }
+
+        /* Totals Area */
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8mm;
+        }
+
+        .thank-you-box {
+            width: 45%;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+        .thank-you-box::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            bottom: -1px;
+            width: 80%;
+            height: 2px;
+            background-color: var(--gold);
+        }
+        .ty-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #f0fdf4;
+            color: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20pt;
+            flex-shrink: 0;
+            border: 1px solid #bbf7d0;
+        }
+        .ty-text h4 { margin: 0 0 5px 0; color: var(--navy-blue); font-size: 10pt; }
+        .ty-text p { margin: 0; font-size: 8pt; color: var(--text-light); line-height: 1.4; }
+
+        .totals-box {
+            width: 40%;
+        }
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 15px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid white;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+        .totals-row.grand-total {
+            background-color: var(--navy-blue);
+            color: white;
+            font-size: 11pt;
+            padding: 12px 15px;
+            align-items: center;
+        }
+
+        /* Footer Info */
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            border-top: 1px solid var(--border-color);
+            padding-top: 5mm;
+            margin-bottom: 8mm;
+        }
+        
+        .bank-details {
+            width: 33%;
+            display: flex;
+            gap: 12px;
+        }
+        .bank-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--navy-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14pt;
+            flex-shrink: 0;
+        }
+        .bank-text h5 { margin: 0 0 5px 0; color: var(--navy-blue); font-size: 10pt; }
+        .bank-text p { margin: 0; font-size: 8.5pt; line-height: 1.4; }
+
+        .qr-details {
+            width: 30%;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .kplus-icon {
+            background-color: #00a950;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 8pt;
+        }
+        .qr-placeholder {
+            width: 70px;
+            height: 70px;
+            border: 1px dashed var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24pt;
+            color: #cbd5e1;
+        }
+
+        .contact-note {
+            width: 33%;
+            font-size: 8.5pt;
+        }
+        .contact-note p { margin: 0 0 8px 0; font-weight: 600; color: var(--navy-blue); }
+        .contact-note .small-text { font-weight: normal; color: var(--text-light); margin-bottom: 5px; }
+
+        /* Signatures */
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+            padding-top: 5mm;
+        }
+        .sig-left {
+            width: 45%;
+            font-size: 8.5pt;
+        }
+        .sig-left p { margin: 0 0 15px 0; }
+        .sig-line-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .sig-line-inline {
+            flex: 1;
+            border-bottom: 1px solid var(--text-main);
+            height: 20px;
+        }
+        
+        .sig-right {
+            width: 40%;
+            text-align: center;
+        }
+        .signature-font {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28pt;
+            color: var(--navy-blue);
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+        .sig-line-full {
+            border-top: 1px solid var(--gold);
+            padding-top: 5px;
+            font-size: 8.5pt;
+            color: var(--text-light);
+        }
+
+        /* Decorative Leaves (Optional CSS based) */
+        .deco-leaf {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .deco-leaf.bl { bottom: -20px; left: -20px; font-size: 150pt; color: #166534; transform: rotate(45deg); }
+        .deco-leaf.br { bottom: -20px; right: -20px; font-size: 150pt; color: #166534; transform: rotate(-45deg); }
+
+        /* Print Settings */
+        @media print {
+            body { background: none; margin: 0; }
+            .page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; }
+            .textarea-transparent, .input-transparent { border: none !important; background: transparent !important; resize: none; }
+            .textarea-transparent::placeholder, .input-transparent::placeholder { color: transparent; }
+            @page { size: A4; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <!-- Decoration -->
+        <i class="fa-solid fa-leaf deco-leaf bl"></i>
+        <i class="fa-solid fa-leaf deco-leaf br"></i>
+
+        <!-- Top Header -->
+        <div class="header-top" style="position: relative; z-index: 1;">
+            <div class="logo-container">
+                <img src="assets/logo_transparent.png" alt="BioRevive Lab" class="logo">
+            </div>
+            <div class="company-details">
+                <div class="company-name">BioRevive Thailand - ไบโอรีไวฟ์ ไทยแลนด์</div>
+                <div style="color: var(--text-light);">
+                    918/147 ม.10 PRACHAUTHID 90<br>
+                    T. NAIKLONGBANPLAKOD A. PRACHAMUDCHEDEE<br>
+                    P. SAMUTPRAKARN 10290
+                </div>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-phone"></i> <input type="text" class="input-transparent" style="width: 150px;" placeholder="0XX-XXXXXXX"></li>
+                    <li><i class="fa-solid fa-globe"></i> biorevive-lab.vercel.app</li>
+                    <li><i class="fa-brands fa-line"></i> @biorevivelab</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Document Title -->
+        <div class="doc-title-wrapper" style="position: relative; z-index: 1;">
+            <h2 class="doc-title">ใบแจ้งค่าบริการ/ใบเสร็จรับเงิน [เมื่อชำระเงินแล้ว]</h2>
+            <p class="doc-subtitle">INVOICE / RECEIPT</p>
+        </div>
+
+        <!-- Middle Info Boxes -->
+        <div class="info-boxes" style="position: relative; z-index: 1;">
+            <div class="box-issued">
+                <div class="box-issued-title">
+                    <i class="fa-solid fa-circle-user"></i> ISSUED TO:
+                </div>
+                <textarea class="textarea-transparent" placeholder="กรอกชื่อและที่อยู่ลูกค้าที่นี่..."></textarea>
+            </div>
+            <div class="box-meta">
+                <div class="meta-row">
+                    <i class="fa-solid fa-file-invoice meta-icon"></i>
+                    <div class="meta-label">INVOICE NO.</div>
+                    <div class="meta-value"><input type="text" class="input-transparent" value="2026*04/010"></div>
+                </div>
+                <div class="meta-row">
+                    <i class="fa-solid fa-calendar-days meta-icon"></i>
+                    <div class="meta-label">DATE</div>
+                    <div class="meta-value"><input type="text" class="input-transparent" value="Apr 30, 2026"></div>
+                </div>
+                <div class="meta-row">
+                    <i class="fa-solid fa-truck-fast meta-icon"></i>
+                    <div class="meta-label">DELIVERY /<br>TRACKING NO.</div>
+                    <div class="meta-value"><input type="text" class="input-transparent" value="-"></div>
+                </div>
+                <div class="meta-row">
+                    <i class="fa-solid fa-credit-card meta-icon"></i>
+                    <div class="meta-label">TERMS OF PAYMENT</div>
+                    <div class="meta-value"><input type="text" class="input-transparent" value="ชำระเงินสด"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <table class="invoice-table" style="position: relative; z-index: 1;">
+            <thead>
+                <tr>
+                    <th class="col-no">NO.</th>
+                    <th class="col-desc">DESCRIPTION</th>
+                    <th class="col-price">UNIT PRICE</th>
+                    <th class="col-qty">QTY</th>
+                    <th class="col-total">TOTAL (THB)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-no"><input type="text" class="input-transparent" style="text-align: center;" value="1"></td>
+                    <td class="col-desc">
+                        <div class="item-title"><input type="text" class="input-transparent" value="จุลินทรีย์เชื้อสด สูตรน้ำ (Active Microbes - Liquid)"></div>
+                        <div class="item-subtitle"><input type="text" class="input-transparent" value="ขนาด 1 ลิตร / 5 ลิตร"></div>
+                    </td>
+                    <td class="col-price"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-qty"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-total"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                </tr>
+                <tr>
+                    <td class="col-no"><input type="text" class="input-transparent" style="text-align: center;" value="2"></td>
+                    <td class="col-desc">
+                        <div class="item-title"><input type="text" class="input-transparent" value="จุลินทรีย์เชื้อสด สูตรพรีเมี่ยม (Active Microbes - Premium)"></div>
+                        <div class="item-subtitle"><input type="text" class="input-transparent" value="แบบเนื้อสดเข้มข้น ขนาด 1 กก. / 6 กก."></div>
+                    </td>
+                    <td class="col-price"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-qty"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-total"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                </tr>
+                <tr>
+                    <td class="col-no"><input type="text" class="input-transparent" style="text-align: center;" value="3"></td>
+                    <td class="col-desc">
+                        <div class="item-title"><input type="text" class="input-transparent" value="จุลินทรีย์เชื้อสด สูตรพรีเมี่ยม (Sachets)"></div>
+                        <div class="item-subtitle"><input type="text" class="input-transparent" value="แบบซองชา ขนาด 20 กรัม x 6 ชิ้น"></div>
+                    </td>
+                    <td class="col-price"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-qty"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-total"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                </tr>
+                <tr>
+                    <td class="col-no"><input type="text" class="input-transparent" style="text-align: center;" value="4"></td>
+                    <td class="col-desc">
+                        <div class="item-title"><input type="text" class="input-transparent" value="ค่าขนส่ง"></div>
+                    </td>
+                    <td class="col-price"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-qty"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                    <td class="col-total"><input type="text" class="input-transparent" style="text-align: center;" value="-"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Totals Area -->
+        <div class="bottom-section" style="position: relative; z-index: 1;">
+            <div class="thank-you-box">
+                <div class="ty-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="ty-text">
+                    <h4>THANK YOU</h4>
+                    <p>ขอขอบพระคุณที่ไว้วางใจในสินค้าและบริการของเรา<br>ไบโอรีไวฟ์ แล็บ มุ่งมั่นพัฒนาโซลูชันชีวภาพ<br>เพื่อสิ่งแวดล้อมที่ดีขึ้น อย่างยั่งยืน</p>
+                </div>
+            </div>
+            <div class="totals-box">
+                <div class="totals-row">
+                    <span>SUBTOTAL</span>
+                    <span><input type="text" class="input-transparent" style="text-align: right; width: 80px;" value="-"></span>
+                </div>
+                <div class="totals-row">
+                    <span>DISCOUNT</span>
+                    <span><input type="text" class="input-transparent" style="text-align: right; width: 80px;" value="-"></span>
+                </div>
+                <div class="totals-row">
+                    <span>VAT 7%</span>
+                    <span><input type="text" class="input-transparent" style="text-align: right; width: 80px;" value="-"></span>
+                </div>
+                <div class="totals-row grand-total">
+                    <div>GRAND TOTAL<br><span style="font-size: 8pt; font-weight: normal;">(THB)</span></div>
+                    <span><input type="text" class="input-transparent" style="text-align: right; width: 100px; color: white; font-size: 14pt; font-weight: bold;" value="-"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="footer-info" style="position: relative; z-index: 1;">
+            <div class="bank-details">
+                <div class="bank-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="bank-text">
+                    <h5>BANK DETAILS</h5>
+                    <p><input type="text" class="input-transparent" style="font-weight: bold;" placeholder="ระบุธนาคาร / สาขา"><br>A/C no. <input type="text" class="input-transparent" style="width: 150px;" placeholder="XXX-X-XXXXX-X"> ชื่อ <input type="text" class="input-transparent" style="width: 150px;" placeholder="ระบุชื่อบัญชี"></p>
+                </div>
+            </div>
+            
+            <div class="qr-details">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
+                        <span class="kplus-icon">K+</span>
+                        <span style="font-size: 8pt; font-weight: 600; color: var(--navy-blue);">QR PAYMENT<br><span style="font-size: 7pt; font-weight: normal; color: var(--text-light);">สแกนเพื่อชำระเงิน</span></span>
+                    </div>
+                </div>
+                <!-- Actual QR Code Image -->
+                <img src="assets/qrcode.jpg" alt="Payment QR Code" style="width: 70px; height: 70px; object-fit: contain; border: 1px dashed var(--text-light); padding: 2px;">
+            </div>
+
+            <div class="contact-note">
+                <p>***เมื่อท่านชำระค่าบริการและค่าภาษีเต็มจำนวนเรียบร้อยแล้ว<br>ให้ส่งใบเสร็จรับเงิน***</p>
+                <div class="small-text">กรุณาอีเมลหลักฐานการโอนเงินที่</div>
+                <div style="margin-bottom: 3px;"><i class="fa-regular fa-envelope" style="color: var(--navy-blue); width: 15px;"></i> panidakhall@gmail.com</div>
+                <div><i class="fa-brands fa-line" style="color: var(--navy-blue); width: 15px;"></i> @pph8888</div>
+            </div>
+        </div>
+
+        <!-- Signatures -->
+        <div class="signatures" style="position: relative; z-index: 1;">
+            <div class="sig-left">
+                <p>The above terms and conditions<br>are agreed by the following parties</p>
+                <div class="sig-line-container">
+                    <span>For & on behalf of</span>
+                    <input type="text" class="input-transparent sig-line-inline">
+                </div>
+                <div style="text-align: center; margin-top: 5px;"><input type="text" class="input-transparent" style="text-align: center;" value="TKI Perpetual Co., Ltd."></div>
+            </div>
+            
+            <div class="sig-right">
+                <input type="text" class="input-transparent signature-font" style="text-align: center;" placeholder="Signature">
+                <div class="sig-line-full">
+                    <input type="text" class="input-transparent" style="text-align: center; font-size: 8.5pt;" placeholder="ชื่อผู้มีอำนาจลงนาม"><br>Authorized Signature
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 จุดอับระดับวิกฤตในร้านอาหาร - BioRevive Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { 
+            background-color: var(--off-white); 
+        }
+        .checklist-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .checklist-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .checklist-header h1 {
+            color: var(--navy-blue);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .checklist-header p {
+            color: var(--gold);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        .checklist-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .checklist-item:active {
+            transform: scale(0.98);
+        }
+        .checklist-item.checked {
+            border-color: var(--gold);
+            background-color: #f9fff9;
+        }
+        .check-icon {
+            color: #ddd;
+            font-size: 1.8rem;
+            margin-top: 2px;
+            transition: color 0.3s;
+        }
+        .checklist-item input[type="checkbox"] {
+            display: none;
+        }
+        .checklist-item input[type="checkbox"]:checked + label .check-icon {
+            color: var(--gold);
+        }
+        .checklist-item input[type="checkbox"]:checked + label .item-content h3 {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .checklist-item input[type="checkbox"]:checked + label .item-content p {
+            color: #aaa;
+        }
+        .item-label {
+            display: flex;
+            gap: 15px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .item-content h3 {
+            color: var(--navy-blue);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+        .item-content p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+            transition: color 0.3s;
+        }
+        .item-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        .checklist-item input[type="checkbox"]:checked + label .item-image {
+            filter: grayscale(80%) opacity(0.6);
+        }
+        .checklist-cta {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+        .checklist-cta h3 {
+            color: var(--navy-blue);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        .btn-line {
+            background-color: #00B900;
+            color: white;
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-line:hover {
+            background-color: #009900;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .btn-back {
+            background-color: transparent;
+            color: var(--navy-blue);
+            border: 2px solid var(--navy-blue);
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .btn-back:hover {
+            background-color: var(--navy-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="checklist-container">
+        <div class="checklist-header fade-in">
+            <h1>5 จุดเสี่ยงซ่อนเร้นในร้านอาหาร</h1>
+            <p>ตรวจเช็คเพื่อยกระดับมาตรฐาน และปกป้องภาพลักษณ์ธุรกิจของคุณ</p>
+        </div>
+
+        <div class="checklist-items fade-in">
+            <!-- Item 1 -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check1">
+                <label for="check1" class="item-label">
+                    <i class="fa-regular fa-circle-check check-icon"></i>
+                    <div class="item-content">
+                        <h3>1. ระบบอ่างล้างจาน (Preparation Sinks)</h3>
+                        <p>ประสบปัญหาน้ำระบายช้า หรือมีกลิ่นไม่พึงประสงค์ย้อนกลับ ซึ่งอาจกระทบต่อสุขอนามัยในพื้นที่เตรียมอาหารหรือไม่?</p>
+                        <img src="assets/chk_sink.png" alt="อ่างล้างจานสกปรก" class="item-image">
+                    </div>
+                </label>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check2">
+                <label for="check2" class="item-label">
+                    <i class="fa-regular fa-circle-check check-icon"></i>
+                    <div class="item-content">
+                        <h3>2. บ่อดักไขมัน (Grease Traps)</h3>
+                        <p>มีคราบไขมันสะสมหนาตัวจนจัดการยาก และเริ่มส่งกลิ่นรบกวนที่อาจส่งผลต่อบรรยากาศและประสบการณ์ของลูกค้าหรือไม่?</p>
+                        <img src="assets/chk_grease.png" alt="ถังดักไขมัน" class="item-image">
+                    </div>
+                </label>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check3">
+                <label for="check3" class="item-label">
+                    <i class="fa-regular fa-circle-check check-icon"></i>
+                    <div class="item-content">
+                        <h3>3. ท่อระบายน้ำหลัก (Main Drainage)</h3>
+                        <p>พบปัญหาน้ำขังระบายไม่ทันในชั่วโมงเร่งด่วน ซึ่งเสี่ยงต่อการสะสมของแบคทีเรียและอุบัติเหตุจากการลื่นล้มหรือไม่?</p>
+                        <img src="assets/chk_drain.png" alt="ท่อระบายน้ำทิ้งอุดตัน" class="item-image">
+                    </div>
+                </label>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check4">
+                <label for="check4" class="item-label">
+                    <i class="fa-regular fa-circle-check check-icon"></i>
+                    <div class="item-content">
+                        <h3>4. พื้นที่พักขยะ (Waste Storage Area)</h3>
+                        <p>มีน้ำเสียตกค้างตามจุดซ่อนเร้น ซึ่งเป็นปัจจัยดึงดูดแมลงรบกวนที่อาจส่งผลเสียต่อความเชื่อมั่นของลูกค้าหรือไม่?</p>
+                        <img src="assets/chk_waste.png" alt="พื้นที่ทิ้งขยะเปียก" class="item-image">
+                    </div>
+                </label>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check5">
+                <label for="check5" class="item-label">
+                    <i class="fa-regular fa-circle-check check-icon"></i>
+                    <div class="item-content">
+                        <h3>5. บ่อบำบัดน้ำเสีย (Wastewater Treatment Pit)</h3>
+                        <p>น้ำที่ผ่านการบำบัดยังคงมีสีคล้ำหรือมีกลิ่นรบกวน ซึ่งอาจเสี่ยงต่อการผิดมาตรฐานหรือถูกร้องเรียนจากพื้นที่ใกล้เคียงหรือไม่?</p>
+                        <img src="assets/chk_pit.png" alt="บ่อพักน้ำเสีย" class="item-image">
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="checklist-cta fade-in">
+            <h3>หากธุรกิจของคุณกำลังเผชิญสัญญาณเหล่านี้?</h3>
+            <p style="margin-bottom: 25px; color: #666; font-size: 0.95rem;">
+                ยกระดับมาตรฐานร้านอาหารของคุณด้วยโซลูชันชีวภาพ<br>
+                ปรึกษาผู้เชี่ยวชาญจาก BioRevive Lab <strong>ฟรี ไม่มีค่าใช้จ่าย</strong>
+            </p>
+            <a href="https://line.me/R/ti/p/@biorevivelab" id="line-cta" class="btn btn-line"><i class="fa-brands fa-line" style="margin-right: 8px;"></i> ทัก LINE ปรึกษาฟรี (@biorevivelab)</a>
+            <a href="index.html" class="btn btn-back">กลับสู่หน้าหลัก (เว็บไซต์)</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Trigger fade-in animation using the class from styles.css
+            const elements = document.querySelectorAll('.fade-in');
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 100);
+
+            const lineBtn = document.getElementById('line-cta');
+            const defaultLineUrl = 'https://line.me/R/ti/p/@biorevivelab';
+            const baseOaMessageUrl = 'https://line.me/R/oaMessage/@biorevivelab/?';
+
+            function updateLineLink() {
+                const checkedItems = document.querySelectorAll('input[type="checkbox"]:checked');
+                
+                if (checkedItems.length === 0) {
+                    lineBtn.href = defaultLineUrl;
+                    return;
+                }
+
+                let message = "สวัสดีครับ/ค่ะ สนใจรับคำปรึกษาจาก BioRevive Lab\nจากการประเมินในเว็บไซต์ ทางร้านพบจุดเสี่ยงดังนี้:\n";
+                
+                checkedItems.forEach(item => {
+                    const title = item.closest('.checklist-item').querySelector('h3').innerText;
+                    message += title + "\n";
+                });
+                
+                message += "\nรบกวนขอคำแนะนำเบื้องต้นด้วยครับ/ค่ะ";
+                
+                lineBtn.href = baseOaMessageUrl + encodeURIComponent(message);
+            }
+
+            // Checkbox logic for styling and font-awesome icons
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(box => {
+                box.addEventListener('change', function() {
+                    const icon = this.nextElementSibling.querySelector('.check-icon');
+                    const parentItem = this.closest('.checklist-item');
+                    
+                    if(this.checked) {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid');
+                        parentItem.classList.add('checked');
+                    } else {
+                        icon.classList.remove('fa-solid');
+                        icon.classList.add('fa-regular');
+                        parentItem.classList.remove('checked');
+                    }
+                    
+                    // Update LINE link whenever a checkbox changes
+                    updateLineLink();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
