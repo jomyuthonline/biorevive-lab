@@ -19,7 +19,7 @@
         
         /* Buttons */
         .btn-outline-dark { border: 2px solid #162C4E; color: #162C4E; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 10px; transition: 0.3s; }
-        .btn-filled-dark { background: #0F172A; color: #fff; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 10px; box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2); transition: 0.3s; }
+        .btn-filled-dark { background: #162C4E; color: #fff !important; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 10px; box-shadow: 0 10px 20px rgba(22, 44, 78, 0.2); transition: 0.3s; }
         .btn-filled-dark:hover { transform: translateY(-3px); }
         .btn-line { background: #06C755; color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; }
 
@@ -73,21 +73,52 @@
         .testimonial-user p { margin: 0; font-size: 0.95rem; color: #64748B; }
         .testimonial-text { font-style: italic; color: #334155; line-height: 1.7; font-size: 1.1rem; }
 
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 2.8rem; }
-            .risk-grid, .story-grid { grid-template-columns: 1fr; text-align: center; }
-            .risk-item { text-align: left; }
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .section-padding { padding: 50px 0; }
+            .hero { padding: 120px 0 60px 0; min-height: auto; }
+            .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 20px; }
+            .hero p { font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
+            .navbar .logo img { height: 55px !important; }
+            .nav-container { padding: 15px 0 !important; }
+            .nav-links { display: flex; align-items: center; }
+            .nav-links a:not(.btn-filled-dark) { display: none; }
+            .btn-filled-dark { padding: 10px 15px !important; font-size: 0.85rem !important; }
+            .hero-btns { flex-direction: column; gap: 15px; }
+            .hero-btns .btn-filled-dark, .hero-btns .btn-outline-dark { width: 100%; padding: 15px; }
+            h2 { font-size: 1.8rem !important; margin-bottom: 30px !important; }
+            
+            /* Force Vertical Stack for Mobile */
+            .risk-grid, .story-grid { 
+                display: block !important; 
+                direction: ltr !important; 
+                text-align: left !important;
+            }
+            .story-text, .risk-content { width: 100% !important; direction: ltr !important; text-align: left !important; }
+            .risk-image, .solution-image, .story-image { display: none !important; } /* Hide large side images on mobile */
+            
+            .mobile-only-img { display: block !important; width: 100%; border-radius: 20px; margin: 20px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+            .risk-item { margin-bottom: 40px; }
+            .risk-item p { font-size: 1.1rem; line-height: 1.6; }
         }
+        .mobile-only-img { display: none; }
+        @keyframes pulse-soft {
+            0% { transform: scale(1); box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
+        }
+        .pulse-cta { animation: pulse-soft 3s infinite ease-in-out; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo"><img src="assets/logo.png" alt="Logo" style="height:45px;"></a>
+        <div class="container nav-container" style="padding: 10px 0;">
+            <a href="#" class="logo"><img src="assets/logo.png" alt="Logo" style="height:90px;"></a>
             <div class="nav-links">
-                <a href="#about" style="margin-right:20px; text-decoration:none; color:#162C4E; font-weight:bold;">ประสบการณ์ 20 ปี</a>
-                <a href="https://line.me/ti/p/~@biorevivelab" class="btn-filled-dark" style="padding: 10px 25px; margin: 0; font-size: 1rem;">สั่งซื้อผ่าน LINE</a>
+                <a href="#about" style="margin-right:25px; text-decoration:none; color:#162C4E; font-weight:bold;">ประสบการณ์ 20 ปี</a>
+                <a href="#promotions" style="margin-right:25px; text-decoration:none; color:#C5A059; font-weight:bold;"><i class="fas fa-fire"></i> โปรโมชั่น</a>
+                <a href="checklist.html" class="btn-filled-dark pulse-cta" style="padding: 15px 35px; margin: 0; font-size: 1.1rem; background: #C5A059;">ตรวจสอบ 5 จุดเสี่ยง (ฟรี)</a>
             </div>
         </div>
     </nav>
@@ -95,25 +126,34 @@
     <!-- 1. Hero Section (From Screenshot) -->
     <header class="hero">
         <div class="container">
-            <h1>คืนความสมดุลให้<br><span>ระบบน้ำทิ้ง</span></h1>
-            <p>เริ่มต้นที่การดูแลอย่างถูกวิธี ด้วยนวัตกรรมจุลินทรีย์เชื้อสด Active 99% กำจัดกลิ่นและสลายไขมันถึงต้นตอภายใน 24 ชั่วโมง</p>
+            <h1>ฟื้นฟูน้ำเสีย...<br><span>ให้กลับมามีชีวิต</span></h1>
+            <p>คืนความสมดุลให้ระบบน้ำทิ้ง ด้วยนวัตกรรมจุลินทรีย์เชื้อสด Active 99% กำจัดกลิ่นและสลายไขมันถึงต้นตอภายใน 24 ชั่วโมง</p>
             <div class="hero-btns">
-                <a href="#about" class="btn-outline-dark">เรียนรู้เพิ่มเติม</a>
-                <a href="https://line.me/ti/p/~@biorevivelab" class="btn-filled-dark">ปรึกษาผู้เชี่ยวชาญ</a>
+                <a href="#promotions" class="btn-filled-dark" style="background:#C5A059; border:none;">ดูโปรโมชั่นพิเศษ</a>
+                <a href="checklist.html" class="btn-outline-dark">ประเมินความเสี่ยงร้าน (ฟรี)</a>
             </div>
         </div>
     </header>
 
     <!-- 2. The Pride (Emotional Storytelling) -->
     <section class="section-padding">
-        <div class="container">
-            <div class="story-grid">
-                <div class="story-image"><img src="assets/restaurant.png" alt="Pride" style="width:100%; border-radius:25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></div>
-                <div class="story-text">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">ความภาคภูมิใจในงานบริการ</h2>
-                    <p style="font-size: 1.2rem;">ความสุขของเจ้าของร้านอาหาร คาเฟ่ หรือโรงแรม คือการได้เห็นรอยยิ้มของลูกค้าในบรรยากาศที่สะอาด ปลอดโปร่ง และได้มาตรฐานสุขอนามัยที่ดีที่สุดในทุกๆ วัน</p>
+        <div class="container text-center">
+            <h2 style="font-size: 2.5rem; margin-bottom: 50px;">ความภาคภูมิใจในงานบริการ</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="story-item">
+                    <img src="assets/restaurant.png" alt="Restaurant" style="width:100%; border-radius:25px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
+                    <h4 style="font-size:1.4rem; color:#162C4E;">กลุ่มร้านอาหาร & ภัตตาคาร</h4>
+                </div>
+                <div class="story-item">
+                    <img src="assets/cafe.png" alt="Cafe" style="width:100%; border-radius:25px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
+                    <h4 style="font-size:1.4rem; color:#162C4E;">กลุ่มคาเฟ่ & เบเกอรี่</h4>
+                </div>
+                <div class="story-item">
+                    <img src="assets/hotel.png" alt="Hotel" style="width:100%; border-radius:25px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
+                    <h4 style="font-size:1.4rem; color:#162C4E;">กลุ่มโรงแรม & หอพัก</h4>
                 </div>
             </div>
+            <p style="font-size: 1.2rem; margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">ความสุขของเจ้าของธุรกิจ คือการได้เห็นรอยยิ้มของลูกค้าในบรรยากาศที่สะอาด ปลอดโปร่ง และได้มาตรฐานสุขอนามัยที่ดีที่สุดในทุกๆ วัน</p>
         </div>
     </section>
 
@@ -130,20 +170,29 @@
                         <i class="fas fa-shield-alt"></i>
                         <h4>มาตรฐานข้อกฎหมาย:</h4>
                         <p>การรักษาค่า BOD, SS และ O&G ให้ผ่านเกณฑ์มาตรฐานการบำบัดน้ำเสีย เพื่อเลี่ยงค่าปรับและข้อร้องเรียน</p>
+                        <img src="assets/chk_pit.png" class="mobile-only-img" alt="Wastewater Standard">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-eye-slash"></i>
                         <h4>วิกฤตที่มองไม่เห็น:</h4>
                         <p>คราบไขมันสะสมในท่ออุดตันและถังดักไขมันใต้ซิงค์ ซึ่งเป็นต้นตอของกลิ่นย้อนกลับที่ทำลายบรรยากาศ</p>
+                        <img src="assets/hidden_crisis_th.png" class="mobile-only-img" alt="Hidden Grease Problem">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-hand-holding-heart"></i>
                         <h4>การลงทุนที่คุ้มค่า:</h4>
                         <p>การดูแลเชิงป้องกันช่วยยืดอายุโครงสร้างท่อ ลดค่าใช้จ่ายในการซ่อมแซมครั้งใหญ่ในอนาคต</p>
+                        <img src="assets/grease_trap.png" class="mobile-only-img" alt="Preventive Maintenance">
+                    </div>
+
+                    <div style="margin-top:40px;">
+                        <a href="checklist.html" class="btn-outline-dark pulse-cta" style="border-color:#DFBE7B; color:#DFBE7B; padding:18px 35px; font-size:1.1rem; text-decoration:none;">
+                            <i class="fas fa-clipboard-check"></i> ตรวจสอบ 5 จุดเสี่ยงในร้านของคุณ (ฟรี)
+                        </a>
                     </div>
                 </div>
                 <div class="risk-image">
-                    <img src="assets/hidden_problem.png" alt="Internal Problem Graphic" style="width:100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
+                    <img src="assets/hidden_crisis_th.png" alt="Risk Illustration" style="width:100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
                 </div>
             </div>
         </div>
@@ -163,7 +212,41 @@
         </div>
     </section>
 
-    <!-- 5. Testimonials -->
+    <!-- 5. Solution Section (New Layout) -->
+    <section class="section-padding" style="background: white;">
+        <div class="container">
+            <div class="story-grid" style="direction: rtl;">
+                <div class="story-text" style="direction: ltr; text-align: left;">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 30px;">ทางออกที่มีประสิทธิภาพ</h2>
+                    <h3 style="color:#C5A059; margin-bottom: 20px;">สลายไขมันถึงต้นตอด้วย Active Bio-Action</h3>
+                    
+                    <div class="risk-item">
+                        <i class="fas fa-bolt" style="color:#C5A059;"></i>
+                        <h4>ทำงานทันที (Active Bio-Action):</h4>
+                        <p>จุลินทรีย์สายพันธุ์พิเศษพร้อมย่อยสลายคราบไขมันและสิ่งปฏิกูลทันทีที่สัมผัส</p>
+                        <img src="assets/product_liquid_clean.png" class="mobile-only-img" alt="Active Bio-Action">
+                    </div>
+                    <div class="risk-item">
+                        <i class="fas fa-leaf" style="color:#C5A059;"></i>
+                        <h4>เป็นมิตรต่อสิ่งแวดล้อม 100%:</h4>
+                        <p>ปลอดภัยต่อผู้ใช้งาน และไม่ทิ้งสารตกค้างในระบบนิเวศน์ตามมาตรฐาน BCG</p>
+                        <img src="assets/ad_concentrated.png" class="mobile-only-img" alt="Eco Friendly">
+                    </div>
+                    <div class="risk-item">
+                        <i class="fas fa-check-circle" style="color:#C5A059;"></i>
+                        <h4>ลดค่าใช้จ่ายระยะยาว:</h4>
+                        <p>ลดความถี่ในการจ้างรถดูดไขมัน และป้องกันปัญหาระบบระบายน้ำพังเสียหาย</p>
+                        <img src="assets/story_solution.png" class="mobile-only-img" alt="Cost Reduction">
+                    </div>
+                </div>
+                <div class="story-image" style="direction: ltr;">
+                    <img src="assets/ad_liquid.png" alt="Solution" style="width:100%; border-radius:25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Testimonials -->
     <section class="section-padding" style="background: #F8FAFC;">
         <div class="container text-center">
             <h2 style="font-size: 2.5rem; margin-bottom: 10px;">เสียงสะท้อนจากความภูมิใจ</h2>
@@ -205,33 +288,34 @@
                 <div class="pricing-card">
                     <img src="assets/ad_liquid.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
                     <h3>สูตรน้ำ (Liquid)</h3>
-                    <button onclick="addToCart('สูตรน้ำ 5L', 1890)" class="btn-buy">5 ลิตร: 1,890 ฿</button>
-                    <button onclick="addToCart('สูตรน้ำ 1L', 380)" class="btn-buy" style="background:none; border:2px solid #162C4E; color:#162C4E;">1 ลิตร: 380 ฿</button>
+                    <button onclick="addToCart('สูตรน้ำ 5L', 1890)" class="btn-buy pulse-cta">5 ลิตร: 1,890 ฿</button>
+                    <button onclick="addToCart('สูตรน้ำ 1L', 380)" class="btn-buy pulse-cta" style="background:none; border:2px solid #162C4E; color:#162C4E;">1 ลิตร: 380 ฿</button>
                 </div>
                 <div class="pricing-card popular">
                     <div style="background:#C5A059; color:white; padding:5px 20px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:15px;">BEST SELLER</div>
                     <img src="assets/ad_concentrated.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
                     <h3>สูตรพรีเมี่ยม (Premium)</h3>
-                    <button onclick="addToCart('พรีเมี่ยม 6kg', 3500)" class="btn-buy btn-buy-gold">6 kg: 3,500 ฿</button>
-                    <button onclick="addToCart('พรีเมี่ยม 1kg', 800)" class="btn-buy" style="background:none; border:2px solid #C5A059; color:#C5A059;">1 kg: 800 ฿</button>
+                    <button onclick="addToCart('พรีเมี่ยม 6kg', 3500)" class="btn-buy btn-buy-gold pulse-cta">6 kg: 3,500 ฿</button>
+                    <button onclick="addToCart('พรีเมี่ยม 1kg', 800)" class="btn-buy pulse-cta" style="background:none; border:2px solid #C5A059; color:#C5A059;">1 kg: 800 ฿</button>
                 </div>
                 <div class="pricing-card">
                     <img src="assets/ad_teabag_final.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
                     <h3>แบบซองชา (Tea bag)</h3>
-                    <button onclick="addToCart('ซองชา 6 ชิ้น', 299)" class="btn-buy">6 ชิ้น: 299 ฿</button>
+                    <p style="margin-bottom:15px; color:#64748B;">1 ซอง บรรจุ 6 ชิ้น / ชิ้นละ 20 g.</p>
+                    <button onclick="addToCart('ซองชา 1 ซอง', 299)" class="btn-buy pulse-cta">1 ซอง: 299 ฿</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 6. Promotions -->
-    <section class="section-padding" style="background: white;">
+    <section class="section-padding" id="promotions" style="background: white;">
         <div class="container text-center">
-            <h2 style="color:#C5A059; margin-bottom:40px; font-size: 2.2rem;">ชุดโปรโมชั่นสุดคุ้ม (ส่งฟรี!)</h2>
+            <h2 style="color:#C5A059; margin-bottom:40px; font-size: 2.2rem;">ชุดโปรโมชั่นสุดคุ้ม</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;">
-                <button onclick="addToCart('Set S', 611)" style="background:white; border:2px solid #162C4E; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.1rem;">Set S: 611 ฿</button>
-                <button onclick="addToCart('Set M', 2690)" style="background:#C5A059; color:white; border:none; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);">Set M: 2,690 ฿</button>
-                <button onclick="addToCart('Set L', 7359)" style="background:white; border:2px solid #162C4E; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.1rem;">Set L: 7,359 ฿</button>
+                <button onclick="addToCart('Set S', 611)" class="pulse-cta" style="background:white; border:2px solid #162C4E; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.1rem;">Set S: <span style="text-decoration:line-through; opacity:0.5; font-weight:normal; font-size:0.9rem;">679.-</span> 611 ฿</button>
+                <button onclick="addToCart('Set M', 2690)" class="pulse-cta" style="background:#C5A059; color:white; border:none; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);">Set M: <span style="text-decoration:line-through; opacity:0.8; font-weight:normal; font-size:1rem;">2,989.-</span> 2,690 ฿</button>
+                <button onclick="addToCart('Set L', 7359)" class="pulse-cta" style="background:white; border:2px solid #162C4E; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.1rem;">Set L: <span style="text-decoration:line-through; opacity:0.5; font-weight:normal; font-size:0.9rem;">8,177.-</span> 7,359 ฿</button>
             </div>
         </div>
     </section>
@@ -248,7 +332,34 @@
         </div>
     </section>
 
-    <!-- 8. BCG & Sustainability -->
+    <!-- 9. FAQ Section -->
+    <section class="section-padding" style="background: #F8FAFC;">
+        <div class="container" style="max-width: 800px;">
+            <h2 style="text-align:center; font-size: 2.2rem; margin-bottom: 40px; color:#162C4E;">คำถามที่พบบ่อย (FAQ)</h2>
+            
+            <div style="margin-bottom: 25px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h4 style="color:#C5A059; margin-bottom:10px;">Q: จุลินทรีย์เชื้อสดต่างจากแบบทั่วไปอย่างไร?</h4>
+                <p style="color:#64748B;">A: ของเราเป็น "เชื้อสด" ที่เข้มข้นและพร้อมทำงานทันที มีเอนไซม์ครบ 3 ชนิด (Lipase, Protease, Amylase) ย่อยทั้งไขมัน โปรตีน และแป้งถึงต้นตอครับ</p>
+            </div>
+
+            <div style="margin-bottom: 25px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h4 style="color:#C5A059; margin-bottom:10px;">Q: ต้องใช้บ่อยแค่ไหนถึงจะเห็นผล?</h4>
+                <p style="color:#64748B;">A: แนะนำใช้สม่ำเสมอทุกสัปดาห์ (ท่อ: 50ก. | บ่อดัก: 1กก. ต่อ 10 ลบ.ม.) กลิ่นจะจางลงเห็นผลชัดเจนใน 24 ชม. ครับ</p>
+            </div>
+
+            <div style="margin-bottom: 25px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h4 style="color:#C5A059; margin-bottom:10px;">Q: ปลอดภัยกับคนและสัตว์เลี้ยงไหม?</h4>
+                <p style="color:#64748B;">A: ปลอดภัย 100% ครับ เป็นมิตรต่อสิ่งแวดล้อมมาตรฐาน BCG Model ไม่กัดกร่อนท่อ และไม่เป็นอันตรายต่อผู้ใช้งานแน่นอนครับ</p>
+            </div>
+
+            <div style="margin-bottom: 25px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h4 style="color:#C5A059; margin-bottom:10px;">Q: มีข้อควรระวังอะไรบ้าง?</h4>
+                <p style="color:#64748B;">A: ไม่ควรใช้ร่วมกับโซดาไฟหรือน้ำยาล้างจานปริมาณมากพร้อมๆ กัน เพราะจะทำลายจุลินทรีย์ครับ และถ้าไขมันแข็งหนามากควรตักทิ้งก่อนเริ่มใช้ครั้งแรกครับ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. BCG & Sustainability -->
     <section style="background:#2E7D32; color:white; padding: 50px 0;">
         <div class="container text-center">
             <h3 style="font-size: 1.8rem; margin-bottom:15px;"><i class="fas fa-leaf"></i> มาตรฐานความยั่งยืน BCG Model</h3>
@@ -257,22 +368,30 @@
     </section>
 
     <footer style="padding: 80px 0; background: #0F172A; color: white; text-align: center;">
-        <img src="assets/logo.png" alt="Logo" style="max-width:160px; margin-bottom:30px;">
-        <p style="opacity:0.6;">&copy; 2026 BioRevive Lab. นวัตกรรมที่ยั่งยืนเพื่ออนาคตธุรกิจไทย</p>
+        <div class="container">
+            <img src="assets/qrcode_biorevive.png" alt="QR Line" style="max-width:180px; margin-bottom:20px; border-radius: 15px; border: 5px solid white; background: white;">
+            <div style="margin-bottom: 30px;">
+                <a href="https://line.me/ti/p/~@biorevivelab" class="pulse-cta" style="background:#06C755; color:white; padding: 12px 35px; border-radius: 50px; text-decoration:none; font-weight:bold; font-size:1.3rem; display:inline-block; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);">
+                    <i class="fab fa-line"></i> @biorevivelab
+                </a>
+            </div>
+            <p style="opacity:0.6;">&copy; 2026 BioRevive Lab. นวัตกรรมที่ยั่งยืนเพื่ออนาคตธุรกิจไทย</p>
+        </div>
     </footer>
 
     <!-- Cart -->
     <div id="cartBar" class="cart-bar">
         <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-            <div style="font-size:1.2rem; font-weight:bold;">ตะกร้า: <span id="cartCount">0</span> รายการ | ยอด: <span id="cartTotal">0</span> ฿</div>
-            <button onclick="openCheckout()" style="background:#C5A059; color:white; border:none; padding:15px 40px; border-radius:40px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">🛒 สั่งซื้อสินค้า</button>
+            <div style="font-size:1.2rem; font-weight:bold;">ตะกร้า: <span id="cartCount">0</span> รายการ | ยอดชำระ: <span id="cartTotal">0</span> ฿</div>
+            <button onclick="openCheckout()" class="pulse-cta" style="background:#C5A059; color:white; border:none; padding:15px 40px; border-radius:40px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">🛒 สั่งซื้อสินค้า</button>
         </div>
     </div>
 
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
             <span onclick="closeCheckout()" style="position:absolute; right:20px; top:20px; cursor:pointer; font-size:32px;">&times;</span>
-            <h2 style="margin-bottom:30px;">สรุปรายการสั่งซื้อ</h2>
+            <h2 style="margin-bottom:10px;">สรุปรายการสั่งซื้อ</h2>
+            <p style="color:#C5A059; font-weight:bold; margin-bottom:20px;">💡 ซื้อครบ 1,500.- ส่งฟรีทั่วประเทศ!<br><span style="font-size:0.9rem; font-weight:normal; opacity:0.8;">(ยอดไม่ถึงคิดค่าส่งเหมาจ่าย 80.-)</span></p>
             <div id="orderList" style="text-align:left; margin-bottom:20px; background:#F8FAFC; padding:20px; border-radius:20px;"></div>
             <h3 id="finalTotal" style="font-size: 1.8rem; color: #162C4E; margin-bottom: 25px; font-weight: 800;"></h3>
             
@@ -289,7 +408,7 @@
 
             <div id="qrcode"></div>
             <p style="margin-top:15px; font-weight:bold; color: #162C4E;">PromptPay: 090-919-5565</p>
-            <button onclick="sendToLine()" style="width:100%; background:#06C755; color:white; padding:20px; border:none; border-radius:15px; cursor:pointer; font-weight:bold; font-size:1.2rem; margin-top:25px;">✅ แจ้งโอนเงินทาง LINE</button>
+            <button onclick="sendToLine()" class="pulse-cta" style="width:100%; background:#06C755; color:white; padding:20px; border:none; border-radius:15px; cursor:pointer; font-weight:bold; font-size:1.2rem; margin-top:25px;">✅ แจ้งโอนเงินทาง LINE</button>
         </div>
     </div>
 
@@ -301,14 +420,24 @@
             document.getElementById('cartBar').style.display = 'block';
         }
         function updateCart() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const shipping = (subtotal >= 1500 || subtotal === 0) ? 0 : 80;
+            const total = subtotal + shipping;
             document.getElementById('cartCount').innerText = cart.length;
             document.getElementById('cartTotal').innerText = total.toLocaleString();
         }
         function openCheckout() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('orderList').innerHTML = cart.map(item => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:1.1rem;"><span>${item.name}</span><span style="font-weight:bold;">${item.price.toLocaleString()} ฿</span></div>`).join('');
-            document.getElementById('finalTotal').innerText = `รวมยอดสุทธิ: ${total.toLocaleString()} ฿`;
+            const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const shipping = (subtotal >= 1500 || subtotal === 0) ? 0 : 80;
+            const total = subtotal + shipping;
+            
+            let html = cart.map(item => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:1.1rem;"><span>${item.name}</span><span style="font-weight:bold;">${item.price.toLocaleString()} ฿</span></div>`).join('');
+            html += `<hr style="border:none; border-top:1px solid #E2E8F0; margin:15px 0;">`;
+            html += `<div style="display:flex; justify-content:space-between; margin-bottom:5px; opacity:0.7;"><span>ค่าจัดส่ง:</span><span>${shipping === 0 ? 'ฟรี' : shipping + ' ฿'}</span></div>`;
+            
+            document.getElementById('orderList').innerHTML = html;
+            document.getElementById('finalTotal').innerText = `ยอดชำระสุทธิ: ${total.toLocaleString()} ฿`;
+            
             const qr = document.getElementById('qrcode');
             qr.innerHTML = '';
             new QRCode(qr, { text: generatePayload("0909195565", total), width: 200, height: 200 });
@@ -316,12 +445,14 @@
         }
         function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
         function sendToLine() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const shipping = (subtotal >= 1500 || subtotal === 0) ? 0 : 80;
+            const total = subtotal + shipping;
             const items = cart.map(item => `- ${item.name}`).join('%0A');
             const name = document.getElementById('custName').value || 'ไม่ระบุ';
             const phone = document.getElementById('custPhone').value || 'ไม่ระบุ';
             const address = document.getElementById('custAddress').value || 'ไม่ระบุ';
-            const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!%0A%0Aรายการสินค้า:%0A${items}%0A%0Aรวมยอดสุทธิ: ${total.toLocaleString()} บาท%0A%0Aชื่อผู้รับ: ${name}%0Aเบอร์โทร: ${phone}%0Aที่อยู่: ${address}`;
+            const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!%0A%0Aรายการสินค้า:%0A${items}%0A%0Aค่าจัดส่ง: ${shipping === 0 ? 'ฟรี' : shipping + ' บาท'}%0Aรวมยอดสุทธิ: ${total.toLocaleString()} บาท%0A%0Aชื่อผู้รับ: ${name}%0Aเบอร์โทร: ${phone}%0Aที่อยู่: ${address}`;
             window.location.href = `https://line.me/R/oaMessage/@biorevivelab/?${msg}`;
         }
         function generatePayload(id, amount) {
