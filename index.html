@@ -224,7 +224,7 @@
                         <i class="fas fa-bolt" style="color:#C5A059;"></i>
                         <h4>ทำงานทันที (Active Bio-Action):</h4>
                         <p>จุลินทรีย์สายพันธุ์พิเศษพร้อมย่อยสลายคราบไขมันและสิ่งปฏิกูลทันทีที่สัมผัส</p>
-                        <img src="assets/product_liquid_clean.png" class="mobile-only-img" alt="Active Bio-Action">
+                        <img src="assets/ad_liquid.png" class="mobile-only-img" alt="Active Bio-Action">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-leaf" style="color:#C5A059;"></i>
@@ -311,11 +311,44 @@
     <!-- 6. Promotions -->
     <section class="section-padding" id="promotions" style="background: white;">
         <div class="container text-center">
-            <h2 style="color:#C5A059; margin-bottom:40px; font-size: 2.2rem;">ชุดโปรโมชั่นสุดคุ้ม</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;">
-                <button onclick="addToCart('Set S', 611)" class="pulse-cta" style="background:white; border:2px solid #162C4E; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.1rem;">Set S: <span style="text-decoration:line-through; opacity:0.5; font-weight:normal; font-size:0.9rem;">679.-</span> 611 ฿</button>
-                <button onclick="addToCart('Set M', 2690)" class="pulse-cta" style="background:#C5A059; color:white; border:none; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);">Set M: <span style="text-decoration:line-through; opacity:0.8; font-weight:normal; font-size:1rem;">2,989.-</span> 2,690 ฿</button>
-                <button onclick="addToCart('Set L', 7359)" class="pulse-cta" style="background:white; border:2px solid #162C4E; padding:25px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:1.1rem;">Set L: <span style="text-decoration:line-through; opacity:0.5; font-weight:normal; font-size:0.9rem;">8,177.-</span> 7,359 ฿</button>
+            <h2 style="color:#C5A059; margin-bottom:50px; font-size: 2.2rem;">ชุดโปรโมชั่นสุดคุ้ม</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Set S -->
+                <div class="pricing-card">
+                    <img src="assets/promo_set_s.png" alt="Set S" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3>Set S (ชุดทดลอง)</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">แกลลอน 1L + ถุงชา 1 ถุง (6 ซอง)</p>
+                    <div style="margin-bottom:20px;">
+                        <span style="text-decoration:line-through; color:#94A3B8; font-size:1.1rem; margin-right:10px;">679.-</span>
+                        <span style="font-size:1.8rem; font-weight:800; color:#162C4E;">611 ฿</span>
+                    </div>
+                    <button onclick="addToCart('Set S', 611)" class="btn-buy pulse-cta">สั่งซื้อเซ็ต S</button>
+                </div>
+
+                <!-- Set M -->
+                <div class="pricing-card popular">
+                    <div style="background:#C5A059; color:white; padding:5px 20px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:15px;">ยอดนิยมที่สุด</div>
+                    <img src="assets/promo_set_m.png" alt="Set M" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3>Set M (มือโปร)</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">แกลลอน 5L + ถุงพรีเมียม 1kg + ถุงชา 1 ถุง (6 ซอง)</p>
+                    <div style="margin-bottom:20px;">
+                        <span style="text-decoration:line-through; color:#94A3B8; font-size:1.1rem; margin-right:10px;">2,989.-</span>
+                        <span style="font-size:1.8rem; font-weight:800; color:#C5A059;">2,690 ฿</span>
+                    </div>
+                    <button onclick="addToCart('Set M', 2690)" class="btn-buy btn-buy-gold pulse-cta">สั่งซื้อเซ็ต M</button>
+                </div>
+
+                <!-- Set L -->
+                <div class="pricing-card">
+                    <img src="assets/promo_set_l.png" alt="Set L" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3>Set L (ธุรกิจใหญ่)</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">แกลลอน 5L (x2) + ถังพรีเมียม 6kg + ถุงชา 3 ถุง</p>
+                    <div style="margin-bottom:20px;">
+                        <span style="text-decoration:line-through; color:#94A3B8; font-size:1.1rem; margin-right:10px;">8,177.-</span>
+                        <span style="font-size:1.8rem; font-weight:800; color:#162C4E;">7,359 ฿</span>
+                    </div>
+                    <button onclick="addToCart('Set L', 7359)" class="btn-buy pulse-cta">สั่งซื้อเซ็ต L</button>
+                </div>
             </div>
         </div>
     </section>
@@ -323,7 +356,7 @@
     <!-- 7. Warning Gallery -->
     <section class="section-padding" style="background:#F9F9F9;">
         <div class="container text-center">
-            <h2 style="font-size: 2.2rem; margin-bottom: 50px;">อย่าปล่อยให้กลายเป็นแบบนี้</h2>
+            <h2 style="font-size: 2.2rem; margin-bottom: 50px;">อย่าลืมตรวจสอบจนกลายเป็นภาพตัวอย่างเหล่านี้</h2>
             <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
                 <div class="warning-card"><img src="assets/sink.png" alt="Sink"><p style="font-weight:bold; font-size:1.1rem;">คราบไขมันอุดตัน</p></div>
                 <div class="warning-card"><img src="assets/grease_trap.png" alt="Trap"><p style="font-weight:bold; font-size:1.1rem;">ถังดักไขมันเน่า</p></div>
