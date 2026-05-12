@@ -56,7 +56,22 @@
         /* Cart */
         .cart-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #162C4E; color: white; padding: 18px 0; z-index: 1001; display: none; border-top: 3px solid #C5A059; box-shadow: 0 -10px 30px rgba(0,0,0,0.3); }
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); }
-        .modal-content { background: white; margin: 5% auto; padding: 40px; border-radius: 30px; width: 90%; max-width: 480px; color: #162C4E; text-align: center; position: relative; }
+        .modal-content { background: white; margin: 2% auto; padding: 35px; border-radius: 30px; width: 95%; max-width: 500px; color: #162C4E; text-align: center; position: relative; max-height: 95vh; overflow-y: auto; }
+        .shipping-inputs { text-align: left; margin-bottom: 25px; }
+        .shipping-inputs label { display: block; font-weight: bold; margin-bottom: 8px; color: #162C4E; }
+        .shipping-inputs input, .shipping-inputs textarea { width: 100%; padding: 12px; border: 2px solid #E2E8F0; border-radius: 12px; margin-bottom: 15px; font-family: 'Sarabun', sans-serif; font-size: 1rem; }
+        .shipping-inputs input:focus, .shipping-inputs textarea:focus { border-color: #C5A059; outline: none; }
+        #qrcode { display: flex; justify-content: center; margin: 0 auto; }
+
+        /* Testimonials */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .testimonial-card { background: #fff; padding: 40px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); text-align: left; border-top: 4px solid #C5A059; position: relative; }
+        .testimonial-card i.fa-quote-left { position: absolute; right: 30px; top: 30px; font-size: 2rem; color: #F1F5F9; }
+        .testimonial-user { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .testimonial-user img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid #F1F5F9; }
+        .testimonial-user h4 { margin: 0; font-size: 1.2rem; color: #162C4E; font-weight: 700; }
+        .testimonial-user p { margin: 0; font-size: 0.95rem; color: #64748B; }
+        .testimonial-text { font-style: italic; color: #334155; line-height: 1.7; font-size: 1.1rem; }
 
         @media (max-width: 992px) {
             .hero h1 { font-size: 2.8rem; }
@@ -89,46 +104,46 @@
         </div>
     </header>
 
-    <!-- 2. The Dream (Original Content) -->
+    <!-- 2. The Pride (Emotional Storytelling) -->
     <section class="section-padding">
         <div class="container">
             <div class="story-grid">
-                <div class="story-image"><img src="assets/restaurant.png" alt="Dream" style="width:100%; border-radius:25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></div>
+                <div class="story-image"><img src="assets/restaurant.png" alt="Pride" style="width:100%; border-radius:25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></div>
                 <div class="story-text">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">ความฝันของเจ้าของธุรกิจอาหาร</h2>
-                    <p style="font-size: 1.2rem;">ความฝันของเจ้าของร้านอาหาร คาเฟ่ หรือโรงแรมทุกคน คือการส่งมอบประสบการณ์ที่ดีที่สุดให้กับลูกค้า ทั้งรสชาติอาหารที่อร่อย และบรรยากาศที่สะอาด ผ่อนคลาย</p>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">ความภาคภูมิใจในงานบริการ</h2>
+                    <p style="font-size: 1.2rem;">ความสุขของเจ้าของร้านอาหาร คาเฟ่ หรือโรงแรม คือการได้เห็นรอยยิ้มของลูกค้าในบรรยากาศที่สะอาด ปลอดโปร่ง และได้มาตรฐานสุขอนามัยที่ดีที่สุดในทุกๆ วัน</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. Risk Section (From Screenshot) -->
+    <!-- 3. Risk Section (Internal Problem Graphic) -->
     <section class="section-risk">
         <div class="container">
             <div class="risk-grid">
                 <div class="risk-content">
-                    <h2>ความเสี่ยงที่มองไม่เห็น</h2>
-                    <h3>อาจกลายเป็นฝันร้ายของธุรกิจได้ทุกเมื่อ</h3>
-                    <p style="margin-bottom: 40px; opacity: 0.85; font-size: 1.1rem;">ภายใต้หน้าร้านที่สวยงาม ปัญหาไขมันอุดตันและกลิ่นเหม็นย้อนกลับ คือระเบิดเวลาที่รอวันปะทุ ไม่เพียงแต่ทำลายบรรยากาศ แต่ยังมาพร้อมกับความเสี่ยง:</p>
+                    <h2>ปัจจัยที่ต้องเฝ้าระวัง</h2>
+                    <h3>รักษาภาพลักษณ์ธุรกิจของคุณให้ยั่งยืน</h3>
+                    <p style="margin-bottom: 40px; opacity: 0.85; font-size: 1.1rem;">ภายใต้โครงสร้างที่สวยงาม มีปัจจัยแฝงที่อาจกระทบต่อมาตรฐานและภาพลักษณ์ได้ หากขาดการดูแลระบบจัดการน้ำเสียอย่างถูกวิธี:</p>
                     
                     <div class="risk-item">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>กฎหมายน้ำทิ้ง:</h4>
-                        <p>มาตรฐาน BOD, SS และ O&G ที่หากไม่ผ่านเกณฑ์ เสี่ยงค่าปรับสูงสุด 100,000.-</p>
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>มาตรฐานข้อกฎหมาย:</h4>
+                        <p>การรักษาค่า BOD, SS และ O&G ให้ผ่านเกณฑ์มาตรฐานการบำบัดน้ำเสีย เพื่อเลี่ยงค่าปรับและข้อร้องเรียน</p>
                     </div>
                     <div class="risk-item">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>ภาพลักษณ์แบรนด์:</h4>
-                        <p>เพียงหนึ่งรีวิวเชิงลบเรื่องกลิ่น อาจทำให้ลูกค้าหายไปถาวร</p>
+                        <i class="fas fa-eye-slash"></i>
+                        <h4>วิกฤตที่มองไม่เห็น:</h4>
+                        <p>คราบไขมันสะสมในท่ออุดตันและถังดักไขมันใต้ซิงค์ ซึ่งเป็นต้นตอของกลิ่นย้อนกลับที่ทำลายบรรยากาศ</p>
                     </div>
                     <div class="risk-item">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>ค่าใช้จ่ายซ่อนเร้น:</h4>
-                        <p>การจ้างช่างทะลวงท่อซ้ำๆ คือการแก้ปัญหาที่ปลายเหตุและมีค่าใช้จ่ายสูง</p>
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h4>การลงทุนที่คุ้มค่า:</h4>
+                        <p>การดูแลเชิงป้องกันช่วยยืดอายุโครงสร้างท่อ ลดค่าใช้จ่ายในการซ่อมแซมครั้งใหญ่ในอนาคต</p>
                     </div>
                 </div>
                 <div class="risk-image">
-                    <img src="assets/story_risk.png" alt="Risk Illustration" style="width:100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
+                    <img src="assets/hidden_problem.png" alt="Internal Problem Graphic" style="width:100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
                 </div>
             </div>
         </div>
@@ -143,6 +158,40 @@
                     <h2 style="font-size: 2.8rem; margin-bottom: 25px;">ทางออกที่ยั่งยืนจาก<br>ประสบการณ์กว่า 20 ปี</h2>
                     <p style="font-size: 1.15rem;">BioRevive Lab คือนวัตกรรมจุลินทรีย์ธรรมชาติที่เกิดจากการสั่งสมประสบการณ์กว่า 20 ปี ในการเป็นที่ปรึกษาด้านระบบนิเวศให้กับฟาร์มกุ้งและภาคเกษตรกรรมชั้นนำของไทย</p>
                     <p style="font-size: 1.15rem;">เราคัดเลือก "จุลินทรีย์เชื้อสด" สายพันธุ์พิเศษที่มีประสิทธิภาพสูงสุดในการย่อยสลายไขมันและกำจัดกลิ่นได้ใน 24 ชั่วโมง โดยยังคงความเป็นมิตรต่อสิ่งแวดล้อม 100%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Testimonials -->
+    <section class="section-padding" style="background: #F8FAFC;">
+        <div class="container text-center">
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">เสียงสะท้อนจากความภูมิใจ</h2>
+            <p style="color: #64748B; font-size: 1.2rem; margin-bottom: 50px;">ผู้ประกอบการที่เลือกเปลี่ยนจากสารเคมี มาเป็นแนวทางชีวภาพที่ยั่งยืน</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <div class="testimonial-user">
+                        <img src="assets/testimonial_chef.png" alt="User 1">
+                        <div>
+                            <h4>เชฟมานพ</h4>
+                            <p>เจ้าของร้านอาหารชื่อดังย่านสุขุมวิท</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"ตั้งแต่เปลี่ยนมาใช้จุลินทรีย์เชื้อสด กลิ่นเหม็นจากถังดักไขมันที่เคยเป็นปัญหาหนักใจหายไปเลยครับ ลูกค้าแฮปปี้ พนักงานก็ทำงานได้เต็มที่ ไม่ต้องคอยกังวลเรื่องท่อตันอีกต่อไป"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <div class="testimonial-user">
+                        <img src="assets/testimonial_manager.png" alt="User 2">
+                        <div>
+                            <h4>คุณรินรดา</h4>
+                            <p>ผู้จัดการฝ่ายอาคาร Boutique Hotel</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"มาตรฐานน้ำทิ้งของเราผ่านเกณฑ์กฎหมายได้ง่ายขึ้นมากค่ะ ที่ประทับใจที่สุดคือการบริการแบบมืออาชีพ และชุดซองชาที่ทำให้ระบบบำบัดน้ำเสียทำงานได้เองอัตโนมัติ 24 ชั่วโมงจริงๆ"</p>
                 </div>
             </div>
         </div>
@@ -225,9 +274,21 @@
             <span onclick="closeCheckout()" style="position:absolute; right:20px; top:20px; cursor:pointer; font-size:32px;">&times;</span>
             <h2 style="margin-bottom:30px;">สรุปรายการสั่งซื้อ</h2>
             <div id="orderList" style="text-align:left; margin-bottom:20px; background:#F8FAFC; padding:20px; border-radius:20px;"></div>
-            <h3 id="finalTotal" style="font-size:1.8rem; color:#162C4E; margin-bottom:20px;"></h3>
+            <h3 id="finalTotal" style="font-size: 1.8rem; color: #162C4E; margin-bottom: 25px; font-weight: 800;"></h3>
+            
+            <div class="shipping-inputs">
+                <label for="custName">ชื่อผู้รับ:</label>
+                <input type="text" id="custName" placeholder="ระบุชื่อของคุณ">
+
+                <label for="custPhone">เบอร์โทรศัพท์:</label>
+                <input type="tel" id="custPhone" placeholder="ระบุเบอร์โทรศัพท์">
+                
+                <label for="custAddress">ที่อยู่จัดส่ง:</label>
+                <textarea id="custAddress" rows="3" placeholder="ระบุบ้านเลขที่, แขวง/ตำบล, เขต/อำเภอ, จังหวัด, รหัสไปรษณีย์"></textarea>
+            </div>
+
             <div id="qrcode"></div>
-            <p style="margin-top:20px; font-weight:bold;">PromptPay: 090-919-5565</p>
+            <p style="margin-top:15px; font-weight:bold; color: #162C4E;">PromptPay: 090-919-5565</p>
             <button onclick="sendToLine()" style="width:100%; background:#06C755; color:white; padding:20px; border:none; border-radius:15px; cursor:pointer; font-weight:bold; font-size:1.2rem; margin-top:25px;">✅ แจ้งโอนเงินทาง LINE</button>
         </div>
     </div>
@@ -256,26 +317,46 @@
         function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
         function sendToLine() {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!%0Aรวมยอดสุทธิ: ${total.toLocaleString()} บาท`;
+            const items = cart.map(item => `- ${item.name}`).join('%0A');
+            const name = document.getElementById('custName').value || 'ไม่ระบุ';
+            const phone = document.getElementById('custPhone').value || 'ไม่ระบุ';
+            const address = document.getElementById('custAddress').value || 'ไม่ระบุ';
+            const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!%0A%0Aรายการสินค้า:%0A${items}%0A%0Aรวมยอดสุทธิ: ${total.toLocaleString()} บาท%0A%0Aชื่อผู้รับ: ${name}%0Aเบอร์โทร: ${phone}%0Aที่อยู่: ${address}`;
             window.location.href = `https://line.me/R/oaMessage/@biorevivelab/?${msg}`;
         }
         function generatePayload(id, amount) {
             const target = id.replace(/[^0-9]/g, '');
-            let targetType = target.length >= 13 ? '03' : '01';
             let formattedTarget = target;
-            if (targetType === '01') { formattedTarget = "0066" + target.substring(1); formattedTarget = formattedTarget.padStart(13, '0'); }
-            let payload = ["000201", "010211", "29" + (30 + targetType.length + formattedTarget.length) + "0016A000000677010111" + targetType + formattedTarget.length.toString().padStart(2, '0') + formattedTarget, "5303764", "54" + amount.toFixed(2).length.toString().padStart(2, '0') + amount.toFixed(2), "5802TH", "6304"].join('');
-            payload += crc16(payload).toString(16).toUpperCase().padStart(4, '0');
-            return payload;
+            let targetType = '01'; 
+
+            if (target.length === 10) {
+                formattedTarget = "0066" + target.substring(1);
+                targetType = '01';
+            } else if (target.length === 13) {
+                formattedTarget = target;
+                targetType = '02';
+            }
+
+            const sub00 = "0016A000000677010111";
+            const sub01 = targetType + formattedTarget.length.toString().padStart(2, '0') + formattedTarget;
+            const tag29Content = sub00 + sub01;
+            const tag29 = "29" + tag29Content.length.toString().padStart(2, '0') + tag29Content;
+            const tag54 = amount ? "54" + amount.toFixed(2).length.toString().padStart(2, '0') + amount.toFixed(2) : "";
+            
+            let payload = ["000201", "010211", tag29, "5303764", tag54, "5802TH", "6304"].join('');
+            return payload + crc16(payload);
         }
+
         function crc16(data) {
             let crc = 0xFFFF;
+            const polynomial = 0x1021;
             for (let i = 0; i < data.length; i++) {
-                let x = ((crc >> 8) ^ data.charCodeAt(i)) & 0xFF;
-                x ^= x >> 4;
-                crc = ((crc << 8) ^ (x << 12) ^ (x << 5) ^ x) & 0xFFFF;
+                crc ^= (data.charCodeAt(i) << 8);
+                for (let j = 0; j < 8; j++) {
+                    crc = (crc & 0x8000) ? ((crc << 1) ^ polynomial) : (crc << 1);
+                }
             }
-            return crc & 0xFFFF;
+            return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
         }
     </script>
 </body>
