@@ -16,9 +16,11 @@ CHANNEL_SECRET = '055a435a7d7050470e27bf5d47b9ae76'
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
-# --- ฐานข้อมูลคำตอบแบบละเอียด (อัปเดต 2026) ---
+BASE_URL = "https://biorevive-lab.vercel.app"
+
+# --- ฐานข้อมูลคำตอบแบบละเอียด ---
 DETAILS = {
-    "ความเชี่ยวชาญ 20 ปี": "🏆 ประวัติและความเชี่ยวชาญ:\nBioRevive Lab ต่อยอดเทคโนโลยีจุลินทรีย์ธรรมชาติจากประสบการณ์กว่า 20 ปี ในการเป็นผู้เชี่ยวชาญด้านระบบนิเวศชีวภาพ\n\nเรานำนวัตกรรม 'เชื้อสด' มาปรับใช้เพื่อแก้ไขปัญหากลิ่นและไขมันในภาคบริการ (โรงแรม/ร้านอาหาร) อย่างยั่งยืนและปลอดภัย 100% ครับ",
+    "ความเชี่ยวชาญ 20 ปี": "🏆 ประวัติและความเชี่ยวชาญ:\nBioRevive Lab ต่อยอดเทคโนโลยีจุลินทรีย์ธรรมชาติจากประสบการณ์กว่า 20 ปี ในการเป็นที่ปรึกษาด้านระบบนิเวศให้กับฟาร์มกุ้งและภาคเกษตรกรรมชั้นนำของไทย\n\nเรานำนวัตกรรม 'เชื้อสด' มาปรับใช้เพื่อแก้ไขปัญหากลิ่นและไขมันในภาคบริการ (โรงแรม/ร้านอาหาร) อย่างยั่งยืนและปลอดภัย 100% ครับ",
     
     "3 พลังเอนไซม์": "🧬 นวัตกรรม 3 Enzymes:\nจุลินทรีย์เชื้อสดของเราผลิตเอนไซม์เข้มข้น 3 ชนิดที่ทำงานทันที:\n1. Lipase: ย่อยสลายคราบไขมัน (Fat/Oil)\n2. Protease: ย่อยสลายกากโปรตีนและเนื้อสัตว์\n3. Amylase: ย่อยสลายแป้งและเศษอาหาร\n\n*ทำให้กลิ่นหายขาดใน 24 ชม. และไขมันไม่อุดตันถาวรครับ*",
     
@@ -31,41 +33,53 @@ DETAILS = {
     "นัดหมายประเมินฟรี": "📸 บริการประเมินหน้างานฟรี!:\nเพื่อการคำนวณปริมาณที่แม่นยำ ท่านสามารถ:\n1. ส่งรูปถังดักไขมัน/หน้างาน\n2. ระบุเบอร์โทรติดต่อกลับ\n\nผู้เชี่ยวชาญของเราจะรีบวิเคราะห์และเสนอโซลูชั่นที่คุ้มค่าที่สุดให้ภายในวันนี้ครับ"
 }
 
-def create_bubble(title, text, btn_text, url=None):
-    return {
+def create_bubble(title, text, btn_text, img_url=None, url=None):
+    bubble = {
         "type": "bubble", "size": "micro",
         "header": {
             "type": "box", "layout": "vertical", "backgroundColor": "#162C4E",
             "contents": [{"type": "text", "text": title, "weight": "bold", "size": "sm", "color": "#C5A059"}]
-        },
-        "body": {
-            "type": "box", "layout": "vertical", "contents": [{"type": "text", "text": text, "wrap": True, "size": "xs", "color": "#4A5568"}]
-        },
-        "footer": {
-            "type": "box", "layout": "vertical",
-            "contents": [{
-                "type": "button", "style": "primary", "color": "#C5A059", "height": "sm",
-                "action": {
-                    "type": "uri" if url else "message",
-                    "label": btn_text,
-                    "uri": url if url else None,
-                    "text": None if url else "สอบถามเรื่อง: " + title
-                }
-            }]
         }
     }
+    
+    if img_url:
+        bubble["hero"] = {
+            "type": "image",
+            "url": img_url,
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover"
+        }
+        
+    bubble["body"] = {
+        "type": "box", "layout": "vertical", "contents": [{"type": "text", "text": text, "wrap": True, "size": "xs", "color": "#4A5568"}]
+    }
+    
+    bubble["footer"] = {
+        "type": "box", "layout": "vertical",
+        "contents": [{
+            "type": "button", "style": "primary", "color": "#C5A059", "height": "sm",
+            "action": {
+                "type": "uri" if url else "message",
+                "label": btn_text,
+                "uri": url if url else None,
+                "text": None if url else "สอบถามเรื่อง: " + title
+            }
+        }]
+    }
+    return bubble
 
 def get_faq_carousel():
     return {
         "type": "carousel",
         "contents": [
-            create_bubble("3 พลังเอนไซม์", "เจาะลึกการย่อยสลายไขมันด้วย 'เชื้อสด'", "ดูการทำงาน"),
-            create_bubble("ความเชี่ยวชาญ 20 ปี", "ผู้นำเทคโนโลยีชีวภาพเพื่อสิ่งแวดล้อม", "ดูประวัติเรา"),
-            create_bubble("วิธีการใช้งาน", "เทคนิคใช้ให้เห็นผลไวที่สุด", "วิธีใช้ละเอียด"),
-            create_bubble("ระยะเวลาเห็นผล", "กลิ่นหายใน 24 ชม. ไขมันลดใน 7 วัน", "เช็คประสิทธิภาพ"),
-            create_bubble("ปลอดภัย & BCG", "รักษ์โลก 100% ไม่กัดท่อ ไม่กัดมือ", "ดูใบรับรอง"),
-            create_bubble("ประเมินความเสี่ยง", "ตรวจสอบ 5 จุดเสี่ยงออนไลน์ (ฟรี)", "เริ่มตรวจเช็ค", "https://biorevive-lab.vercel.app/checklist.html"),
-            create_bubble("นัดหมายประเมินฟรี", "ส่งรูปหน้างานให้ผู้เชี่ยวชาญช่วยดู", "คุยกับผู้เชี่ยวชาญ")
+            create_bubble("3 พลังเอนไซม์", "สลายไขมันสะสมด้วยจุลินทรีย์เชื้อสด", "ดูการทำงาน", f"{BASE_URL}/assets/story_solution.png"),
+            create_bubble("วิธีการใช้งาน", "เทคนิคใช้ให้เห็นผลไวที่สุด", "วิธีใช้ละเอียด", f"{BASE_URL}/assets/ad_liquid.png"),
+            create_bubble("ความเชี่ยวชาญ 20 ปี", "ผู้นำเทคโนโลยีชีวภาพเพื่อสิ่งแวดล้อม", "ดูประวัติเรา", f"{BASE_URL}/assets/restaurant.png"),
+            create_bubble("ระยะเวลาเห็นผล", "กลิ่นหายใน 24 ชม. ไขมันลดใน 7 วัน", "เช็คประสิทธิภาพ", f"{BASE_URL}/assets/warn_canal.png"),
+            create_bubble("ปลอดภัย & BCG", "รักษ์โลก 100% ไม่กัดท่อ ไม่กัดมือ", "ดูใบรับรอง", f"{BASE_URL}/assets/hotel.png"),
+            create_bubble("ประเมินความเสี่ยง", "ตรวจสอบ 5 จุดเสี่ยงออนไลน์ (ฟรี)", "เริ่มตรวจเช็ค", f"{BASE_URL}/assets/hidden_crisis_th.png", f"{BASE_URL}/checklist.html"),
+            create_bubble("นัดหมายประเมินฟรี", "ส่งรูปหน้างานให้ผู้เชี่ยวชาญช่วยดู", "คุยกับผู้เชี่ยวชาญ", f"{BASE_URL}/assets/grease_trap.png")
         ]
     }
 
