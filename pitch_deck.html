@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BioRevive Lab · Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* base.css inline */
+:root {
+  --bg: #ffffff; --bg-soft: #f8fafc; --surface: #ffffff; --surface-2: #f1f5f9;
+  --border: rgba(22, 44, 78, 0.08); --border-strong: rgba(22, 44, 78, 0.18);
+  --text-1: #162C4E; --text-2: #4a5568; --text-3: #718096;
+  --accent: #C5A059; --accent-2: #B08D48; --accent-3: #162C4E;
+  --grad: linear-gradient(135deg, #C5A059 0%, #162C4E 100%);
+  --grad-soft: linear-gradient(135deg, #fdfcf9 0%, #f1f5f9 100%);
+  --radius: 20px; --radius-lg: 28px;
+  --shadow: 0 14px 40px rgba(22, 44, 78, 0.08), 0 2px 8px rgba(22, 44, 78, 0.04);
+  --font-sans: 'Sarabun', sans-serif;
+  --font-display: 'Sarabun', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text-1);font-family:var(--font-sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--bg)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:60px 112px;opacity:0;pointer-events:none;transition:opacity .5s ease, transform .5s ease;transform:translateX(30px);overflow:hidden;}
+
+.slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:2}
+.slide.is-prev{transform:translateX(-30px)}
+.h1{font-size:72px;line-height:1.4;font-weight:900;letter-spacing:-.02em;margin:0 0 15px; padding: 10px 0;}
+.h2{font-size:52px;font-weight:800;line-height:1.45;letter-spacing:-.015em;margin:0 0 12px; padding: 5px 0;}
+.h3{font-size:32px;line-height:1.5;font-weight:700;margin-bottom:12px;}
+
+.lede{font-size:26px;line-height:1.6;color:var(--text-2);font-weight:400;max-width:62ch}
+.grid{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+
+.card-accent{background:var(--surface);border-top:4px solid var(--accent)}
+.pill{display:inline-block;padding:8px 20px;border-radius:999px;font-size:15px;font-weight:600;background:var(--surface-2);color:var(--text-2);border:1px solid var(--border)}
+.pill-accent{background:rgba(197, 160, 89, 0.1);color:var(--accent);border-color:rgba(197, 160, 89, 0.3)}
+.gradient-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.deck-footer{position:absolute;bottom:24px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text-3);z-index:10;pointer-events:none}
+.progress-bar{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(0,0,0,0.05);z-index:20}
+.progress-bar > span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
+
+/* pitch-deck specific CSS */
+.tpl-pitch-deck .cover-bg{position:absolute;inset:0;background:var(--grad-soft);z-index:-1}
+.tpl-pitch-deck .cover-image{position:absolute;inset:0;z-index:-1;opacity:0.25;object-fit:cover;width:100%;height:100%;}
+.tpl-pitch-deck .cover-blob{position:absolute;right:-140px;top:-140px;width:560px;height:560px;border-radius:50%;background:var(--grad);filter:blur(60px);opacity:.15;z-index:-1}
+.tpl-pitch-deck .brand-dot{display:inline-block;width:16px;height:16px;border-radius:50%;background:var(--grad);margin-right:12px;vertical-align:middle}
+.tpl-pitch-deck .brand{font-weight:800;font-size:24px;letter-spacing:-.02em}
+.tpl-pitch-deck .num-tag{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:.12em;margin-bottom:10px;text-transform:uppercase;}
+.tpl-pitch-deck .section-num{font-size:220px;font-weight:900;line-height:.9;color:rgba(22, 44, 78, 0.03);position:absolute;right:72px;bottom:40px;z-index:0;letter-spacing:-.05em}
+.tpl-pitch-deck .mega{font-size:140px;font-weight:900;line-height:1.3;letter-spacing:-.05em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent; padding-bottom: 20px;}
+
+.tpl-pitch-deck .ask-box{background:var(--grad);color:#fff;padding:56px 64px;border-radius:var(--radius-lg);box-shadow:0 30px 70px rgba(197, 160, 89, 0.3)}
+.tpl-pitch-deck .metric .n{font-size:72px;font-weight:900;letter-spacing:-.035em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.tpl-pitch-deck .metric .l{color:var(--text-2);font-size:18px;font-weight:600;}
+.tpl-pitch-deck .save-tag{font-size:16px;color:#06C755;font-weight:bold;margin-top:8px;}
+.tpl-pitch-deck .old-price{text-decoration:line-through;color:var(--text-3);font-size:24px;margin-bottom:4px;}
+
+/* animations.css inline subset */
+@keyframes kf-fade-up{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+.anim-fade-up{animation:kf-fade-up 0.8s cubic-bezier(.4,0,.2,1) both}
+.mt-m{margin-top:15px}.mt-l{margin-top:30px}
+.slide-img{width:100%; height: 160px; object-fit: contain; border-radius:8px; margin-bottom:10px; background: #fff;}
+
+.gender-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: inherit; font-size: 14px; box-shadow: var(--shadow); transition: 0.3s; }
+.gender-toggle:hover { background: var(--text-1); }
+
+</style>
+</head>
+<body class="tpl-pitch-deck">
+<button class="gender-toggle" onclick="toggleGender()">เปลี่ยนเป็น: <span id="genderLabel">ครับ</span></button>
+<div class="deck">
+
+
+  <!-- 1. Cover -->
+  <section class="slide" data-title="Cover">
+    <div class="cover-bg"></div>
+    <img src="assets/pitch_cover.png" class="cover-image" alt="BioRevive Lab">
+    <div class="cover-blob"></div>
+    <div style="position:absolute;top:56px;left:112px"><span class="brand-dot"></span><span class="brand">BioRevive Lab</span></div>
+    <p class="num-tag" style="color:var(--text-3)">B2B Partnership Proposal · 2026</p>
+    <h1 class="h1 anim-fade-up">ฟื้นฟูระบบน้ำเสีย...<br>ให้กลับมา <span class="gradient-text">มีชีวิต</span></h1>
+    <p class="lede mt-m">ยกระดับมาตรฐานสุขอนามัยสำหรับห้างสรรพสินค้าและร้านอาหาร ด้วยนวัตกรรมจุลินทรีย์ธรรมชาติ "เชื้อสด" ประสิทธิภาพสูง</p>
+    <div class="deck-footer"><span>BioRevive Lab · นวัตกรรมเพื่อธุรกิจสีเขียว</span><span class="slide-number"></span></div>
+  </section>
+
+
+  <!-- 2. Problem -->
+  <section class="slide" data-title="Problem">
+    <span class="section-num">01</span>
+    <p class="num-tag">THE PROBLEM</p>
+    <h2 class="h2 mt-s">ภายใต้โครงสร้างที่สวยงาม<br>มีวิกฤตที่มองไม่เห็น</h2>
+    <div class="grid g3 mt-l">
+      <div class="card"><img src="assets/sink.png" class="slide-img"><h4>คราบไขมันอุดตัน</h4><p class="dim">ไขมันสะสมในท่อทำให้น้ำระบายช้า และเป็นแหล่งสะสมของแบคทีเรียอันตราย</p></div>
+      <div class="card"><img src="assets/grease_trap.png" class="slide-img"><h4>กลิ่นไม่พึงประสงค์</h4><p class="dim">กลิ่นย้อนกลับจากถังดักไขมันทำลายบรรยากาศการใช้บริการของลูกค้า</p></div>
+      <div class="card"><img src="assets/canal.png" class="slide-img"><h4>มาตรฐานสุขอนามัย</h4><p class="dim">ความเสี่ยงจากการตรวจสอบน้ำทิ้งที่ไม่ผ่านเกณฑ์ และค่าปรับตามกฎหมาย</p></div>
+    </div>
+  </section>
+
+
+  <!-- 3. The Hidden Cost -->
+  <section class="slide" data-title="Cost">
+    <span class="section-num">02</span>
+    <p class="num-tag">THE HIDDEN COST</p>
+    <h2 class="h2 mt-s">ค่าใช้จ่ายแฝง<br>ที่ทำลายผลกำไร</h2>
+    <div class="grid g3 mt-l">
+      <div class="metric"><div class="n">80,000+</div><div class="l">ค่าปรับสูงสุดต่อครั้งตามกฎหมาย</div></div>
+      <div class="metric"><div class="n">35%</div><div class="l">ลูกค้าไม่กลับมาเพราะเรื่องความสะอาด</div></div>
+      <div class="metric"><div class="n">12 ชม.</div><div class="l">เวลาที่เสียไปเมื่อต้องปิดร้านซ่อมท่อ</div></div>
+    </div>
+    <p class="lede mt-l">การดูแลระบบน้ำเสียไม่ใช่แค่เรื่องความสะอาด แต่คือการรักษารอยยิ้มของลูกค้าและภาพลักษณ์ของธุรกิจคุณ</p>
+  </section>
+
+  <!-- 4. Solution -->
+  <section class="slide" data-title="Solution">
+    <span class="section-num">03</span>
+    <p class="num-tag">THE SOLUTION</p>
+    <h2 class="h2 mt-s">นวัตกรรมจุลินทรีย์ <span class="gradient-text">"เชื้อสด"</span><br>Active 99%</h2>
+    <p class="lede mt-m">ไม่ใช่แค่สารเคมี แต่คือ "สิ่งมีชีวิต" ที่พร้อมย่อยสลายไขมันและกำจัดกลิ่นได้ถึงต้นตอภายใน 24 ชั่วโมง</p>
+    <div class="row mt-l">
+      <span class="pill pill-accent">สลายไขมันทันที</span>
+      <span class="pill pill-accent">กำจัดกลิ่นใน 24 ชม.</span>
+      <span class="pill pill-accent">ปลอดภัย 100%</span>
+      <span class="pill pill-accent">มาตรฐาน BCG</span>
+    </div>
+  </section>
+
+  <!-- 5. Products -->
+  <section class="slide" data-title="Products">
+    <span class="section-num">04</span>
+    <p class="num-tag">OUR PRODUCTS</p>
+    <h2 class="h2 mt-s">ออกแบบมาเพื่อทุกขนาดธุรกิจ</h2>
+    <div class="grid g3 mt-l">
+      <div class="card card-hover"><img src="assets/ad_liquid.png" class="slide-img"><h4>Liquid Formula</h4><p class="dim">สูตรน้ำเข้มข้น เหมาะสำหรับล้างท่อและดับกลิ่นแบบเร่งด่วน</p></div>
+      <div class="card card-hover"><img src="assets/ad_concentrated.png" class="slide-img"><h4>Premium Powder</h4><p class="dim">สูตรผงประสิทธิภาพสูง สำหรับถังดักไขมันขนาดใหญ่</p></div>
+      <div class="card card-hover"><img src="assets/ad_teabag_final.png" class="slide-img"><h4>Tea Bag System</h4><p class="dim">ระบบซองชา "ใส่แล้วลืม" ทำงานอัตโนมัติ 24 ชม. ไม่ต้องตวง</p></div>
+    </div>
+  </section>
+
+
+  <!-- 6. Experience -->
+  <section class="slide" data-title="Expertise">
+    <span class="section-num">05</span>
+    <p class="num-tag">OUR EXPERTISE</p>
+    <h2 class="h2 mt-s">มั่นใจด้วยประสบการณ์<br>กว่า 20 ปี</h2>
+    <div class="grid g2 mt-l">
+      <div class="card">
+        <h3>20 Years Experience</h3>
+        <p class="dim">จากที่ปรึกษาฟาร์มกุ้งระดับประเทศ สู่ผู้นำด้านนวัตกรรมจุลินทรีย์สำหรับภาคบริการ</p>
+      </div>
+      <div class="card">
+        <h3>BCG Sustainability</h3>
+        <p class="dim">ผลิตภัณฑ์ทุกชิ้นเป็นมิตรต่อสิ่งแวดล้อม 100% สอดคล้องกับนโยบายธุรกิจสีเขียวของห้างสรรพสินค้าชั้นนำ</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Case Study -->
+  <section class="slide" data-title="Success">
+    <span class="section-num">06</span>
+    <p class="num-tag">SUCCESS STORIES</p>
+    <h2 class="h2 mt-s">พิสูจน์แล้วจากผู้ใช้งานจริง</h2>
+    <div class="grid g3 mt-l">
+      <div class="card"><h4>Food Courts</h4><p class="dim">ลดค่าใช้จ่ายในการดูดไขมันลง 50% และไม่มีข้อร้องเรียนเรื่องกลิ่น</p></div>
+      <div class="card"><h4>Fine Dining</h4><p class="dim">รักษามาตรฐานสุขอนามัยระดับสากล และยืดอายุการใช้งานระบบท่อ</p></div>
+      <div class="card"><h4>Chain Cafes</h4><p class="dim">จัดการคราบไขมันนมและกาแฟได้อย่างเบ็ดเสร็จ ง่ายต่อพนักงาน</p></div>
+    </div>
+  </section>
+
+
+  <!-- 9. Partner Ask -->
+  <section class="slide" data-title="Partnership">
+    <p class="num-tag">PARTNERSHIP</p>
+    <div class="ask-box mt-m">
+      <h2 class="h2">ก้าวสู่การเป็นธุรกิจรักษ์โลก</h2>
+      <p class="lede" style="color:rgba(255,255,255,.9);max-width:60ch">ร่วมเป็นพันธมิตรกับเรา เพื่อยกระดับมาตรฐานความสะอาดและความยั่งยืนให้กับพื้นที่ของคุณ</p>
+      <div class="row mt-l" style="gap:40px">
+        <div><div style="font-size:44px;font-weight:900">100%</div><div class="dim">Organic & Safe</div></div>
+        <div><div style="font-size:44px;font-weight:900">24 Hr</div><div class="dim">Active Response</div></div>
+        <div><div style="font-size:44px;font-weight:900">Zero</div><div class="dim">Chemical Waste</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Thanks -->
+  <section class="slide center tc" data-title="Thanks">
+    <div class="cover-bg"></div>
+    <img src="assets/pitch_cover.png" class="cover-image" alt="BioRevive Lab">
+    <div>
+      <div class="mega">ขอบคุณ<span class="gender-text">ครับ</span></div>
+
+      <p class="mega-sub">LINE ID: @biorevivelab · www.biorevivelab.com</p>
+      <div class="row mt-l" style="justify-content:center;gap:24px">
+        <span class="pill pill-accent">จองคิวประเมินฟรี<span class="gender-text">ครับ</span></span>
+
+        <span class="pill">BioRevive Lab · Proposal v1.0</span>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+
+<div class="progress-bar"><span></span></div>
+
+<script>
+(function () {
+  'use strict';
+  const deck = document.querySelector('.deck');
+  const slides = Array.from(deck.querySelectorAll('.slide'));
+  const barFill = document.querySelector('.progress-bar span');
+  let idx = 0;
+  const total = slides.length;
+
+  function go(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    slides.forEach((s, i) => {
+      s.classList.toggle('is-active', i === n);
+      s.classList.toggle('is-prev', i < n);
+    });
+    idx = n;
+    barFill.style.width = ((n + 1) / total * 100) + '%';
+    const numEl = slides[n].querySelector('.slide-number');
+    if (numEl) numEl.textContent = (n + 1) + ' / ' + total;
+  }
+
+  window.toggleGender = function() {
+    const texts = document.querySelectorAll('.gender-text');
+    const label = document.getElementById('genderLabel');
+    const current = label.innerText;
+    const next = current === 'ครับ' ? 'ค่ะ' : 'ครับ';
+    
+    texts.forEach(t => t.innerText = next);
+    label.innerText = current === 'ครับ' ? 'ครับ' : 'ค่ะ'; // The label shows what you can SWITCH TO
+    
+    // Update label to show what it IS currently to make it clearer
+    label.innerText = current === 'ครับ' ? 'ครับ' : 'ค่ะ'; 
+    // Wait, let's make it simpler:
+    if (current === 'ครับ') {
+      texts.forEach(t => t.innerText = 'ค่ะ');
+      label.innerText = 'ค่ะ';
+    } else {
+      texts.forEach(t => t.innerText = 'ครับ');
+      label.innerText = 'ครับ';
+    }
+  };
+
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') go(idx + 1);
+    if (e.key === 'ArrowLeft') go(idx - 1);
+  });
+
+  // Simple touch/click to navigate for preview
+  document.addEventListener('click', (e) => {
+    if (e.clientX > window.innerWidth / 2) go(idx + 1);
+    else go(idx - 1);
+  });
+
+  go(0);
+})();
+</script>
+</body></html>
