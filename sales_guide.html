@@ -49,6 +49,11 @@ header { background: var(--surface); padding: 20px; border-bottom: 1px solid var
   .hero h1 { font-size: 24px; }
   .card { padding: 20px; }
 }
+.comp-wrapper { position: relative; width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border); }
+.comp-labels { display: flex; justify-content: space-between; padding: 10px 15px; background: #f1f5f9; font-weight: 800; font-size: 13px; }
+.comp-label-bad { color: #e53e3e; }
+.comp-label-good { color: #06C755; }
+
 </style>
 </head>
 <body>
@@ -110,7 +115,14 @@ header { background: var(--surface); padding: 20px; border-bottom: 1px solid var
   <!-- SECTION 4 -->
   <div class="section-title">04. สู้กับคู่แข่ง (VS Competitors)</div>
   <div class="card">
-    <img src="assets/comparison.png" class="hero" style="margin-bottom:15px; height:auto;">
+    <div class="comp-wrapper">
+      <div class="comp-labels">
+        <span class="comp-label-bad">แบบเดิม (สารเคมี/ดูด)</span>
+        <span class="comp-label-good">BioRevive (เชื้อสด)</span>
+      </div>
+      <img src="assets/comparison_v2.png" style="width:100%; display:block;">
+    </div>
+
     <span class="q">สู้กับ "สารเคมีล้างท่อ":</span>
     <span class="a">สารเคมีกัดกร่อนท่อให้บางลงและทำให้ไขมันจับตัวเป็นก้อนแข็งในภายหลัง แต่ BioRevive ย่อยไขมันให้กลายเป็นน้ำและก๊าซธรรมชาติ ไม่ทำลายท่อ<span class="gender-text">ครับ</span></span>
     
