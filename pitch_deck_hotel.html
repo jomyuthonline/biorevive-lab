@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Solution Proposal - BioRevive Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #162C4E;
+            --accent: #C5A059;
+            --text-main: #1E293B;
+            --text-sub: #64748B;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Outfit', 'Noto Sans Thai', sans-serif; 
+            background: #111; 
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .deck {
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 120px;
+            overflow: hidden;
+        }
+
+        /* Animations */
+        .anim-fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .slide.active .anim-fade-up { opacity: 1; transform: translateY(0); }
+
+        /* Cover Slide */
+        .slide-cover {
+            background: var(--primary);
+            color: var(--white);
+            text-align: left;
+        }
+        .cover-bg {
+            position: absolute;
+            right: 0; top: 0; width: 50%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2070') center/cover;
+            opacity: 0.3;
+            mask-image: linear-gradient(to left, rgba(0,0,0,1), transparent);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(197, 160, 89, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 700; }
+        .h2 { font-size: 3rem; color: var(--primary); margin-bottom: 30px; font-weight: 700; }
+        .gradient-text { background: linear-gradient(135deg, #C5A059 0%, #F5E6AD 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .lede { font-size: 1.4rem; max-width: 700px; color: #CBD5E1; line-height: 1.6; }
+        
+        .section-num {
+            position: absolute;
+            top: 60px; left: 120px;
+            font-size: 1rem; font-weight: 700; color: var(--accent);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-num::after { content: ''; width: 40px; height: 1px; background: var(--accent); }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent);
+            margin-bottom: 20px;
+        }
+        .card h4 { font-size: 1.4rem; color: var(--primary); margin-bottom: 10px; }
+        .card p { color: var(--text-sub); line-height: 1.5; }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .comparison-table th { padding: 20px; text-align: left; border-bottom: 2px solid #E2E8F0; color: var(--primary); font-size: 1.2rem; }
+        .comparison-table td { padding: 20px; border-bottom: 1px solid #E2E8F0; }
+        .td-bad { color: #EF4444; font-weight: 600; }
+        .td-good { color: #10B981; font-weight: 600; }
+
+        .image-box {
+            width: 100%; height: 450px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .footer-tag {
+            position: absolute;
+            bottom: 40px; left: 120px; right: 120px;
+            display: flex; justify-content: space-between;
+            font-size: 0.8rem; color: var(--text-sub);
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide { padding: 40px; }
+            .h1 { font-size: 2.5rem; }
+            .h2 { font-size: 2rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 20px; }
+            .lede { font-size: 1rem; }
+            .cover-bg { display: none; }
+        }
+
+        /* Navigation Hints */
+        .nav-hint {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            z-index: 100;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-hint">เลื่อนลงเพื่อดูสไลด์ถัดไป <i class="fas fa-chevron-down"></i></div>
+
+    <div class="deck" id="deck">
+
+        <!-- 1. Cover -->
+        <section class="slide slide-cover active">
+            <div class="cover-bg"></div>
+            <div style="z-index: 2;">
+                <div class="badge">STRATEGIC SOLUTION PROPOSAL</div>
+                <h1 class="h1 anim-fade-up" style="opacity:1; transform:none;">Executive Proposal:<br><span class="gradient-text">Sustainable Waste</span><br>Management</h1>
+                <p class="lede anim-fade-up" style="opacity:1; transform:none; margin-top: 20px;">ยกระดับมาตรฐานสุขอนามัยและการจัดการของเสียอย่างยั่งยืน<br>สำหรับโรงแรมระดับ Luxury และกลุ่ม Hospitality ชั้นนำ</p>
+            </div>
+            <div class="footer-tag" style="color: #64748B;">
+                <span>BioRevive Lab · Professional Hospitality Series</span>
+                <span>CONFIDENTIAL · 2026</span>
+            </div>
+        </section>
+
+        <!-- 2. Pain Points -->
+        <section class="slide">
+            <span class="section-num">01 / THE CHALLENGE</span>
+            <div class="content-grid anim-fade-up">
+                <div>
+                    <h2 class="h2">ปัญหาที่มองไม่เห็น<br>แต่กระทบ <span class="gradient-text">หัวใจบริการ</span></h2>
+                    <p style="color: var(--text-sub); margin-bottom: 30px; font-size: 1.1rem;">โรงแรมขนาดใหญ่ต้องเผชิญกับภาระการจัดการน้ำเสียที่ซับซ้อน ซึ่งหากไม่ได้รับการดูแลที่ถูกต้อง จะส่งผลเสียต่อธุรกิจอย่างรุนแรง</p>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="card">
+                        <i class="fas fa-wind" style="color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Guest Experience</h4>
+                        <p>กลิ่นเหม็นย้อนกลับจากท่อระบายน้ำที่ทำลายความประทับใจของลูกค้า</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-dollar-sign" style="color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Maintenance Cost</h4>
+                        <p>ค่าใช้จ่ายในการดูดไขมันและล้างท่อแบบฉุกเฉินที่สูงเกินความจำเป็น</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-bug" style="color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Drain Pests</h4>
+                        <p>การสะสมของไขมันเป็นแหล่งเพาะพันธุ์แมลงหวี่ขนและพาหะนำโรค</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-leaf" style="color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Compliance</h4>
+                        <p>ความเสี่ยงในการทำผิดมาตรฐานน้ำเสีย (COD/BOD) ตามข้อกำหนดกฎหมาย</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. The Solution -->
+        <section class="slide" style="background: var(--bg-light);">
+            <span class="section-num">02 / OUR SOLUTION</span>
+            <div class="content-grid anim-fade-up">
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=2070" alt="Solution">
+                </div>
+                <div>
+                    <h2 class="h2">Biological<br>Revolution</h2>
+                    <div class="card" style="background: white;">
+                        <h4 style="color: var(--accent);">นวัตกรรม "จุลินทรีย์เชื้อสด"</h4>
+                        <p>เราไม่ได้แค่ทำความสะอาด แต่เราใช้พลังแห่งธรรมชาติในการ "ย่อยสลาย" ไขมันและกากอินทรีย์ที่ต้นเหตุ โดยใช้จุลินทรีย์สายพันธุ์คัดเลือกที่พร้อมทำงานทันที (Active Bio-Action)</p>
+                    </div>
+                    <ul style="list-style: none; margin-top: 20px;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent);"></i>
+                            <span>ปลอดภัย 100% ไม่กัดกร่อนระบบท่อ</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent);"></i>
+                            <span>กำจัดกลิ่นได้ถาวร ไม่ใช่แค่การใช้กลิ่นกลบ</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent);"></i>
+                            <span>ลดการสะสมของคราบไขมันในถังดักและบ่อบำบัด</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Comparison -->
+        <section class="slide">
+            <span class="section-num">03 / COMPARISON</span>
+            <div class="anim-fade-up">
+                <h2 class="h2">ทำไมต้องเปลี่ยนเป็น<br><span class="gradient-text">Bio-Revive?</span></h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>หัวข้อเปรียบเทียบ</th>
+                            <th>การจัดการแบบเดิม (Chemical)</th>
+                            <th>BioRevive Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>การแก้ปัญหา</td>
+                            <td class="td-bad">แก้ชั่วคราว (ท่อตันแล้วค่อยแก้)</td>
+                            <td class="td-good">แก้ถาวร (ย่อยสลายคราบสะสม)</td>
+                        </tr>
+                        <tr>
+                            <td>ผลกระทบต่อระบบท่อ</td>
+                            <td class="td-bad">กัดกร่อนและทำลายผิวท่อ</td>
+                            <td class="td-good">ปลอดภัย ไม่กัดกร่อน ยืดอายุการใช้งาน</td>
+                        </tr>
+                        <tr>
+                            <td>ความปลอดภัย</td>
+                            <td class="td-bad">มีสารเคมีตกค้าง อันตรายต่อผู้ใช้</td>
+                            <td class="td-good">Organic 100% ปลอดภัยต่อคนและสัตว์</td>
+                        </tr>
+                        <tr>
+                            <td>ภาพลักษณ์ความยั่งยืน</td>
+                            <td class="td-bad">ไม่ตอบโจทย์ Green Policy</td>
+                            <td class="td-good">สอดคล้องกับมาตรฐาน BCG & ESG</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. Applications -->
+        <section class="slide" style="background: var(--primary); color: white;">
+            <span class="section-num" style="color: var(--accent);">04 / APPLICATIONS</span>
+            <div class="anim-fade-up">
+                <h2 class="h2" style="color: white;">Full Ecosystem<br>Management</h2>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px;">
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--accent);">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h4>Main Kitchen</h4>
+                        <p style="font-size: 0.9rem; color: #CBD5E1; margin-top: 10px;">ครัวหลักและจุดเตรียมอาหารขนาดใหญ่</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--accent);">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h4>Grease Traps</h4>
+                        <p style="font-size: 0.9rem; color: #CBD5E1; margin-top: 10px;">บ่อดักไขมันทุกขนาดในอาคาร</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--accent);">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <h4>Garbage Room</h4>
+                        <p style="font-size: 0.9rem; color: #CBD5E1; margin-top: 10px;">ห้องพักขยะและจุดรวบรวมของเสีย</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--accent);">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4>STP Systems</h4>
+                        <p style="font-size: 0.9rem; color: #CBD5E1; margin-top: 10px;">ระบบบำบัดน้ำเสียรวมของโรงแรม</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ROI / ESG -->
+        <section class="slide">
+            <span class="section-num">05 / BUSINESS IMPACT</span>
+            <div class="content-grid anim-fade-up">
+                <div>
+                    <h2 class="h2">คุณค่าที่มากกว่า<br>แค่การทำความสะอาด</h2>
+                    <div class="card">
+                        <h4>ROI & Cost Saving</h4>
+                        <p>ลดค่าใช้จ่ายการซ่อมบำรุงระบบท่อลง 40-60% และลดความถี่ในการสูบบ่อไขมันลงอย่างเห็นได้ชัด</p>
+                    </div>
+                    <div class="card">
+                        <h4>Brand Reputation</h4>
+                        <p>ปกป้องชื่อเสียงโรงแรมจากข้อร้องเรียนเรื่องกลิ่นไม่พึงประสงค์ มอบประสบการณ์พักผ่อนที่สมบูรณ์แบบ</p>
+                    </div>
+                    <div class="card">
+                        <h4>ESG & Compliance</h4>
+                        <p>สนับสนุนนโยบาย Green Hotel และช่วยให้ผ่านการตรวจสอบมาตรฐานสิ่งแวดล้อมได้ง่ายขึ้น</p>
+                    </div>
+                </div>
+                <div class="image-box">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069" alt="Hotel ROI">
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Trial / Contact -->
+        <section class="slide" style="text-align: center;">
+            <div class="anim-fade-up">
+                <div class="badge">EXCLUSIVE OFFER</div>
+                <h2 class="h2">ก้าวแรกสู่มาตรฐาน<br><span class="gradient-text">โรงแรมสีเขียวอย่างยั่งยืน</span></h2>
+                <p style="max-width: 800px; margin: 0 auto 40px; font-size: 1.3rem; color: var(--text-sub);">ร่วมทดสอบประสิทธิภาพกับเราด้วยโปรแกรม 14-Day Trial<br>เพื่อพิสูจน์ผลลัพธ์ในพื้นที่จริงของท่าน ก่อนการทำสัญญาระยะยาว</p>
+                
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <a href="https://line.me/R/ti/p/@biorevivelab" style="background: var(--primary); color: white; padding: 20px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.2rem;">
+                        นัดหมายประเมินหน้างานฟรี <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-tag" style="justify-content: center; gap: 50px;">
+                <span><i class="fas fa-globe"></i> www.biorevive-lab.vercel.app</span>
+                <span><i class="fab fa-line"></i> @biorevivelab</span>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const deck = document.getElementById('deck');
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => observer.observe(slide));
+    </script>
+</body>
+</html>
