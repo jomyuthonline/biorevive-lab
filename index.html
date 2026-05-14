@@ -483,7 +483,7 @@
 
             <div id="qrcode"></div>
             <p style="margin-top:15px; font-weight:bold; color: #162C4E;">PromptPay: 090-919-5565</p>
-            <button onclick="sendToLine()" class="pulse-cta" style="width:100%; background:#06C755; color:white; padding:20px; border:none; border-radius:15px; cursor:pointer; font-weight:bold; font-size:1.2rem; margin-top:25px;">✅ แจ้งโอนเงินทาง LINE</button>
+            <a href="javascript:void(0)" onclick="sendToLine()" style="display: block; text-align: center; text-decoration: none; width:100%; background:#06C755; color:white; padding:20px; border:none; border-radius:15px; cursor:pointer; font-weight:bold; font-size:1.2rem; margin-top:25px;">✅ แจ้งโอนเงินทาง LINE</a>
         </div>
     </div>
 
@@ -568,9 +568,13 @@
         }
         function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
         function sendToLine() {
-            const name = document.getElementById('custName').value.trim() || 'ไม่ระบุ';
-            const phone = document.getElementById('custPhone').value.trim() || 'ไม่ระบุ';
-            const address = document.getElementById('custAddress').value.trim() || 'ไม่ระบุ';
+            const nameEl = document.getElementById('custName');
+            const phoneEl = document.getElementById('custPhone');
+            const addressEl = document.getElementById('custAddress');
+            
+            const name = nameEl ? nameEl.value.trim() : 'ไม่ระบุ';
+            const phone = phoneEl ? phoneEl.value.trim() : 'ไม่ระบุ';
+            const address = addressEl ? addressEl.value.trim() : 'ไม่ระบุ';
 
             const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
             const shipping = (subtotal >= 1500 || subtotal === 0) ? 0 : 80;
@@ -579,7 +583,13 @@
             
             const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!\n\nรายการสินค้า:\n${items}\n\nค่าจัดส่ง: ${shipping === 0 ? 'ฟรี' : shipping + ' บาท'}\nรวมยอดสุทธิ: ${total.toLocaleString()} บาท\n\nชื่อผู้รับ: ${name}\nเบอร์โทร: ${phone}\nที่อยู่: ${address}`;
             
-            window.location.href = `https://line.me/R/oaMessage/@biorevivelab/?${encodeURIComponent(msg)}`;
+            const lineUrl = `https://line.me/R/oaMessage/@biorevivelab/?${encodeURIComponent(msg)}`;
+            
+            // Try window.location first, then fallback to window.open for mobile deep links
+            window.location.href = lineUrl;
+            setTimeout(() => {
+                window.open(lineUrl, '_blank');
+            }, 300);
         }
         function generatePayload(id, amount) {
             const target = id.replace(/[^0-9]/g, '');
