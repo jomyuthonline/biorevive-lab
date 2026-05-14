@@ -443,7 +443,7 @@
         <div class="container">
             <img src="assets/qrcode_biorevive.png" alt="QR Line" style="max-width:180px; margin-bottom:20px; border-radius: 15px; border: 5px solid white; background: white;">
             <div style="margin-bottom: 30px;">
-                <a href="https://line.me/ti/p/~@biorevivelab" class="pulse-cta" style="background:#06C755; color:white; padding: 12px 35px; border-radius: 50px; text-decoration:none; font-weight:bold; font-size:1.3rem; display:inline-block; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);">
+                <a href="https://lin.ee/qqkJ83B" class="pulse-cta" style="background:#06C755; color:white; padding: 12px 35px; border-radius: 50px; text-decoration:none; font-weight:bold; font-size:1.3rem; display:inline-block; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);">
                     <i class="fab fa-line"></i> @biorevivelab
                 </a>
             </div>
@@ -568,15 +568,28 @@
         }
         function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
         function sendToLine() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('กรุณากรอกข้อมูลชื่อ เบอร์โทร และที่อยู่จัดส่งให้ครบถ้วนก่อนแจ้งโอนเงินครับ');
+                return;
+            }
+
+            if (cart.length === 0) {
+                alert('กรุณาเลือกสินค้าก่อนสั่งซื้อครับ');
+                return;
+            }
+
             const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
             const shipping = (subtotal >= 1500 || subtotal === 0) ? 0 : 80;
             const total = subtotal + shipping;
-            const items = cart.map(item => `- ${item.name}`).join('%0A');
-            const name = document.getElementById('custName').value || 'ไม่ระบุ';
-            const phone = document.getElementById('custPhone').value || 'ไม่ระบุ';
-            const address = document.getElementById('custAddress').value || 'ไม่ระบุ';
-            const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!%0A%0Aรายการสินค้า:%0A${items}%0A%0Aค่าจัดส่ง: ${shipping === 0 ? 'ฟรี' : shipping + ' บาท'}%0Aรวมยอดสุทธิ: ${total.toLocaleString()} บาท%0A%0Aชื่อผู้รับ: ${name}%0Aเบอร์โทร: ${phone}%0Aที่อยู่: ${address}`;
-            window.location.href = `https://line.me/R/oaMessage/@biorevivelab/?${msg}`;
+            const items = cart.map(item => `- ${item.name}`).join('\n');
+            
+            const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!\n\nรายการสินค้า:\n${items}\n\nค่าจัดส่ง: ${shipping === 0 ? 'ฟรี' : shipping + ' บาท'}\nรวมยอดสุทธิ: ${total.toLocaleString()} บาท\n\nชื่อผู้รับ: ${name}\nเบอร์โทร: ${phone}\nที่อยู่: ${address}`;
+            
+            window.location.href = `https://line.me/R/oaMessage/@biorevivelab/?${encodeURIComponent(msg)}`;
         }
         function generatePayload(id, amount) {
             const target = id.replace(/[^0-9]/g, '');
