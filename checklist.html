@@ -6,7 +6,7 @@
     <title data-i18n="chk_page_title">5 จุดอับระดับวิกฤตในร้านอาหาร - BioRevive Lab</title>
 
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { 
@@ -146,11 +146,24 @@
             background-color: var(--navy-blue);
             color: white;
         }
+
+        /* Language Switcher */
+        .lang-switcher { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
+        .lang-btn { cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; border: 1px solid #e2e8f0; background: #fff; transition: 0.3s; }
+        .lang-btn.active { background: #162C4E; color: #fff; border-color: #162C4E; }
     </style>
 </head>
 <body>
 
     <div class="checklist-container">
+        <div class="lang-switcher">
+            <button class="lang-btn" onclick="changeLang('th')">TH</button>
+            <button class="lang-btn" onclick="changeLang('en')">EN</button>
+            <button class="lang-btn" onclick="changeLang('zh')">ZH</button>
+            <button class="lang-btn" onclick="changeLang('ja')">JA</button>
+            <button class="lang-btn" onclick="changeLang('ko')">KO</button>
+            <button class="lang-btn" onclick="changeLang('my')">MY</button>
+        </div>
         <div class="checklist-header fade-in">
             <h1 data-i18n="chk_main_title">5 จุดเสี่ยงซ่อนเร้นในร้านอาหาร</h1>
             <p data-i18n="chk_sub_title">ตรวจเช็คเพื่อยกระดับมาตรฐาน และปกป้องภาพลักษณ์ธุรกิจของคุณ</p>
@@ -243,8 +256,16 @@
     <script src="translations.js"></script>
     <script>
         // Multi-language Engine
+        let currentLang = localStorage.getItem('biorevive_lang') || 'th';
+
+        function changeLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('biorevive_lang', lang);
+            updateUI();
+            updateLineLink();
+        }
+
         function updateUI() {
-            const currentLang = localStorage.getItem('selectedLanguage') || 'th';
             const langData = translations[currentLang];
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -258,6 +279,11 @@
                         el.innerHTML = langData[key];
                     }
                 }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('onclick').includes(currentLang));
             });
 
             // Update document language
@@ -286,7 +312,6 @@
             const baseOaMessageUrl = 'https://line.me/R/oaMessage/@biorevivelab/?';
 
             function updateLineLink() {
-                const currentLang = localStorage.getItem('selectedLanguage') || 'th';
                 const langData = translations[currentLang];
                 const checkedItems = document.querySelectorAll('input[type="checkbox"]:checked');
                 
