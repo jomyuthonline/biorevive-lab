@@ -568,24 +568,14 @@
         }
         function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
         function sendToLine() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const address = document.getElementById('custAddress').value.trim();
-
-            if (!name || !phone || !address) {
-                alert('กรุณากรอกข้อมูลชื่อ เบอร์โทร และที่อยู่จัดส่งให้ครบถ้วนก่อนแจ้งโอนเงินครับ');
-                return;
-            }
-
-            if (cart.length === 0) {
-                alert('กรุณาเลือกสินค้าก่อนสั่งซื้อครับ');
-                return;
-            }
+            const name = document.getElementById('custName').value.trim() || 'ไม่ระบุ';
+            const phone = document.getElementById('custPhone').value.trim() || 'ไม่ระบุ';
+            const address = document.getElementById('custAddress').value.trim() || 'ไม่ระบุ';
 
             const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
             const shipping = (subtotal >= 1500 || subtotal === 0) ? 0 : 80;
             const total = subtotal + shipping;
-            const items = cart.map(item => `- ${item.name}`).join('\n');
+            const items = cart.length > 0 ? cart.map(item => `- ${item.name}`).join('\n') : 'ยังไม่ได้เลือกสินค้า';
             
             const msg = `สนใจสั่งซื้อ BioRevive Lab ครับ!\n\nรายการสินค้า:\n${items}\n\nค่าจัดส่ง: ${shipping === 0 ? 'ฟรี' : shipping + ' บาท'}\nรวมยอดสุทธิ: ${total.toLocaleString()} บาท\n\nชื่อผู้รับ: ${name}\nเบอร์โทร: ${phone}\nที่อยู่: ${address}`;
             
