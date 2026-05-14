@@ -122,14 +122,22 @@
             letter-spacing: 1px;
         }
 
-        /* Responsive */
+        /* Responsive Updates */
         @media (max-width: 768px) {
-            .slide { padding: 40px; }
-            .h1 { font-size: 2.5rem; }
-            .h2 { font-size: 2rem; }
+            .slide { padding: 40px 20px; justify-content: flex-start; overflow-y: auto; }
+            .h1 { font-size: 2.2rem; }
+            .h2 { font-size: 1.8rem; margin-bottom: 20px; }
             .content-grid { grid-template-columns: 1fr; gap: 20px; }
+            .image-box { height: 250px; }
             .lede { font-size: 1rem; }
             .cover-bg { display: none; }
+            .section-num { left: 20px; top: 20px; }
+            .footer-tag { left: 20px; right: 20px; flex-direction: column; gap: 5px; }
+            
+            /* Stack grids on mobile */
+            .mobile-stack { grid-template-columns: 1fr !important; gap: 20px !important; }
+            .mobile-stack > div { margin-bottom: 10px; }
+            .mobile-stack img { height: 180px !important; }
         }
 
         .nav-hint {
@@ -173,11 +181,11 @@
                 <div>
                     <h2 class="h2">วิกฤตซ่อนเร้น<br>ในร้านอาหาร</h2>
                     <p style="color: var(--text-sub); margin-bottom: 30px; font-size: 1.1rem;">ต้นตอของปัญหาที่ทำลายทั้งบรรยากาศและกำไรของธุรกิจ</p>
-                    <div class="card">
+                    <div class="card" style="padding: 20px; margin-bottom: 15px;">
                         <h4>กลิ่นเหม็นรบกวน</h4>
                         <p>กลิ่นย้อนกลับจากท่อและถังดักไขมันที่ทำลายประสบการณ์ที่ดีของลูกค้า</p>
                     </div>
-                    <div class="card">
+                    <div class="card" style="padding: 20px; margin-bottom: 15px;">
                         <h4>ท่ออุดตันซ้ำซาก</h4>
                         <p>คราบไขมันสะสมหนาจนน้ำระบายไม่ทัน กระทบงานในครัวช่วงเวลาเร่งด่วน</p>
                     </div>
@@ -221,24 +229,24 @@
             <span class="section-num">03 / APPLICATIONS</span>
             <div class="anim-fade-up">
                 <h2 class="h2">ครอบคลุมทุกจุดเสี่ยง</h2>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
+                <div class="mobile-stack" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
                     <div style="text-align: center;">
-                        <div style="width: 100%; height: 250px; border-radius: 20px; overflow: hidden; margin-bottom: 20px;">
-                            <img src="assets/restaurant.png" style="width:100%; height:100%; object-fit:cover;">
+                        <div style="width: 100%; height: 250px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid #eee;">
+                            <img src="assets/app_kitchen.png" style="width:100%; height:100%; object-fit:cover;">
                         </div>
-                        <h4>ครัวและอ่างล้างจาน</h4>
+                        <h4 style="color: var(--primary);">ครัวและอ่างล้างจาน</h4>
                     </div>
                     <div style="text-align: center;">
-                        <div style="width: 100%; height: 250px; border-radius: 20px; overflow: hidden; margin-bottom: 20px;">
+                        <div style="width: 100%; height: 250px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid #eee;">
                             <img src="assets/grease_trap.png" style="width:100%; height:100%; object-fit:cover;">
                         </div>
-                        <h4>บ่อดักไขมันใต้ซิงค์</h4>
+                        <h4 style="color: var(--primary);">บ่อดักไขมันใต้ซิงค์</h4>
                     </div>
                     <div style="text-align: center;">
-                        <div style="width: 100%; height: 250px; border-radius: 20px; overflow: hidden; margin-bottom: 20px;">
+                        <div style="width: 100%; height: 250px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid #eee;">
                             <img src="assets/chk_pit.png" style="width:100%; height:100%; object-fit:cover;">
                         </div>
-                        <h4>บ่อพักและท่อระบายน้ำ</h4>
+                        <h4 style="color: var(--primary);">บ่อพักและท่อระบายน้ำ</h4>
                     </div>
                 </div>
             </div>
@@ -249,21 +257,21 @@
             <span class="section-num" style="color: var(--accent);">04 / PRODUCTS</span>
             <div class="anim-fade-up">
                 <h2 class="h2" style="color: white;">ชุดผลิตภัณฑ์แนะนำ</h2>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
-                    <div class="card" style="background: rgba(255,255,255,0.1); border: none; text-align: center;">
-                        <img src="assets/ad_liquid.png" style="width:100%; border-radius:15px; margin-bottom:15px;">
+                <div class="mobile-stack" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
+                    <div class="card" style="background: rgba(255,255,255,0.1); border: none; text-align: center; padding: 20px;">
+                        <img src="assets/ad_liquid.png" style="width:100%; height: 200px; object-fit: contain; border-radius:15px; margin-bottom:15px;">
                         <h4 style="color: var(--accent);">สูตรน้ำ (Liquid)</h4>
-                        <p style="color: #CBD5E1;">สยบกลิ่นเร่งด่วนและล้างระบบ</p>
+                        <p style="color: #CBD5E1; font-size: 0.9rem;">สยบกลิ่นเร่งด่วนและล้างระบบ</p>
                     </div>
-                    <div class="card" style="background: rgba(255,255,255,0.1); border: none; text-align: center;">
-                        <img src="assets/ad_concentrated.png" style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    <div class="card" style="background: rgba(255,255,255,0.1); border: none; text-align: center; padding: 20px;">
+                        <img src="assets/ad_concentrated.png" style="width:100%; height: 200px; object-fit: contain; border-radius:15px; margin-bottom:15px;">
                         <h4 style="color: var(--accent);">สูตรพรีเมี่ยม</h4>
-                        <p style="color: #CBD5E1;">สลายไขมันสะสมหนาเป็นพิเศษ</p>
+                        <p style="color: #CBD5E1; font-size: 0.9rem;">สลายไขมันสะสมหนาพิเศษ</p>
                     </div>
-                    <div class="card" style="background: rgba(255,255,255,0.1); border: none; text-align: center;">
-                        <img src="assets/ad_teabag_final.png" style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    <div class="card" style="background: rgba(255,255,255,0.1); border: none; text-align: center; padding: 20px;">
+                        <img src="assets/ad_teabag_final.png" style="width:100%; height: 200px; object-fit: contain; border-radius:15px; margin-bottom:15px;">
                         <h4 style="color: var(--accent);">แบบซองชา</h4>
-                        <p style="color: #CBD5E1;">ดูแลต่อเนื่องแบบอัตโนมัติ 24 ชม.</p>
+                        <p style="color: #CBD5E1; font-size: 0.9rem;">ดูแลต่อเนื่อง 24 ชม.</p>
                     </div>
                 </div>
             </div>
@@ -274,7 +282,7 @@
             <div class="anim-fade-up">
                 <h2 class="h2">เริ่มต้นยกระดับมาตรฐาน<br><span class="gradient-text">ร้านอาหารของคุณวันนี้</span></h2>
                 <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.3rem; color: var(--text-sub);">ปรึกษาผู้เชี่ยวชาญเพื่อประเมินหน้างานและรับใบเสนอราคาพิเศษ</p>
-                <a href="https://lin.ee/qqkJ83B" target="_blank" style="background: var(--primary); color: white; padding: 20px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.2rem; display: inline-block;">
+                <a href="https://lin.ee/qqkJ83B" target="_blank" style="background: var(--primary); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.1rem; display: inline-block;">
                     ทัก LINE ปรึกษาฟรี <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
