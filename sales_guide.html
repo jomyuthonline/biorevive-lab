@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BioRevive · Sales Playbook & FAQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8fafc; --surface: #ffffff; --text-1: #162C4E; --text-2: #4a5568;
+  --accent: #C5A059; --accent-light: #fdfcf9; --border: #e2e8f0;
+  --grad: linear-gradient(135deg, #C5A059 0%, #162C4E 100%);
+  --shadow: 0 4px 12px rgba(22, 44, 78, 0.05);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: 'Sarabun', sans-serif; background: var(--bg); color: var(--text-1); line-height: 1.6; }
+header { background: var(--surface); padding: 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+.header-content { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-weight: 800; font-size: 18px; color: var(--text-1); }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.hero { background: var(--surface); border-radius: 20px; overflow: hidden; margin-bottom: 30px; box-shadow: var(--shadow); }
+.hero img { width: 100%; height: 250px; object-fit: cover; }
+.hero-content { padding: 24px; }
+.hero h1 { margin: 0 0 10px; font-size: 28px; line-height: 1.3; }
+.hero p { margin: 0; color: var(--text-2); font-size: 16px; }
+
+.section-title { font-size: 20px; font-weight: 800; margin: 40px 0 20px; display: flex; align-items: center; gap: 10px; }
+.section-title::before { content: ""; width: 4px; height: 24px; background: var(--accent); border-radius: 2px; }
+
+.card { background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.card h3 { margin: 0 0 12px; font-size: 18px; color: var(--accent); }
+.script-box { background: var(--accent-light); border-left: 4px solid var(--accent); padding: 16px; border-radius: 0 8px 8px 0; margin: 15px 0; font-style: italic; }
+.q { font-weight: 700; color: var(--text-1); margin-bottom: 8px; display: block; }
+.a { color: var(--text-2); margin-bottom: 15px; display: block; }
+
+.badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+.badge-blue { background: #e1e7ff; color: #3b5bff; }
+.badge-gold { background: #fdf6e7; color: #b08d48; }
+
+.step { display: flex; gap: 15px; margin-bottom: 20px; }
+.step-num { width: 32px; height: 32px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+.step-text h4 { margin: 0 0 5px; }
+
+.gender-toggle { background: var(--text-1); color: white; border: none; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-size: 12px; }
+.footer-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 12px; display: flex; justify-content: space-around; font-size: 12px; font-weight: 600; }
+.nav-item { text-align: center; color: var(--text-2); text-decoration: none; }
+.nav-item.active { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 24px; }
+  .card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo">BioRevive Playbook</div>
+    <button class="gender-toggle" onclick="toggleGender()">โหมดเซลล์: <span id="genderLabel">ครับ</span></button>
+  </div>
+</header>
+
+<div class="container">
+  
+  <div class="hero">
+    <img src="assets/sales_hero.png" alt="Sales Pro">
+    <div class="hero-content">
+      <span class="badge badge-gold">คู่มือตัวแทนฝ่ายขาย</span>
+      <h1>สคริปต์ปิดการขายพรีเมียม</h1>
+      <p>เทคนิคการเปิดใจ แก้ไขปัญหา และตอบโต้คู่แข่งอย่างมืออาชีพ</p>
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section-title">01. สคริปต์พูดเปิดใจ (The Hook)</div>
+  <div class="card">
+    <span class="badge badge-blue">สร้างความไว้ใจ</span>
+    <p>เริ่มต้นด้วยการชื่นชมร้านและแสดงความเป็นห่วงเรื่อง "ความสะอาดที่มองไม่เห็น"</p>
+    <div class="script-box">
+      "สวัสดี<span class="gender-text">ครับ</span>คุณเจ้าของร้าน ร้านจัดบรรยากาศสวยมากเลยนะ<span class="gender-text">ครับ</span> ผมเดินผ่านโซนครัวเห็นว่าดูแลความสะอาดได้ดีมาก แต่ทราบไหม<span class="gender-text">ครับ</span>ว่าปัญหาที่กวนใจร้านใหญ่ๆ มักจะเป็นเรื่อง 'กลิ่นย้อนกลับ' และ 'ท่ออุดตัน' ในช่วงที่ลูกค้าเยอะๆ..."
+    </div>
+    <p><strong>หัวใจสำคัญ:</strong> อย่าขายของทันที แต่ให้ขาย "ความกังวล" และเสนอ "ทางออก"</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-title">02. ตอบคำถามสินค้า (Product FAQ)</div>
+  <div class="card">
+    <span class="q">Q: สินค้าของ BioRevive ต่างจาก EM ตามท้องตลาดอย่างไร?</span>
+    <span class="a">A: EM ทั่วไปมักเป็นเชื้อที่หลับไหลหรือมีความเข้มข้นต่ำ แต่ของเราเป็น "จุลินทรีย์เชื้อสด" ที่ผ่านการคัดสายพันธุ์ให้ Active 99% พร้อมทำงานทันทีที่ลงน้ำเสีย ย่อยสลายไขมันได้ลึกถึงต้นตอและเห็นผลใน 24 ชั่วโมง<span class="gender-text">ครับ</span></span>
+    
+    <span class="q">Q: ปลอดภัยกับพนักงานไหม?</span>
+    <span class="a">A: ปลอดภัย 100% <span class="gender-text">ครับ</span> เพราะเป็นผลิตภัณฑ์จากธรรมชาติ ไม่มีสารเคมีกัดกร่อน ไม่แสบจมูก และไม่มีสารตกค้างในระบบน้ำทิ้ง สอดคล้องกับมาตรฐาน BCG Model <span class="gender-text">ครับ</span></span>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-title">03. วิธีใช้งานที่ง่ายที่สุด (How to Use)</div>
+  <div class="card">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><h4>สูตรน้ำ (Liquid)</h4><p>ผสมน้ำตามสัดส่วน ราดลงท่อหรือซิงค์ล้างจานช่วงปิดร้าน เพื่อให้จุลินทรีย์ทำงานตอนน้ำนิ่ง</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><h4>ระบบซองชา (Tea Bag)</h4><p>แค่แขวนซองชาไว้ที่ถังดักไขมัน จุลินทรีย์จะค่อยๆ ละลายออกมาทำงานอัตโนมัติ 24 ชม. ไม่ต้องตวงให้เสียเวลา<span class="gender-text">ครับ</span></p></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section-title">04. สู้กับคู่แข่ง (VS Competitors)</div>
+  <div class="card">
+    <img src="assets/comparison.png" class="hero" style="margin-bottom:15px; height:auto;">
+    <span class="q">สู้กับ "สารเคมีล้างท่อ":</span>
+    <span class="a">สารเคมีกัดกร่อนท่อให้บางลงและทำให้ไขมันจับตัวเป็นก้อนแข็งในภายหลัง แต่ BioRevive ย่อยไขมันให้กลายเป็นน้ำและก๊าซธรรมชาติ ไม่ทำลายท่อ<span class="gender-text">ครับ</span></span>
+    
+    <span class="q">สู้กับ "รถดูดส้วม/ดูดไขมัน":</span>
+    <span class="a">การดูดไขมันคือการแก้ที่ปลายเหตุและมีค่าใช้จ่ายสูง แต่การใช้จุลินทรีย์ของเราคือการป้องกันไม่ให้ไขมันเต็มถัง ช่วยประหยัดค่าดูดไขมันได้มากกว่า 50% ต่อปี<span class="gender-text">ครับ</span></span>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section-title">05. กฎหมายและข้อบังคับ (Law & BCG)</div>
+  <div class="card">
+    <p>รู้ไว้ก่อนโดนปรับ: มาตรฐานน้ำทิ้งของกรมควบคุมมลพิษ</p>
+    <div class="script-box" style="background:#fff5f5; border-color:#e53e3e; color:#c53030;">
+      "หากตรวจพบว่าค่าน้ำทิ้งไม่ผ่านเกณฑ์ (Fat, Oil & Grease เกินมาตรฐาน) โทษปรับสูงสุดถึง 80,000 บาท และอาจถูกสั่งปิดร้านชั่วคราวเพื่อปรับปรุงระบบนะ<span class="gender-text">ครับ</span>"
+    </div>
+    <p>ใช้ BioRevive = ได้ใบรับรองการดูแลสิ่งแวดล้อม ช่วยเสริมภาพลักษณ์ร้านให้เป็น Green Restaurant <span class="gender-text">ครับ</span></p>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section-title">06. เทคนิคปิดการขาย (Closing)</div>
+  <div class="card">
+    <h3>Trial Offer (ชุดทดลอง)</h3>
+    <div class="script-box">
+      "วันนี้ผมไม่อยากให้คุณเชื่อผมทั้งหมด แต่อยากให้ลอง 'เซ็ตทดลอง S' ราคาสมาชิกเพียง 611 บาท ไปใช้ดูก่อน 1 อาทิตย์ ถ้ากลิ่นไม่หายหรือน้ำไม่ไหลคล่องขึ้น ผมยินดีให้คำปรึกษาเพิ่มเติมฟรี<span class="gender-text">ครับ</span> รับเซ็ตนี้ไปลองก่อนดีไหม<span class="gender-text">ครับ</span>?"
+    </div>
+    <p><strong>Trick:</strong> ให้เปรียบเทียบราคา 611 บาท กับค่าปรับ 80,000 บาท จะเห็นว่าคุ้มค่ามาก<span class="gender-text">ครับ</span></p>
+  </div>
+
+  <div style="height:80px;"></div>
+</div>
+
+<div class="footer-nav">
+  <a href="#section1" class="nav-item">เปิดใจ</a>
+  <a href="#section2" class="nav-item">FAQ</a>
+  <a href="#section4" class="nav-item">คู่แข่ง</a>
+  <a href="#section6" class="nav-item active">ปิดการขาย</a>
+</div>
+
+<script>
+  function toggleGender() {
+    const texts = document.querySelectorAll('.gender-text');
+    const label = document.getElementById('genderLabel');
+    const current = label.innerText;
+    
+    if (current === 'ครับ') {
+      texts.forEach(t => t.innerText = 'ค่ะ');
+      label.innerText = 'ค่ะ';
+    } else {
+      texts.forEach(t => t.innerText = 'ครับ');
+      label.innerText = 'ครับ';
+    }
+  }
+</script>
+</body>
+</html>
