@@ -6,7 +6,8 @@
     <title>BioRevive Lab - นวัตกรรมจุลินทรีย์ธรรมชาติเพื่อธุรกิจรักษ์โลก</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         /* Modern Premium Style */
         body { font-family: 'Sarabun', sans-serif; background: #fff; color: #162C4E; margin:0; line-height: 1.6; }
@@ -108,89 +109,113 @@
             100% { transform: scale(1); box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
         }
         .pulse-cta { animation: pulse-soft 3s infinite ease-in-out; }
+        
+        /* Language Switcher */
+        .lang-switcher { display: flex; gap: 8px; margin-right: 20px; }
+        .lang-btn { cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; border: 1px solid #e2e8f0; background: #fff; transition: 0.3s; }
+        .lang-btn.active { background: #162C4E; color: #fff; border-color: #162C4E; }
+        @media (max-width: 768px) {
+            .lang-switcher { margin-right: 10px; gap: 4px; }
+            .lang-btn { padding: 2px 4px; font-size: 0.65rem; }
+        }
     </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
         <div class="container nav-container" style="padding: 10px 0;">
             <a href="#" class="logo"><img src="assets/logo.png" alt="Logo" style="height:90px;"></a>
-            <div class="nav-links">
-                <a href="#about" style="margin-right:25px; text-decoration:none; color:#162C4E; font-weight:bold;">ประสบการณ์ 20 ปี</a>
-                <a href="#promotions" style="margin-right:25px; text-decoration:none; color:#C5A059; font-weight:bold;"><i class="fas fa-fire"></i> โปรโมชั่น</a>
-                <a href="checklist.html" class="btn-filled-dark pulse-cta" style="padding: 15px 35px; margin: 0; font-size: 1.1rem; background: #C5A059;">ตรวจสอบ 5 จุดเสี่ยง (ฟรี)</a>
+            <div style="display: flex; align-items: center;">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="changeLang('th')">TH</button>
+                    <button class="lang-btn" onclick="changeLang('en')">EN</button>
+                    <button class="lang-btn" onclick="changeLang('zh')">ZH</button>
+                    <button class="lang-btn" onclick="changeLang('ja')">JA</button>
+                    <button class="lang-btn" onclick="changeLang('ko')">KO</button>
+                    <button class="lang-btn" onclick="changeLang('my')">MY</button>
+                </div>
+                <div class="nav-links">
+                    <a href="#about" data-i18n="nav_about" style="margin-right:25px; text-decoration:none; color:#162C4E; font-weight:bold;">ประสบการณ์ 20 ปี</a>
+                    <a href="#promotions" data-i18n="nav_promo" style="margin-right:25px; text-decoration:none; color:#C5A059; font-weight:bold;"><i class="fas fa-fire"></i> โปรโมชั่น</a>
+                    <a href="checklist.html" data-i18n="nav_checklist" class="btn-filled-dark pulse-cta" style="padding: 15px 35px; margin: 0; font-size: 1.1rem; background: #C5A059;">ตรวจสอบ 5 จุดเสี่ยง (ฟรี)</a>
+                </div>
             </div>
         </div>
+
     </nav>
 
     <!-- 1. Hero Section (From Screenshot) -->
     <header class="hero">
         <div class="container">
-            <h1>ฟื้นฟูน้ำเสีย...<br><span>ให้กลับมามีชีวิต</span></h1>
-            <p>คืนความสมดุลให้ระบบน้ำทิ้ง ด้วยนวัตกรรมจุลินทรีย์เชื้อสด Active 99% กำจัดกลิ่นและสลายไขมันถึงต้นตอภายใน 24 ชั่วโมง</p>
+            <h1 data-i18n="hero_title">ฟื้นฟูน้ำเสีย...<br><span>ให้กลับมามีชีวิต</span></h1>
+            <p data-i18n="hero_sub">คืนความสมดุลให้ระบบน้ำทิ้ง ด้วยนวัตกรรมจุลินทรีย์เชื้อสด Active 99% กำจัดกลิ่นและสลายไขมันถึงต้นตอภายใน 24 ชั่วโมง</p>
             <div class="hero-btns">
-                <a href="#promotions" class="btn-filled-dark" style="background:#C5A059; border:none;">ดูโปรโมชั่นพิเศษ</a>
-                <a href="checklist.html" class="btn-outline-dark">ประเมินความเสี่ยงร้าน (ฟรี)</a>
+                <a href="#promotions" data-i18n="hero_btn_promo" class="btn-filled-dark" style="background:#C5A059; border:none;">ดูโปรโมชั่นพิเศษ</a>
+                <a href="checklist.html" data-i18n="hero_btn_risk" class="btn-outline-dark">ประเมินความเสี่ยงร้าน (ฟรี)</a>
             </div>
         </div>
     </header>
 
+
     <!-- 2. The Pride (Emotional Storytelling) -->
     <section class="section-padding">
         <div class="container text-center">
-            <h2 style="font-size: 2.5rem; margin-bottom: 50px;">ความภาคภูมิใจในงานบริการ</h2>
+            <h2 data-i18n="section_pride" style="font-size: 2.5rem; margin-bottom: 50px;">ความภาคภูมิใจในงานบริการ</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <div class="story-item">
                     <img src="assets/restaurant.png" alt="Restaurant" style="width:100%; border-radius:25px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
-                    <h4 style="font-size:1.4rem; color:#162C4E;">กลุ่มร้านอาหาร & ภัตตาคาร</h4>
+                    <h4 data-i18n="cat_restaurant" style="font-size:1.4rem; color:#162C4E;">กลุ่มร้านอาหาร & ภัตตาคาร</h4>
                 </div>
                 <div class="story-item">
                     <img src="assets/cafe.png" alt="Cafe" style="width:100%; border-radius:25px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
-                    <h4 style="font-size:1.4rem; color:#162C4E;">กลุ่มคาเฟ่ & เบเกอรี่</h4>
+                    <h4 data-i18n="cat_cafe" style="font-size:1.4rem; color:#162C4E;">กลุ่มคาเฟ่ & เบเกอรี่</h4>
                 </div>
                 <div class="story-item">
                     <img src="assets/hotel.png" alt="Hotel" style="width:100%; border-radius:25px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); margin-bottom:20px;">
-                    <h4 style="font-size:1.4rem; color:#162C4E;">กลุ่มโรงแรม & หอพัก</h4>
+                    <h4 data-i18n="cat_hotel" style="font-size:1.4rem; color:#162C4E;">กลุ่มโรงแรม & หอพัก</h4>
                 </div>
             </div>
-            <p style="font-size: 1.2rem; margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">ความสุขของเจ้าของธุรกิจ คือการได้เห็นรอยยิ้มของลูกค้าในบรรยากาศที่สะอาด ปลอดโปร่ง และได้มาตรฐานสุขอนามัยที่ดีที่สุดในทุกๆ วัน</p>
+            <p data-i18n="cat_desc" style="font-size: 1.2rem; margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">ความสุขของเจ้าของธุรกิจ คือการได้เห็นรอยยิ้มของลูกค้าในบรรยากาศที่สะอาด ปลอดโปร่ง และได้มาตรฐานสุขอนามัยที่ดีที่สุดในทุกๆ วัน</p>
         </div>
     </section>
+
 
     <!-- 3. Risk Section (Internal Problem Graphic) -->
     <section class="section-risk">
         <div class="container">
             <div class="risk-grid">
                 <div class="risk-content">
-                    <h2>ปัจจัยที่ต้องเฝ้าระวัง</h2>
-                    <h3>รักษาภาพลักษณ์ธุรกิจของคุณให้ยั่งยืน</h3>
-                    <p style="margin-bottom: 40px; opacity: 0.85; font-size: 1.1rem;">ภายใต้โครงสร้างที่สวยงาม มีปัจจัยแฝงที่อาจกระทบต่อมาตรฐานและภาพลักษณ์ได้ หากขาดการดูแลระบบจัดการน้ำเสียอย่างถูกวิธี:</p>
+                    <h2 data-i18n="risk_title">ปัจจัยที่ต้องเฝ้าระวัง</h2>
+                    <h3 data-i18n="risk_sub">รักษาภาพลักษณ์ธุรกิจของคุณให้ยั่งยืน</h3>
+                    <p data-i18n="risk_desc" style="margin-bottom: 40px; opacity: 0.85; font-size: 1.1rem;">ภายใต้โครงสร้างที่สวยงาม มีปัจจัยแฝงที่อาจกระทบต่อมาตรฐานและภาพลักษณ์ได้ หากขาดการดูแลระบบจัดการน้ำเสียอย่างถูกวิธี:</p>
                     
                     <div class="risk-item">
                         <i class="fas fa-shield-alt"></i>
-                        <h4>มาตรฐานข้อกฎหมาย:</h4>
-                        <p>การรักษาค่า BOD, SS และ O&G ให้ผ่านเกณฑ์มาตรฐานการบำบัดน้ำเสีย เพื่อเลี่ยงค่าปรับและข้อร้องเรียน</p>
+                        <h4 data-i18n="risk_law_title">มาตรฐานข้อกฎหมาย:</h4>
+                        <p data-i18n="risk_law_desc">การรักษาค่า BOD, SS และ O&G ให้ผ่านเกณฑ์มาตรฐานการบำบัดน้ำเสีย เพื่อเลี่ยงค่าปรับและข้อร้องเรียน</p>
                         <img src="assets/chk_pit.png" class="mobile-only-img" alt="Wastewater Standard">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-eye-slash"></i>
-                        <h4>วิกฤตที่มองไม่เห็น:</h4>
-                        <p>คราบไขมันสะสมในท่ออุดตันและถังดักไขมันใต้ซิงค์ ซึ่งเป็นต้นตอของกลิ่นย้อนกลับที่ทำลายบรรยากาศ</p>
+                        <h4 data-i18n="risk_hidden_title">วิกฤตที่มองไม่เห็น:</h4>
+                        <p data-i18n="risk_hidden_desc">คราบไขมันสะสมในท่ออุดตันและถังดักไขมันใต้ซิงค์ ซึ่งเป็นต้นตอของกลิ่นย้อนกลับที่ทำลายบรรยากาศ</p>
                         <img src="assets/hidden_crisis_th.png" class="mobile-only-img" alt="Hidden Grease Problem">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-hand-holding-heart"></i>
-                        <h4>การลงทุนที่คุ้มค่า:</h4>
-                        <p>การดูแลเชิงป้องกันช่วยยืดอายุโครงสร้างท่อ ลดค่าใช้จ่ายในการซ่อมแซมครั้งใหญ่ในอนาคต</p>
+                        <h4 data-i18n="risk_investment_title">การลงทุนที่คุ้มค่า:</h4>
+                        <p data-i18n="risk_investment_desc">การดูแลเชิงป้องกันช่วยยืดอายุโครงสร้างท่อ ลดค่าใช้จ่ายในการซ่อมแซมครั้งใหญ่ในอนาคต</p>
                         <img src="assets/grease_trap.png" class="mobile-only-img" alt="Preventive Maintenance">
                     </div>
 
                     <div style="margin-top:40px;">
-                        <a href="checklist.html" class="btn-outline-dark pulse-cta" style="border-color:#DFBE7B; color:#DFBE7B; padding:18px 35px; font-size:1.1rem; text-decoration:none;">
+                        <a href="checklist.html" data-i18n="btn_risk_check" class="btn-outline-dark pulse-cta" style="border-color:#DFBE7B; color:#DFBE7B; padding:18px 35px; font-size:1.1rem; text-decoration:none;">
                             <i class="fas fa-clipboard-check"></i> ตรวจสอบ 5 จุดเสี่ยงในร้านของคุณ (ฟรี)
                         </a>
                     </div>
                 </div>
+
                 <div class="risk-image">
                     <img src="assets/hidden_crisis_th.png" alt="Risk Illustration" style="width:100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
                 </div>
@@ -204,41 +229,43 @@
             <div class="story-grid">
                 <div class="story-image"><img src="assets/story_solution.png" alt="Expertise" style="width:100%; border-radius:25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></div>
                 <div class="story-text">
-                    <h2 style="font-size: 2.8rem; margin-bottom: 25px;">ทางออกที่ยั่งยืนจาก<br>ประสบการณ์กว่า 20 ปี</h2>
-                    <p style="font-size: 1.15rem;">BioRevive Lab คือนวัตกรรมจุลินทรีย์ธรรมชาติที่เกิดจากการสั่งสมประสบการณ์กว่า 20 ปี ในการเป็นที่ปรึกษาด้านระบบนิเวศให้กับฟาร์มกุ้งและภาคเกษตรกรรมชั้นนำของไทย</p>
-                    <p style="font-size: 1.15rem;">เราคัดเลือก "จุลินทรีย์เชื้อสด" สายพันธุ์พิเศษที่มีประสิทธิภาพสูงสุดในการย่อยสลายไขมันและกำจัดกลิ่นได้ใน 24 ชั่วโมง โดยยังคงความเป็นมิตรต่อสิ่งแวดล้อม 100%</p>
+                    <h2 data-i18n="exp_title" style="font-size: 2.8rem; margin-bottom: 25px;">ทางออกที่ยั่งยืนจาก<br>ประสบการณ์กว่า 20 ปี</h2>
+                    <p data-i18n="exp_p1" style="font-size: 1.15rem;">BioRevive Lab คือนวัตกรรมจุลินทรีย์ธรรมชาติที่เกิดจากการสั่งสมประสบการณ์กว่า 20 ปี ในการเป็นที่ปรึกษาด้านระบบนิเวศให้กับฟาร์มกุ้งและภาคเกษตรกรรมชั้นนำของไทย</p>
+                    <p data-i18n="exp_p2" style="font-size: 1.15rem;">เราคัดเลือก "จุลินทรีย์เชื้อสด" สายพันธุ์พิเศษที่มีประสิทธิภาพสูงสุดในการย่อยสลายไขมันและกำจัดกลิ่นได้ใน 24 ชั่วโมง โดยยังคงความเป็นมิตรต่อสิ่งแวดล้อม 100%</p>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- 5. Solution Section (New Layout) -->
     <section class="section-padding" style="background: white;">
         <div class="container">
             <div class="story-grid" style="direction: rtl;">
                 <div class="story-text" style="direction: ltr; text-align: left;">
-                    <h2 style="font-size: 2.2rem; margin-bottom: 30px;">ทางออกที่มีประสิทธิภาพ</h2>
-                    <h3 style="color:#C5A059; margin-bottom: 20px;">สลายไขมันถึงต้นตอด้วย Active Bio-Action</h3>
+                    <h2 data-i18n="sol_title" style="font-size: 2.2rem; margin-bottom: 30px;">ทางออกที่มีประสิทธิภาพ</h2>
+                    <h3 data-i18n="sol_sub" style="color:#C5A059; margin-bottom: 20px;">สลายไขมันถึงต้นตอด้วย Active Bio-Action</h3>
                     
                     <div class="risk-item">
                         <i class="fas fa-bolt" style="color:#C5A059;"></i>
-                        <h4>ทำงานทันที (Active Bio-Action):</h4>
-                        <p>จุลินทรีย์สายพันธุ์พิเศษพร้อมย่อยสลายคราบไขมันและสิ่งปฏิกูลทันทีที่สัมผัส</p>
+                        <h4 data-i18n="sol_active_title">ทำงานทันที (Active Bio-Action):</h4>
+                        <p data-i18n="sol_active_desc">จุลินทรีย์สายพันธุ์พิเศษพร้อมย่อยสลายคราบไขมันและสิ่งปฏิกูลทันทีที่สัมผัส</p>
                         <img src="assets/ad_liquid.png" class="mobile-only-img" alt="Active Bio-Action">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-leaf" style="color:#C5A059;"></i>
-                        <h4>เป็นมิตรต่อสิ่งแวดล้อม 100%:</h4>
-                        <p>ปลอดภัยต่อผู้ใช้งาน และไม่ทิ้งสารตกค้างในระบบนิเวศน์ตามมาตรฐาน BCG</p>
+                        <h4 data-i18n="sol_eco_title">เป็นมิตรต่อสิ่งแวดล้อม 100%:</h4>
+                        <p data-i18n="sol_eco_desc">ปลอดภัยต่อผู้ใช้งาน และไม่ทิ้งสารตกค้างในระบบนิเวศน์ตามมาตรฐาน BCG</p>
                         <img src="assets/ad_concentrated.png" class="mobile-only-img" alt="Eco Friendly">
                     </div>
                     <div class="risk-item">
                         <i class="fas fa-check-circle" style="color:#C5A059;"></i>
-                        <h4>ลดค่าใช้จ่ายระยะยาว:</h4>
-                        <p>ลดความถี่ในการจ้างรถดูดไขมัน และป้องกันปัญหาระบบระบายน้ำพังเสียหาย</p>
+                        <h4 data-i18n="sol_cost_title">ลดค่าใช้จ่ายระยะยาว:</h4>
+                        <p data-i18n="sol_cost_desc">ลดความถี่ในการจ้างรถดูดไขมัน และป้องกันปัญหาระบบระบายน้ำพังเสียหาย</p>
                         <img src="assets/story_solution.png" class="mobile-only-img" alt="Cost Reduction">
                     </div>
                 </div>
+
                 <div class="story-image" style="direction: ltr;">
                     <img src="assets/ad_liquid.png" alt="Solution" style="width:100%; border-radius:25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
                 </div>
@@ -249,8 +276,9 @@
     <!-- 6. Testimonials -->
     <section class="section-padding" style="background: #F8FAFC;">
         <div class="container text-center">
-            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">เสียงสะท้อนจากความภูมิใจ</h2>
-            <p style="color: #64748B; font-size: 1.2rem; margin-bottom: 50px;">ผู้ประกอบการที่เลือกเปลี่ยนจากสารเคมี มาเป็นแนวทางชีวภาพที่ยั่งยืน</p>
+            <h2 data-i18n="test_title" style="font-size: 2.5rem; margin-bottom: 10px;">เสียงสะท้อนจากความภูมิใจ</h2>
+            <p data-i18n="test_sub" style="color: #64748B; font-size: 1.2rem; margin-bottom: 50px;">ผู้ประกอบการที่เลือกเปลี่ยนจากสารเคมี มาเป็นแนวทางชีวภาพที่ยั่งยืน</p>
+
             
             <div class="testimonial-grid">
                 <div class="testimonial-card">
@@ -283,25 +311,28 @@
     <!-- 5. Pricing -->
     <section class="section-padding" id="pricing" style="background:#F8FAFC;">
         <div class="container text-center">
-            <h2 style="font-size: 2.5rem; margin-bottom: 50px;">ผลิตภัณฑ์ BioRevive Lab</h2>
+            <h2 data-i18n="prod_title" style="font-size: 2.5rem; margin-bottom: 50px;">ผลิตภัณฑ์ BioRevive Lab</h2>
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
                 <div class="pricing-card">
                     <img src="assets/ad_liquid.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3>สูตรน้ำ (Liquid)</h3>
+                    <h3 data-i18n="prod_liquid">สูตรน้ำ (Liquid)</h3>
+
                     <button onclick="addToCart('สูตรน้ำ 5L', 1890)" class="btn-buy pulse-cta">5 ลิตร: 1,890 ฿</button>
                     <button onclick="addToCart('สูตรน้ำ 1L', 380)" class="btn-buy pulse-cta" style="background:none; border:2px solid #162C4E; color:#162C4E;">1 ลิตร: 380 ฿</button>
                 </div>
                 <div class="pricing-card popular">
                     <div style="background:#C5A059; color:white; padding:5px 20px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:15px;">BEST SELLER</div>
                     <img src="assets/ad_concentrated.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3>สูตรพรีเมี่ยม (Premium)</h3>
+                    <h3 data-i18n="prod_premium">สูตรพรีเมี่ยม (Premium)</h3>
+
                     <button onclick="addToCart('พรีเมี่ยม 6kg', 3500)" class="btn-buy btn-buy-gold pulse-cta">6 kg: 3,500 ฿</button>
                     <button onclick="addToCart('พรีเมี่ยม 1kg', 800)" class="btn-buy pulse-cta" style="background:none; border:2px solid #C5A059; color:#C5A059;">1 kg: 800 ฿</button>
                 </div>
                 <div class="pricing-card">
                     <img src="assets/ad_teabag_final.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3>แบบซองชา (Tea bag)</h3>
-                    <p style="margin-bottom:15px; color:#64748B;">1 ซอง บรรจุ 6 ชิ้น / ชิ้นละ 20 g.</p>
+                    <h3 data-i18n="prod_teabag">แบบซองชา (Tea bag)</h3>
+                    <p data-i18n="prod_teabag_desc" style="margin-bottom:15px; color:#64748B;">1 ซอง บรรจุ 6 ชิ้น / ชิ้นละ 20 g.</p>
+
                     <button onclick="addToCart('ซองชา 1 ซอง', 299)" class="btn-buy pulse-cta">1 ซอง: 299 ฿</button>
                 </div>
             </div>
@@ -311,13 +342,14 @@
     <!-- 6. Promotions -->
     <section class="section-padding" id="promotions" style="background: white;">
         <div class="container text-center">
-            <h2 style="color:#C5A059; margin-bottom:50px; font-size: 2.2rem;">ชุดโปรโมชั่นสุดคุ้ม</h2>
+            <h2 data-i18n="promo_title" style="color:#C5A059; margin-bottom:50px; font-size: 2.2rem;">ชุดโปรโมชั่นสุดคุ้ม</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <!-- Set S -->
                 <div class="pricing-card">
                     <img src="assets/promo_set_s.png" alt="Set S" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3>Set S (ชุดทดลอง)</h3>
-                    <p style="color:#64748B; margin-bottom:15px;">แกลลอน 1L + ถุงชา 1 ถุง (6 ซอง)</p>
+                    <h3 data-i18n="set_s">Set S (ชุดทดลอง)</h3>
+                    <p data-i18n="set_s_desc" style="color:#64748B; margin-bottom:15px;">แกลลอน 1L + ถุงชา 1 ถุง (6 ซอง)</p>
+
                     <div style="margin-bottom:20px;">
                         <span style="text-decoration:line-through; color:#94A3B8; font-size:1.1rem; margin-right:10px;">679.-</span>
                         <span style="font-size:1.8rem; font-weight:800; color:#162C4E;">611 ฿</span>
@@ -329,8 +361,9 @@
                 <div class="pricing-card popular">
                     <div style="background:#C5A059; color:white; padding:5px 20px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:15px;">ยอดนิยมที่สุด</div>
                     <img src="assets/promo_set_m.png" alt="Set M" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3>Set M (มือโปร)</h3>
-                    <p style="color:#64748B; margin-bottom:15px;">แกลลอน 5L + ถุงพรีเมียม 1kg + ถุงชา 1 ถุง (6 ซอง)</p>
+                    <h3 data-i18n="set_m">Set M (มือโปร)</h3>
+                    <p data-i18n="set_m_desc" style="color:#64748B; margin-bottom:15px;">แกลลอน 5L + ถุงพรีเมียม 1kg + ถุงชา 1 ถุง (6 ซอง)</p>
+
                     <div style="margin-bottom:20px;">
                         <span style="text-decoration:line-through; color:#94A3B8; font-size:1.1rem; margin-right:10px;">2,989.-</span>
                         <span style="font-size:1.8rem; font-weight:800; color:#C5A059;">2,690 ฿</span>
@@ -341,8 +374,9 @@
                 <!-- Set L -->
                 <div class="pricing-card">
                     <img src="assets/promo_set_l.png" alt="Set L" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3>Set L (ธุรกิจใหญ่)</h3>
-                    <p style="color:#64748B; margin-bottom:15px;">แกลลอน 5L (x2) + ถังพรีเมียม 6kg + ถุงชา 3 ถุง</p>
+                    <h3 data-i18n="set_l">Set L (ธุรกิจใหญ่)</h3>
+                    <p data-i18n="set_l_desc" style="color:#64748B; margin-bottom:15px;">แกลลอน 5L (x2) + ถังพรีเมียม 6kg + ถุงชา 3 ถุง</p>
+
                     <div style="margin-bottom:20px;">
                         <span style="text-decoration:line-through; color:#94A3B8; font-size:1.1rem; margin-right:10px;">8,177.-</span>
                         <span style="font-size:1.8rem; font-weight:800; color:#162C4E;">7,359 ฿</span>
@@ -356,7 +390,8 @@
     <!-- 7. Warning Gallery -->
     <section class="section-padding" style="background:#F9F9F9;">
         <div class="container text-center">
-            <h2 style="font-size: 2.2rem; margin-bottom: 50px;">อย่าลืมตรวจสอบจนกลายเป็นภาพตัวอย่างเหล่านี้</h2>
+            <h2 data-i18n="warning_title" style="font-size: 2.2rem; margin-bottom: 50px;">อย่าลืมตรวจสอบจนกลายเป็นภาพตัวอย่างเหล่านี้</h2>
+
             <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
                 <div class="warning-card"><img src="assets/sink.png" alt="Sink"><p style="font-weight:bold; font-size:1.1rem;">คราบไขมันอุดตัน</p></div>
                 <div class="warning-card"><img src="assets/grease_trap.png" alt="Trap"><p style="font-weight:bold; font-size:1.1rem;">ถังดักไขมันเน่า</p></div>
@@ -368,7 +403,8 @@
     <!-- 9. FAQ Section -->
     <section class="section-padding" style="background: #F8FAFC;">
         <div class="container" style="max-width: 800px;">
-            <h2 style="text-align:center; font-size: 2.2rem; margin-bottom: 40px; color:#162C4E;">คำถามที่พบบ่อย (FAQ)</h2>
+            <h2 data-i18n="faq_title" style="text-align:center; font-size: 2.2rem; margin-bottom: 40px; color:#162C4E;">คำถามที่พบบ่อย (FAQ)</h2>
+
             
             <div style="margin-bottom: 25px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                 <h4 style="color:#C5A059; margin-bottom:10px;">Q: จุลินทรีย์เชื้อสดต่างจากแบบทั่วไปอย่างไร?</h4>
@@ -395,10 +431,11 @@
     <!-- 10. BCG & Sustainability -->
     <section style="background:#2E7D32; color:white; padding: 50px 0;">
         <div class="container text-center">
-            <h3 style="font-size: 1.8rem; margin-bottom:15px;"><i class="fas fa-leaf"></i> มาตรฐานความยั่งยืน BCG Model</h3>
-            <p style="font-size: 1.1rem; opacity: 0.9;">ผลิตภัณฑ์ BioRevive Lab เป็นมิตรต่อสิ่งแวดล้อม 100% ปลอดภัยต่อผู้ใช้งาน และถูกต้องตามกฎหมายน้ำทิ้ง</p>
+            <h3 data-i18n="bcg_title" style="font-size: 1.8rem; margin-bottom:15px;"><i class="fas fa-leaf"></i> มาตรฐานความยั่งยืน BCG Model</h3>
+            <p data-i18n="bcg_desc" style="font-size: 1.1rem; opacity: 0.9;">ผลิตภัณฑ์ BioRevive Lab เป็นมิตรต่อสิ่งแวดล้อม 100% ปลอดภัยต่อผู้ใช้งาน และถูกต้องตามกฎหมายน้ำทิ้ง</p>
         </div>
     </section>
+
 
     <footer style="padding: 80px 0; background: #0F172A; color: white; text-align: center;">
         <div class="container">
@@ -408,23 +445,26 @@
                     <i class="fab fa-line"></i> @biorevivelab
                 </a>
             </div>
-            <p style="opacity:0.6;">&copy; 2026 BioRevive Lab. นวัตกรรมที่ยั่งยืนเพื่ออนาคตธุรกิจไทย</p>
+            <p data-i18n="footer_copy" style="opacity:0.6;">&copy; 2026 BioRevive Lab. นวัตกรรมที่ยั่งยืนเพื่ออนาคตธุรกิจไทย</p>
+
         </div>
     </footer>
 
     <!-- Cart -->
     <div id="cartBar" class="cart-bar">
         <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-            <div style="font-size:1.2rem; font-weight:bold;">ตะกร้า: <span id="cartCount">0</span> รายการ | ยอดชำระ: <span id="cartTotal">0</span> ฿</div>
-            <button onclick="openCheckout()" class="pulse-cta" style="background:#C5A059; color:white; border:none; padding:15px 40px; border-radius:40px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">🛒 สั่งซื้อสินค้า</button>
+            <div style="font-size:1.2rem; font-weight:bold;"><span data-i18n="cart_items">ตะกร้า</span>: <span id="cartCount">0</span> | <span data-i18n="cart_total">ยอดชำระ</span>: <span id="cartTotal">0</span> ฿</div>
+            <button onclick="openCheckout()" data-i18n="btn_order" class="pulse-cta" style="background:#C5A059; color:white; border:none; padding:15px 40px; border-radius:40px; cursor:pointer; font-weight:bold; font-size:1.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">🛒 สั่งซื้อสินค้า</button>
         </div>
     </div>
+
 
     <div id="checkoutModal" class="modal">
         <div class="modal-content">
             <span onclick="closeCheckout()" style="position:absolute; right:20px; top:20px; cursor:pointer; font-size:32px;">&times;</span>
-            <h2 style="margin-bottom:10px;">สรุปรายการสั่งซื้อ</h2>
-            <p style="color:#C5A059; font-weight:bold; margin-bottom:20px;">💡 ซื้อครบ 1,500.- ส่งฟรีทั่วประเทศ!<br><span style="font-size:0.9rem; font-weight:normal; opacity:0.8;">(ยอดไม่ถึงคิดค่าส่งเหมาจ่าย 80.-)</span></p>
+            <h2 data-i18n="checkout_title" style="margin-bottom:10px;">สรุปรายการสั่งซื้อ</h2>
+            <p style="color:#C5A059; font-weight:bold; margin-bottom:20px;"><span data-i18n="shipping_free">💡 ซื้อครบ 1,500.- ส่งฟรีทั่วประเทศ!</span><br><span data-i18n="shipping_cost" style="font-size:0.9rem; font-weight:normal; opacity:0.8;">(ยอดไม่ถึงคิดค่าส่งเหมาจ่าย 80.-)</span></p>
+
             <div id="orderList" style="text-align:left; margin-bottom:20px; background:#F8FAFC; padding:20px; border-radius:20px;"></div>
             <h3 id="finalTotal" style="font-size: 1.8rem; color: #162C4E; margin-bottom: 25px; font-weight: 800;"></h3>
             
@@ -445,8 +485,41 @@
         </div>
     </div>
 
+    <script src="translations.js"></script>
     <script>
+        let currentLang = localStorage.getItem('biorevive_lang') || 'th';
+        
+        function changeLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('biorevive_lang', lang);
+            updateUI();
+        }
+
+        function updateUI() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('onclick').includes(currentLang));
+            });
+            // Update document language
+            document.documentElement.lang = currentLang;
+            // Burmese font adjustment
+            if (currentLang === 'my') {
+                document.body.style.fontFamily = "'Noto Sans Myanmar', sans-serif";
+            } else {
+                document.body.style.fontFamily = "'Sarabun', sans-serif";
+            }
+        }
+        
+        // Initial UI update
+        window.addEventListener('DOMContentLoaded', updateUI);
+
         let cart = [];
+
         function addToCart(name, price) {
             cart.push({ name, price });
             updateCart();
