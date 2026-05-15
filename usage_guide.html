@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือการใช้จุลินทรีย์เชื้อสด - BioRevive Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@400;700&family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="usage_guide.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="logo">BIOREVIVE LAB</span>
+            <h1>คู่มือการใช้จุลินทรีย์เชื้อสด</h1>
+            <p class="subtitle">นวัตกรรมชีวภาพเพื่อการบำบัดน้ำเสียอย่างยั่งยืน</p>
+        </header>
+
+        <!-- Dosage Calculator Section -->
+        <section class="card">
+            <h2><i class="fa-solid fa-calculator"></i> เครื่องคำนวณและเลือกผลิตภัณฑ์</h2>
+            
+            <div class="calc-group">
+                <label>1. เลือกกลุ่มผลิตภัณฑ์</label>
+                <div class="tabs" style="margin-bottom: 1rem;">
+                    <button class="tab-btn active" style="flex: 1;" data-prod-line="liquid">สูตรน้ำ (Liquid)</button>
+                    <button class="tab-btn" style="flex: 1;" data-prod-line="premium">สูตรพรีเมียม (Premium)</button>
+                </div>
+            </div>
+
+            <div class="calc-group">
+                <label>2. เลือกจุดที่ต้องการบำบัด</label>
+                <select id="product-type" style="width: 100%; background: var(--secondary-navy); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1rem; color: var(--text-white); font-size: 1rem; outline: none;">
+                    <option value="trap">บ่อดักไขมัน / บ่อบำบัด</option>
+                    <option value="pipe">ท่อระบายน้ำ / ซิงค์ล้างจาน</option>
+                </select>
+            </div>
+
+            <div class="calc-group">
+                <label id="input-label">ขนาดบ่อบำบัด / บ่อดักไขมัน</label>
+                <div class="input-wrapper">
+                    <input type="number" id="volume-input" placeholder="ระบุจำนวนลูกบาศก์เมตร" value="10">
+                    <span class="unit" id="input-unit">m³</span>
+                </div>
+            </div>
+
+            <div class="result-box">
+                <span class="result-label">ปริมาณที่แนะนำให้ใช้</span>
+                <span class="result-value" id="dosage-result">1.00 กิโลกรัม (kg)</span>
+                <div id="packaging-suggestion" style="margin-top: 10px; font-size: 0.9rem; color: var(--accent-gold-light); font-weight: 600;"></div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1rem; text-align: center;">
+                *แนะนำให้ใช้สม่ำเสมอทุกสัปดาห์เพื่อประสิทธิภาพสูงสุด
+            </p>
+        </section>
+
+        <!-- Product Information Section -->
+        <section class="card">
+            <h2><i class="fa-solid fa-box-open"></i> รายละเอียดขนาดบรรจุภัณฑ์</h2>
+            
+            <div id="info-liquid" class="prod-info-block active">
+                <h3 style="color: var(--text-white); margin-bottom: 1rem; font-size: 1.1rem;">สูตรน้ำ (Liquid Formula)</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="check-item" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-bottle-water"></i>
+                        <span>แกลลอน 1 L</span>
+                    </div>
+                    <div class="check-item" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-bottle-water"></i>
+                        <span>แกลลอน 5 L</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="info-premium" class="prod-info-block" style="display: none;">
+                <h3 style="color: var(--text-white); margin-bottom: 1rem; font-size: 1.1rem;">สูตรพรีเมียม (Premium Powder)</h3>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                    <div class="check-item" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <span>รุ่นซองชา (20g x 6 ซอง/ถุง)</span>
+                    </div>
+                    <div class="check-item" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>ถุงขนาด 1 kg</span>
+                    </div>
+                    <div class="check-item" style="margin-bottom: 0;">
+                        <i class="fa-solid fa-bucket"></i>
+                        <span>ถังขนาด 6 kg</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Guides -->
+        <section class="card">
+            <h2><i class="fa-solid fa-book-open"></i> วิธีการใช้งานทีละขั้นตอน</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="guide-trap">บ่อดักไขมัน</button>
+                <button class="tab-btn" data-tab="guide-sink">อ่างล้างจาน</button>
+                <button class="tab-btn" data-tab="guide-drain">ท่อระบายน้ำหลัก</button>
+            </div>
+
+            <div id="guide-trap" class="tab-content active">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">ตักก้อนไขมันที่แข็งตัวหนาด้านบนออกก่อน (หากมีการสะสมนาน)</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">เทจุลินทรีย์เชื้อสดลงในบ่อดักไขมันตามปริมาณที่คำนวณได้</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">แนะนำให้เทในช่วงเวลาที่ไม่มีการใช้งาน (เช่น หลังปิดร้าน) เพื่อให้เชื้อทำงานได้เต็มที่</div>
+                </div>
+            </div>
+
+            <div id="guide-sink" class="tab-content">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">เปิดน้ำไล่สิ่งสกปรกในท่อเล็กน้อย</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">เทจุลินทรีย์ประมาณ 50-100 กรัม ลงในท่อระบายน้ำใต้ซิงค์</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">ทิ้งไว้ข้ามคืนโดยไม่เปิดน้ำตาม เพื่อให้เอนไซม์ย่อยสลายคราบไขมันในท่อ</div>
+                </div>
+            </div>
+
+            <div id="guide-drain" class="tab-content">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">ระบุจุดพักน้ำหรือจุดที่มีกลิ่นเหม็นรุนแรง</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">เทจุลินทรีย์สูตรเข้มข้นลงไปโดยตรง</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">กลิ่นจะจางลงอย่างเห็นได้ชัดภายใน 24 ชั่วโมง</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Do's and Don'ts -->
+        <section class="card">
+            <h2><i class="fa-solid fa-triangle-exclamation"></i> ข้อควรระวังและคำแนะนำ</h2>
+            
+            <div class="warning-item">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <div>
+                    <strong>ห้ามใช้ร่วมกับโซดาไฟ</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-gray);">สารเคมีรุนแรงจะทำลายจุลินทรีย์ ทำให้การบำบัดไม่ได้ผล</p>
+                </div>
+            </div>
+
+            <div class="warning-item">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <div>
+                    <strong>เลี่ยงน้ำยาล้างจานปริมาณมาก</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-gray);">หากเทน้ำยาล้างจานลงไปพร้อมกัน อาจทำให้จุลินทรีย์ทำงานช้าลง</p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                    <strong>ความปลอดภัย 100%</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-gray);">เป็นมิตรต่อสิ่งแวดล้อม ไม่กัดกร่อนท่อ และปลอดภัยต่อผู้ใช้งาน</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 BioRevive Lab. Sustainable Innovation.</p>
+            <p style="margin-top: 0.5rem;">มาตรฐาน BCG Model | จุลินทรีย์เชื้อสดเข้มข้น</p>
+        </footer>
+    </div>
+
+    <script src="usage_guide.js"></script>
+</body>
+</html>
