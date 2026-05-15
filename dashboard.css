@@ -130,6 +130,17 @@ h2 {
     margin-bottom: 2.5rem;
 }
 
+.btn-group-label {
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
 .action-btn {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
