@@ -1,20 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Current time for the log
-    const now = new Date();
-    const timeString = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+    const noteInput = document.getElementById('note-input');
+    const addNoteBtn = document.getElementById('add-note-btn');
+    const noteList = document.getElementById('note-list');
 
-    // You can add logic here to fetch real data from an API if needed
-    console.log("BioRevive Command Center Initialized at " + timeString);
+    // Load existing notes
+    let notes = JSON.parse(localStorage.getItem('biorevive_notes') || '[]');
+    
+    function renderNotes() {
+        noteList.innerHTML = '';
+        notes.forEach((note, index) => {
+            const div = document.createElement('div');
+            div.className = 'note-item';
+            div.innerHTML = `
+                <p>${note.text}</p>
+                <div class="note-actions">
+                    <button class="note-btn copy" onclick="copyNote(${index})"><i class="fa-solid fa-copy"></i> คัดลอก</button>
+                    <button class="note-btn" onclick="deleteNote(${index})"><i class="fa-solid fa-trash"></i> ลบ</button>
+                </div>
+            `;
+            noteList.appendChild(div);
+        });
+    }
 
-    // Dynamic Greeting based on time
-    const brand = document.querySelector('.brand');
-    const hour = now.getHours();
-    let greeting = 'BIOREVIVE';
-    
-    if (hour < 12) greeting = 'GOOD MORNING, BIOREVIVE';
-    else if (hour < 18) greeting = 'GOOD AFTERNOON, BIOREVIVE';
-    else greeting = 'GOOD EVENING, BIOREVIVE';
-    
-    // Optional: Update greeting
-    // brand.innerText = greeting;
+    addNoteBtn.addEventListener('click', () => {
+        const text = noteInput.value.trim();
+        if (text) {
+            notes.unshift({ text, date: new Date().toISOString() });
+            localStorage.setItem('biorevive_notes', JSON.stringify(notes));
+            noteInput.value = '';
+            renderNotes();
+        }
+    });
+
+    window.deleteNote = (index) => {
+        notes.splice(index, 1);
+        localStorage.setItem('biorevive_notes', JSON.stringify(notes));
+        renderNotes();
+    };
+
+    window.copyNote = (index) => {
+        const text = notes[index].text;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.querySelectorAll('.note-btn.copy')[index];
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> คัดลอกแล้ว';
+            setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+        });
+    };
+
+    renderNotes();
 });

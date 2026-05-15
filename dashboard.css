@@ -199,6 +199,73 @@ h2 {
     color: var(--text-white);
 }
 
+/* Notes Section */
+.note-section {
+    margin-bottom: 2.5rem;
+}
+
+.note-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+#note-input {
+    background: var(--secondary-navy);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text-white);
+    font-size: 0.9rem;
+    height: 100px;
+    resize: none;
+}
+
+#add-note-btn {
+    background: var(--accent-gold);
+    color: var(--primary-navy);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.note-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: fadeIn 0.4s ease;
+}
+
+.note-item p {
+    font-size: 0.85rem;
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.note-btn {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-gray);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+}
+
+.note-btn.copy { color: var(--accent-gold); }
+
 footer {
     text-align: center;
     padding: 2rem 0;
