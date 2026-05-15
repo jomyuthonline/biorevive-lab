@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioRevive Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <span class="brand">BIOREVIVE</span>
+                <span class="tagline">COMMAND CENTER</span>
+            </div>
+            <div class="profile-badge">
+                <i class="fa-solid fa-user-tie"></i> Admin
+            </div>
+        </header>
+
+        <!-- Main Status Grid -->
+        <main>
+            <section class="summary-section">
+                <h2>ภาพรวมโครงการ</h2>
+                <div class="status-grid">
+                    <div class="status-card" data-status="ready">
+                        <div class="card-icon"><i class="fa-solid fa-microbe"></i></div>
+                        <div class="card-info">
+                            <h3>Usage Guide</h3>
+                            <span class="status-tag">Ready</span>
+                        </div>
+                    </div>
+                    <div class="status-card" data-status="updated">
+                        <div class="card-icon"><i class="fa-solid fa-hotel"></i></div>
+                        <div class="card-info">
+                            <h3>Hotel Slide</h3>
+                            <span class="status-tag">Updated</span>
+                        </div>
+                    </div>
+                    <div class="status-card" data-status="active">
+                        <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+                        <div class="card-info">
+                            <h3>Landing Page</h3>
+                            <span class="status-tag">Live</span>
+                        </div>
+                    </div>
+                    <div class="status-card" data-status="paused">
+                        <div class="card-icon"><i class="fa-brands fa-facebook"></i></div>
+                        <div class="card-info">
+                            <h3>FB Automation</h3>
+                            <span class="status-tag">Paused</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Links -->
+            <section class="action-section">
+                <h2>ทางลัดเปิดงาน</h2>
+                <div class="action-list">
+                    <a href="index.html" class="action-btn">
+                        <i class="fa-solid fa-eye"></i> ดูหน้าเว็บหลัก
+                    </a>
+                    <a href="pitch_deck_hotel.html" class="action-btn">
+                        <i class="fa-solid fa-presentation-screen"></i> สไลด์โรงแรม
+                    </a>
+                    <a href="usage_guide.html" class="action-btn">
+                        <i class="fa-solid fa-calculator"></i> ตัวคำนวณการใช้
+                    </a>
+                </div>
+            </section>
+
+            <!-- Recent Log -->
+            <section class="log-section">
+                <h2>กิจกรรมล่าสุด</h2>
+                <div class="log-timeline" id="log-timeline">
+                    <!-- Logs will be injected here -->
+                    <div class="log-item">
+                        <div class="log-dot"></div>
+                        <div class="log-content">
+                            <span class="log-time">วันนี้ 19:10</span>
+                            <p>อัปเดตสไลด์โรงแรมและอัพโหลดคู่มือการใช้</p>
+                        </div>
+                    </div>
+                    <div class="log-item">
+                        <div class="log-dot"></div>
+                        <div class="log-content">
+                            <span class="log-time">วันนี้ 18:40</span>
+                            <p>หยุดการเชื่อมต่อ Facebook ตามคำสั่ง</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 BioRevive Lab · Dashboard v1.0</p>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
