@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Post - Promotion Bundle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0a192f;
+            --gold: #c5a059;
+            --gold-light: #e2c275;
+            --white: #ffffff;
+            --sale-red: #ff4747;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', 'Noto Sans Thai', sans-serif; background: #eee; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+        .post-card {
+            width: 1080px;
+            height: 1080px;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            color: var(--white);
+            background-image: linear-gradient(to bottom, rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.95)),
+                              url('https://images.unsplash.com/photo-1556911220-e150213ff7ad?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .promo-header {
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .sale-badge {
+            background: var(--sale-red);
+            color: white;
+            display: inline-block;
+            padding: 10px 40px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .main-title { font-size: 5rem; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+        .sub-title { font-size: 2rem; color: var(--gold-light); }
+
+        /* Product Showcase Grid */
+        .showcase {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 40px;
+            margin-top: 50px;
+            padding: 0 50px;
+        }
+
+        .prod-unit { text-align: center; flex: 1; }
+        .prod-unit img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
+        .prod-label { background: var(--gold); color: var(--navy); padding: 10px; border-radius: 5px; font-weight: 800; margin-top: -20px; position: relative; }
+
+        .price-section {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .bundle-price {
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--white);
+            text-shadow: 0 0 20px var(--gold);
+        }
+        .bundle-price span { font-size: 2rem; color: var(--gold); }
+
+        .limited-tag { font-size: 1.5rem; color: var(--text-gray); margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="post-card">
+        <div class="promo-header">
+            <div class="sale-badge">PROMOTION</div>
+            <h1 class="main-title">เซตคู่กู้โลก(น้ำเสีย)</h1>
+            <p class="sub-title">ครบเครื่องเรื่องบ้านสะอาด กลิ่นหอม ไร้ไขมัน</p>
+        </div>
+
+        <div class="showcase">
+            <div class="prod-unit">
+                <img src="assets/product_soil1kg.jpg" alt="1kg Bag">
+                <div class="prod-label">สูตรเข้มข้น 1KG</div>
+            </div>
+            <div class="prod-unit" style="margin-bottom: 30px;">
+                <img src="assets/product_teabag_nobg.png" alt="Teabag" style="width: 80%;">
+                <div class="prod-label">สูตรสะดวก ซองชา</div>
+            </div>
+        </div>
+
+        <div class="price-section">
+            <div class="bundle-price"><span>พิเศษเพียง</span> 6xx.-</div>
+            <div class="limited-tag">*จำกัดเพียง 50 เซตต่อเดือนเท่านั้น</div>
+        </div>
+    </div>
+</body>
+</html>
