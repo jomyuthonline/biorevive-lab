@@ -12,21 +12,11 @@ def remove_background(input_path, output_path):
     except Exception as e:
         print(f"Error processing {input_path}: {e}")
 
-# Folder and files
 assets_dir = r"c:\BioRevive_Master\assets"
-images_to_process = [
-    "product_liquid.png",
-    "product_concentrated.png",
-    "product_teabag.png"
-]
+in_path = os.path.join(assets_dir, "product_soil1kg.jpg")
+out_path = os.path.join(assets_dir, "product_soil1kg_nobg.png")
 
-for img_name in images_to_process:
-    in_path = os.path.join(assets_dir, img_name)
-    out_path = os.path.join(assets_dir, img_name.replace(".png", "_nobg.png"))
-    
-    if os.path.exists(in_path):
-        remove_background(in_path, out_path)
-    else:
-        print(f"File not found: {in_path}")
-
-print("Background removal completed!")
+if os.path.exists(in_path):
+    remove_background(in_path, out_path)
+else:
+    print(f"File not found: {in_path}")
