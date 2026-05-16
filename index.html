@@ -313,28 +313,43 @@
     <section class="section-padding" id="pricing" style="background:#F8FAFC;">
         <div class="container text-center">
             <h2 data-i18n="prod_title" style="font-size: 2.5rem; margin-bottom: 50px;">ผลิตภัณฑ์ BioRevive Lab</h2>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:25px;">
+                <!-- 1L Liquid -->
                 <div class="pricing-card">
-                    <img src="assets/ad_liquid.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3 data-i18n="prod_liquid">สูตรน้ำ (Liquid)</h3>
-
-                    <button onclick="addToCart('Liquid 5L', 1890)" class="btn-buy pulse-cta"><span data-i18n="prod_size_5l">5 ลิตร</span>: 1,890 ฿</button>
-                    <button onclick="addToCart('Liquid 1L', 380)" class="btn-buy pulse-cta" style="background:none; border:2px solid #162C4E; color:#162C4E;"><span data-i18n="prod_size_1l">1 ลิตร</span>: 380 ฿</button>
+                    <img src="assets/catalog/catalog_liquid_1l.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3 data-i18n="prod_liquid_1l">สูตรน้ำ 1 ลิตร</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">ทรงเหลี่ยม กะทัดรัด</p>
+                    <button onclick="addToCart('Liquid 1L', 380)" class="btn-buy pulse-cta" style="background:#162C4E;">380 ฿</button>
                 </div>
+                <!-- 5L Liquid -->
                 <div class="pricing-card popular">
-                    <div style="background:#C5A059; color:white; padding:5px 20px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:15px;" data-i18n="promo_popular">BEST SELLER</div>
-                    <img src="assets/ad_concentrated.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3 data-i18n="prod_premium">สูตรพรีเมี่ยม (Premium)</h3>
-
-                    <button onclick="addToCart('Premium 6kg', 3500)" class="btn-buy btn-buy-gold pulse-cta"><span data-i18n="prod_size_6kg">6 kg</span>: 3,500 ฿</button>
-                    <button onclick="addToCart('Premium 1kg', 800)" class="btn-buy pulse-cta" style="background:none; border:2px solid #C5A059; color:#C5A059;"><span data-i18n="prod_size_1kg">1 kg</span>: 800 ฿</button>
+                    <div style="background:#C5A059; color:white; padding:5px 15px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:10px; font-size:0.8rem;">POPULAR</div>
+                    <img src="assets/catalog/catalog_liquid_5l.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3 data-i18n="prod_liquid_5l">สูตรน้ำ 5 ลิตร</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">ไซส์ประหยัด คุ้มค่า</p>
+                    <button onclick="addToCart('Liquid 5L', 1890)" class="btn-buy btn-buy-gold pulse-cta">1,890 ฿</button>
                 </div>
+                <!-- 1kg Premium -->
                 <div class="pricing-card">
-                    <img src="assets/ad_teabag_final.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
-                    <h3 data-i18n="prod_teabag">แบบซองชา (Tea bag)</h3>
-                    <p data-i18n="prod_teabag_desc" style="margin-bottom:15px; color:#64748B;">1 ซอง บรรจุ 6 ชิ้น / ชิ้นละ 20 g.</p>
-
-                    <button onclick="addToCart('Tea bag 1 pack', 299)" class="btn-buy pulse-cta"><span data-i18n="prod_size_1pack">1 ซอง</span>: 299 ฿</button>
+                    <img src="assets/catalog/catalog_pouch_1kg.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3 data-i18n="prod_premium_1kg">สูตรพรีเมี่ยม 1 kg</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">ชนิดผงเข้มข้น</p>
+                    <button onclick="addToCart('Premium 1kg', 800)" class="btn-buy pulse-cta" style="background:#162C4E;">800 ฿</button>
+                </div>
+                <!-- 6kg Premium -->
+                <div class="pricing-card popular">
+                    <div style="background:#C5A059; color:white; padding:5px 15px; border-radius:20px; font-weight:bold; display:inline-block; margin-bottom:10px; font-size:0.8rem;">BEST VALUE</div>
+                    <img src="assets/catalog/catalog_bucket_6kg.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3 data-i18n="prod_premium_6kg">สูตรพรีเมี่ยม 6 kg</h3>
+                    <p style="color:#64748B; margin-bottom:15px;">ถังใหญ่ สำหรับธุรกิจ</p>
+                    <button onclick="addToCart('Premium 6kg', 3500)" class="btn-buy btn-buy-gold pulse-cta">3,500 ฿</button>
+                </div>
+                <!-- Teabag -->
+                <div class="pricing-card">
+                    <img src="assets/catalog/catalog_teabag.png" style="width:100%; border-radius:15px; margin-bottom:20px;">
+                    <h3 data-i18n="prod_teabag">แบบซองชา 20g</h3>
+                    <p data-i18n="prod_teabag_desc" style="margin-bottom:15px; color:#64748B;">บรรจุ 6 ชิ้นต่อถุง</p>
+                    <button onclick="addToCart('Tea bag 1 pack', 299)" class="btn-buy pulse-cta" style="background:#162C4E;">299 ฿</button>
                 </div>
             </div>
         </div>
