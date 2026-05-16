@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Hub | BioRevive Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-navy: #0F0F1A;
+            --accent-gold: #C5A059;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-gray: #94A3B8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
+            background: var(--primary-navy);
+            color: white;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 50% -20%, #1a1a2e, #0F0F1A);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .btn-back {
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1, h2 {
+            margin: 0;
+            color: var(--accent-gold);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(6, 199, 85, 0.1);
+            color: #06C755;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        textarea, input, select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            color: white;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .asset-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .asset-item.selected {
+            border-color: var(--accent-gold);
+        }
+
+        .asset-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-post {
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .btn-post:hover {
+            transform: scale(1.02);
+        }
+
+        .schedule-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="dashboard.html" class="btn-back">← Back to Dashboard</a>
+            <div class="status-badge" id="fbStatus">● Facebook Connected (Permanent)</div>
+        </div>
+
+        <h1>Marketing Hub</h1>
+        <p style="color: var(--text-gray); margin-bottom: 40px;">Manage your automated social media content and scheduling.</p>
+
+        <div class="card">
+            <h2>Create New Post</h2>
+            <div style="margin-top: 25px;">
+                <div class="form-group">
+                    <label>Select Template / Image</label>
+                    <div class="asset-grid">
+                        <div class="asset-item selected" onclick="selectAsset(this, 'promo_set_s_lifestyle.png')">
+                            <img src="assets/promo_set_s_lifestyle.png" alt="Set S">
+                        </div>
+                        <div class="asset-item" onclick="selectAsset(this, 'promo_set_m_lifestyle.png')">
+                            <img src="assets/promo_set_m_lifestyle.png" alt="Set M">
+                        </div>
+                        <div class="asset-item" onclick="selectAsset(this, 'promo_set_l_lifestyle.png')">
+                            <img src="assets/promo_set_l_lifestyle.png" alt="Set L">
+                        </div>
+                        <div class="asset-item" onclick="selectAsset(this, 'infographic_watermarked.png')">
+                            <img src="assets/infographic_watermarked.png" alt="Checklist">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Caption (Storytelling Mode)</label>
+                    <textarea id="caption" placeholder="ร่างข้อความคอนเทนต์ที่นี่..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Scheduling (Optional)</label>
+                    <div class="schedule-options">
+                        <input type="date" id="scheduleDate">
+                        <input type="time" id="scheduleTime">
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-gray); margin-top: 8px;">
+                        * หากตั้งเวลา ข้อมูลจะถูกส่งไปที่ Facebook และโพสต์อัตโนมัติแม้คุณจะปิดคอมพิวเตอร์
+                    </p>
+                </div>
+
+                <button class="btn-post" onclick="handlePost()">Publish to Facebook Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedImage = 'promo_set_s_lifestyle.png';
+
+        function selectAsset(el, imgName) {
+            document.querySelectorAll('.asset-item').forEach(item => item.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedImage = imgName;
+        }
+
+        async function handlePost() {
+            const caption = document.getElementById('caption').value;
+            const date = document.getElementById('scheduleDate').value;
+            const time = document.getElementById('scheduleTime').value;
+
+            if(!caption) {
+                alert('กรุณาใส่ข้อความคอนเทนต์ครับ');
+                return;
+            }
+
+            alert('ระบบกำลังส่งข้อมูลไปยัง Facebook... (ฟีเจอร์นี้จะเชื่อมต่อกับ Daemon API ในขั้นตอนถัดไป)');
+            
+            // ในขั้นตอนถัดไป ผมจะเชื่อมต่อหน้าจอนี้กับ Backend 
+            // เพื่อให้กดปุ่มแล้วรัน Python Script ที่เราทำไว้ครับ
+        }
+    </script>
+</body>
+</html>
