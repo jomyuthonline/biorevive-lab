@@ -47,7 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         resultValue.innerText = `${dosage} ${unit}`;
-        packagingSuggestion.innerText = suggestion;
+        
+        let frequencyTip = ' (ทำซ้ำ 1-3 ครั้ง/สัปดาห์)';
+        let startupTip = '<br><span style="font-size: 0.8rem; opacity: 0.8;">*ถ้าของเสียเยอะ: ใช้ติดต่อกัน 3-5 วันแรกเพื่อเซ็ตระบบ</span>';
+        
+        packagingSuggestion.innerHTML = suggestion + frequencyTip + startupTip;
     }
 
     volumeInput.addEventListener('input', calculateDosage);
