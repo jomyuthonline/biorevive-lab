@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, height=1080" />
+    <meta name="viewport" content="width=1280, height=720" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
       html,
       body {
         margin: 0;
-        width: 1920px;
-        height: 1080px;
+        width: 1280px;
+        height: 720px;
         overflow: hidden;
         background: #06060F;
         font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
@@ -28,16 +28,16 @@
       /* Canvas & Background */
       .video-stage {
         position: relative;
-        width: 1920px;
-        height: 1080px;
+        width: 1280px;
+        height: 720px;
         background: radial-gradient(circle at 50% 50%, #0F1226 0%, #05060E 100%);
         overflow: hidden;
       }
 
       .ambient-glow {
         position: absolute;
-        width: 800px;
-        height: 800px;
+        width: 600px;
+        height: 600px;
         background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, rgba(197, 160, 89, 0) 70%);
         top: 50%;
         left: 50%;
@@ -47,21 +47,21 @@
 
       .accent-blue-glow {
         position: absolute;
-        width: 1000px;
-        height: 1000px;
+        width: 700px;
+        height: 700px;
         background: radial-gradient(circle, rgba(30, 41, 150, 0.15) 0%, rgba(30, 41, 150, 0) 70%);
-        bottom: -200px;
-        right: -200px;
+        bottom: -150px;
+        right: -150px;
         pointer-events: none;
       }
 
       /* Grid and Borders */
       .border-frame {
         position: absolute;
-        top: 40px;
-        left: 40px;
-        right: 40px;
-        bottom: 40px;
+        top: 25px;
+        left: 25px;
+        right: 25px;
+        bottom: 25px;
         border: 1px solid rgba(197, 160, 89, 0.2);
         pointer-events: none;
         z-index: 10;
@@ -69,23 +69,23 @@
 
       .logo-stamp {
         position: absolute;
-        top: 70px;
-        left: 80px;
+        top: 50px;
+        left: 60px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
         z-index: 15;
       }
 
       .logo-stamp img {
-        height: 45px;
+        height: 35px;
       }
 
       .logo-stamp span {
         font-family: 'Outfit';
         font-weight: 800;
-        font-size: 22px;
-        letter-spacing: 4px;
+        font-size: 18px;
+        letter-spacing: 3px;
         color: #C5A059;
       }
 
@@ -94,12 +94,12 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 1920px;
-        height: 1080px;
+        width: 1280px;
+        height: 720px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0 100px;
+        padding: 0 80px;
       }
 
       /* SCENE 1: Intro (0-2.5s) */
@@ -110,22 +110,22 @@
       }
 
       .intro-gold-title {
-        font-size: 96px;
+        font-size: 72px;
         font-weight: 800;
-        letter-spacing: 12px;
+        letter-spacing: 10px;
         background: linear-gradient(135deg, #FFF 0%, #C5A059 50%, #8A6D3B 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         text-transform: uppercase;
-        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
       }
 
       .intro-subtitle {
-        font-size: 32px;
+        font-size: 22px;
         font-weight: 600;
         color: #94A3B8;
-        letter-spacing: 6px;
+        letter-spacing: 5px;
         text-transform: uppercase;
       }
 
@@ -137,8 +137,8 @@
       }
 
       .product-text-side {
-        width: 800px;
-        margin-left: 100px;
+        width: 600px;
+        margin-left: 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -146,24 +146,24 @@
 
       .badge {
         display: inline-block;
-        padding: 8px 16px;
+        padding: 6px 12px;
         background: rgba(197, 160, 89, 0.1);
         border: 1px solid #C5A059;
         color: #C5A059;
         border-radius: 100px;
-        font-size: 16px;
+        font-size: 13px;
         font-weight: bold;
         letter-spacing: 2px;
         width: fit-content;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         text-transform: uppercase;
       }
 
       .h-title {
-        font-size: 64px;
+        font-size: 44px;
         font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 20px;
+        line-height: 1.25;
+        margin-bottom: 15px;
         color: #fff;
       }
 
@@ -172,27 +172,27 @@
       }
 
       .desc-text {
-        font-size: 24px;
+        font-size: 18px;
         color: #94A3B8;
-        line-height: 1.6;
-        margin-bottom: 40px;
+        line-height: 1.5;
+        margin-bottom: 25px;
       }
 
       .bullets {
         display: grid;
-        gap: 20px;
+        gap: 15px;
       }
 
       .bullet-item {
         display: flex;
         align-items: center;
-        gap: 15px;
-        font-size: 24px;
+        gap: 12px;
+        font-size: 18px;
       }
 
       .bullet-icon {
-        width: 35px;
-        height: 35px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background: rgba(6, 199, 85, 0.1);
         border: 1px solid #06C755;
@@ -200,12 +200,12 @@
         align-items: center;
         justify-content: center;
         color: #06C755;
-        font-size: 16px;
+        font-size: 13px;
       }
 
       .product-img-side {
         position: relative;
-        width: 700px;
+        width: 500px;
         height: 100%;
         display: flex;
         align-items: center;
@@ -213,9 +213,9 @@
       }
 
       .product-main-img {
-        max-width: 620px;
-        max-height: 620px;
-        filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.6));
+        max-width: 440px;
+        max-height: 440px;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
       }
 
       /* SCENE 3: Outro / CTA (6.5-10s) */
@@ -226,40 +226,40 @@
       }
 
       .outro-logo {
-        height: 120px;
-        margin-bottom: 40px;
-        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        height: 90px;
+        margin-bottom: 30px;
+        filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
       }
 
       .outro-title {
-        font-size: 54px;
+        font-size: 38px;
         font-weight: 700;
         color: white;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
       }
 
       .outro-desc {
-        font-size: 28px;
+        font-size: 20px;
         color: #94A3B8;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         letter-spacing: 1px;
       }
 
       .qr-block {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 20px;
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 20px 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        padding: 15px 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       }
 
       .qr-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 12px;
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
         border: 2px solid #C5A059;
       }
 
@@ -269,13 +269,13 @@
 
       .qr-text h4 {
         color: #C5A059;
-        font-size: 24px;
-        margin-bottom: 5px;
+        font-size: 18px;
+        margin-bottom: 4px;
       }
 
       .qr-text p {
         color: #94A3B8;
-        font-size: 18px;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -286,8 +286,8 @@
       data-composition-id="main"
       data-start="0"
       data-duration="10"
-      data-width="1920"
-      data-height="1080"
+      data-width="1280"
+      data-height="720"
     >
       <!-- Background elements -->
       <div class="ambient-glow"></div>
@@ -365,7 +365,7 @@
         .fromTo("#scene-product .bullet-item", { opacity: 0, x: -20 }, { opacity: 1, x: 0, stagger: 0.2, duration: 0.6 }, 3.6)
         .fromTo("#product-teabag", { opacity: 0, scale: 0.8, rotation: -10 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.2, ease: "power2.out" }, 2.7)
         // Gentle hover loop inside timeline
-        .to("#product-teabag", { y: -25, duration: 1.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 3.9)
+        .to("#product-teabag", { y: -20, duration: 1.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 3.9)
         .to("#scene-product", { opacity: 0, duration: 0.6 }, 6.0);
 
       // Frame 6.5s - 10s: Outro / Call to action
@@ -377,13 +377,13 @@
 
       window.__timelines["main"] = tl;
 
-      // Responsive viewport scaling for iframe preview
+      // Responsive viewport scaling for iframe preview (Optimized for 1280x720 HD)
       function resizeVideo() {
           const root = document.getElementById('root');
-          const scale = window.innerWidth / 1920;
+          const scale = window.innerWidth / 1280;
           root.style.transform = `scale(${scale})`;
           root.style.transformOrigin = 'top left';
-          document.body.style.height = `${1080 * scale}px`;
+          document.body.style.height = `${720 * scale}px`;
       }
       window.addEventListener('resize', resizeVideo);
       window.addEventListener('load', resizeVideo);
