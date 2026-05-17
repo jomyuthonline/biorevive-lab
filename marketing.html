@@ -212,6 +212,8 @@
 
         <!-- NEW: AI Video Studio (HyperFrames Engine) -->
         <div class="card" style="border-color: rgba(197, 160, 89, 0.4); background: linear-gradient(135deg, rgba(26, 26, 46, 0.6) 0%, rgba(15, 15, 26, 0.8) 100%);">
+            <!-- Background music element for parent container (Guarantees iOS Safari gesture compatibility) -->
+            <audio id="bg-music" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Chopin_Nocturne_Op9_No2.ogg" loop preload="auto"></audio>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
                 <h2 style="display: flex; align-items: center; gap: 10px; color: var(--accent-gold);"><i class="fa-solid fa-clapperboard"></i> AI Video Studio (HyperFrames Engine)</h2>
                 <span class="status-badge" style="background: rgba(197, 160, 89, 0.1); color: var(--accent-gold); border: 1px solid var(--accent-gold);">
@@ -237,7 +239,7 @@
                         <button onclick="controlTimeline('restart')" style="background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 13px;"><i class="fa-solid fa-arrow-rotate-left"></i> เล่นใหม่ (Restart)</button>
                     </div>
                     <span style="font-size: 12px; color: var(--text-gray);">
-                        * วิดีโอนี้รันแบบ Interactive 60fps ด้วย GSAP และพร้อมเรนเดอร์เป็น MP4 ตลอดเวลา
+                        * วิดีโอนี้รันแบบ Interactive 60fps ด้วย GSAP | 📱 <strong>หากไม่มีเสียงบน iOS:</strong> กรุณาเช็กสวิตช์ปิดเสียง (Silent Switch) ด้านข้างโทรศัพท์ของคุณ
                     </span>
                 </div>
             </div>
@@ -427,13 +429,18 @@
         function closeVideoPreview() {
             document.getElementById('video-preview-container').style.display = 'none';
             document.getElementById('hyperframes-iframe').src = '';
+            const audio = document.getElementById('bg-music');
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
         }
 
         function controlTimeline(action) {
             const iframe = document.getElementById('hyperframes-iframe');
+            const audio = document.getElementById('bg-music');
             if (iframe && iframe.contentWindow) {
                 const tl = iframe.contentWindow.__timelines ? iframe.contentWindow.__timelines["main"] : null;
-                const audio = iframe.contentWindow.document.getElementById('bg-music');
                 if (tl) {
                     if (action === 'play') {
                         tl.play();
