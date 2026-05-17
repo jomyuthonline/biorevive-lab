@@ -6,12 +6,12 @@ ASSETS_DIR = r"C:\BioRevive_Master\assets"
 CATALOG_DIR = os.path.join(ASSETS_DIR, "catalog")
 OUTPUT_DIR = ASSETS_DIR
 
-# Products from the catalog folder
-PROD_1L = os.path.join(CATALOG_DIR, "catalog_liquid_1l.png")
-PROD_5L = os.path.join(CATALOG_DIR, "catalog_liquid_5l.png")
-PROD_1KG = os.path.join(CATALOG_DIR, "catalog_pouch_1kg.png")
-PROD_6KG = os.path.join(CATALOG_DIR, "catalog_bucket_6kg.png")
-PROD_TEABAG = os.path.join(CATALOG_DIR, "catalog_teabag.png")
+# Products from the catalog folder (transparent cutout versions)
+PROD_1L = os.path.join(ASSETS_DIR, "ad_liquid_1l_nobg.png")
+PROD_5L = os.path.join(ASSETS_DIR, "ad_liquid_5l_nobg.png")
+PROD_1KG = os.path.join(ASSETS_DIR, "ad_pouch_white_1kg_nobg.png")
+PROD_6KG = os.path.join(ASSETS_DIR, "ad_bucket_6kg_nobg.png")
+PROD_TEABAG = os.path.join(ASSETS_DIR, "ad_teabag_with_6teabags_nobg.png")
 
 def create_set_v3(name, products, output_filename):
     print(f"Creating Premium Catalog {name}...")
