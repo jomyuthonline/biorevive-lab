@@ -10,7 +10,7 @@
         :root {
             --bg-navy: #05050f;
             --accent-gold: #C5A059;
-            --glass-bg: rgba(15, 15, 26, 0.75);
+            --glass-bg: rgba(15, 15, 26, 0.85);
             --border-glow: rgba(197, 160, 89, 0.3);
         }
 
@@ -34,13 +34,17 @@
 
         /* 9:16 Vertical Canvas Container */
         #canvas {
-            position: relative;
+            position: absolute;
             width: 720px;
             height: 1280px;
             background: #000;
             overflow: hidden;
             border: 2px solid var(--border-glow);
             box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transform-origin: center center;
         }
 
         /* Background Images */
@@ -130,7 +134,7 @@
         /* Main Content Container (Storytelling Cards) */
         .story-container {
             position: absolute;
-            bottom: 250px;
+            bottom: 230px;
             left: 50%;
             transform: translateX(-50%);
             width: 85%;
@@ -142,7 +146,7 @@
         }
 
         .headline {
-            font-size: 40px;
+            font-size: 38px;
             font-weight: 800;
             line-height: 1.3;
             color: white;
@@ -159,18 +163,23 @@
         .story-card {
             background: var(--glass-bg);
             border: 1px solid rgba(197, 160, 89, 0.25);
-            border-radius: 24px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 24px 28px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             backdrop-filter: blur(15px);
             opacity: 0;
             transform: translateY(30px);
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .story-card p {
-            font-size: 24px;
-            line-height: 1.6;
-            color: #E2E8F0;
+            font-size: 21px;
+            line-height: 1.5;
+            color: #F1F5F9;
+            font-weight: 400;
         }
 
         /* Interactive Footer Controls inside Canvas */
@@ -214,31 +223,6 @@
             border-color: var(--accent-gold);
             color: #05050f;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
-        }
-
-        .playback-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: background 0.2s;
-        }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
@@ -377,8 +361,19 @@
         }, 4500);
     }
 
+    // Responsive viewport scaling
+    function resizeVideo() {
+        const canvas = document.getElementById('canvas');
+        const scale = Math.min(window.innerWidth / 720, window.innerHeight / 1280);
+        canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+
+    window.addEventListener('resize', resizeVideo);
+    window.addEventListener('load', resizeVideo);
+
     // Start on load
     window.onload = () => {
+        resizeVideo();
         playSequence();
     };
 </script>
