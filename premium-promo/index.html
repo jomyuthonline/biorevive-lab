@@ -391,11 +391,6 @@
       data-width="720"
       data-height="1280"
     >
-      <!-- Background music and Voiceover elements -->
-      <audio id="bg-music" src="../assets/audio_soundtrack.mp3" loop preload="auto"></audio>
-      <audio id="voiceover" src="../assets/voiceover_premium.mp3" preload="auto"></audio>
-      
-      <!-- Background glows -->
       <div class="ambient-glow"></div>
       <div class="accent-blue-glow"></div>
       <div class="border-frame"></div>
@@ -439,19 +434,19 @@
           <div class="lineup-container">
             <!-- 20g Tea bag box -->
             <div id="prod-teabag" class="prod-box" style="opacity: 0;">
-              <img class="img-teabag" src="../assets/product_teabag_with_6teabags_nobg.png" alt="20g Teabag">
+              <img class="img-teabag" src="../assets/catalog/catalog_teabag.png" alt="20g Teabag">
               <div class="prod-label">ซองชา 20g</div>
             </div>
             
             <!-- 1kg White pouch -->
             <div id="prod-pouch" class="prod-box" style="opacity: 0;">
-              <img class="img-pouch" src="../assets/ad_pouch_white_1kg_nobg.png" alt="1kg Bag">
+              <img class="img-pouch" src="../assets/catalog/catalog_pouch_1kg.png" alt="1kg Bag">
               <div class="prod-label">ถุง 1 kg</div>
             </div>
             
             <!-- 6kg Big bucket -->
             <div id="prod-bucket" class="prod-box" style="opacity: 0;">
-              <img class="img-bucket" src="../assets/ad_bucket_6kg_nobg.png" alt="6kg Bucket">
+              <img class="img-bucket" src="../assets/catalog/catalog_bucket_6kg.png" alt="6kg Bucket">
               <div class="prod-label">ถัง 6 kg</div>
             </div>
           </div>
@@ -477,24 +472,6 @@
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-
-      // Audio Elements Setup
-      const bgMusic = document.getElementById('bg-music');
-      const voiceover = document.getElementById('voiceover');
-      
-      if (bgMusic) bgMusic.volume = 0.12; // Lower to keep voiceover clear
-      if (voiceover) voiceover.volume = 1.0; // High volume for premium narration
-
-      // Sync Audio to GSAP events
-      tl.eventCallback("onPlay", () => {
-          if (bgMusic) bgMusic.play().catch(e => console.log("BG music blocked:", e));
-          if (voiceover) voiceover.play().catch(e => console.log("Voiceover blocked:", e));
-      });
-
-      tl.eventCallback("onPause", () => {
-          if (bgMusic) bgMusic.pause();
-          if (voiceover) voiceover.pause();
-      });
 
       // Frame 0 - 3s: Intro scene
       tl.fromTo("#scene-intro .intro-logo", { opacity: 0, scale: 0.8, rotation: -5 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.2, ease: "back.out(1.5)" }, 0)
@@ -532,14 +509,21 @@
 
       window.__timelines["main"] = tl;
 
-      // Handle direct timeline sync on time update (restart/scrubbing support)
+      // Handle timeline sync with parent window audio
       tl.eventCallback("onUpdate", () => {
-          const time = tl.time();
-          if (voiceover && Math.abs(voiceover.currentTime - time) > 0.3) {
-              voiceover.currentTime = time;
-          }
-          if (bgMusic && Math.abs(bgMusic.currentTime - time) > 0.3) {
-              bgMusic.currentTime = time % bgMusic.duration;
+          try {
+              const time = tl.time();
+              const bgMusic = window.parent.document.getElementById('bg-music');
+              const voiceover = window.parent.document.getElementById('voiceover-premium');
+              
+              if (voiceover && !voiceover.paused && Math.abs(voiceover.currentTime - time) > 0.3) {
+                  voiceover.currentTime = time;
+              }
+              if (bgMusic && !bgMusic.paused && Math.abs(bgMusic.currentTime - time) > 0.3) {
+                  bgMusic.currentTime = time % bgMusic.duration;
+              }
+          } catch(e) {
+              // Ignore cross-origin errors if any
           }
       });
 

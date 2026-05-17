@@ -212,8 +212,10 @@
 
         <!-- NEW: AI Video Studio (HyperFrames Engine) -->
         <div class="card" style="border-color: rgba(197, 160, 89, 0.4); background: linear-gradient(135deg, rgba(26, 26, 46, 0.6) 0%, rgba(15, 15, 26, 0.8) 100%);">
-            <!-- Background music element for parent container (Muted to prevent overlap, but active for iOS touch gestures) -->
-            <audio id="bg-music" src="assets/audio_soundtrack.mp3" loop preload="auto" muted></audio>
+            <!-- Audio elements for parent container (Playing audio from parent bypasses iframe restrictions) -->
+            <audio id="bg-music" src="assets/audio_soundtrack.mp3" loop preload="auto"></audio>
+            <audio id="voiceover-liquid" src="assets/voiceover_liquid.mp3" preload="auto"></audio>
+            <audio id="voiceover-premium" src="assets/voiceover_premium.mp3" preload="auto"></audio>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
                 <h2 style="display: flex; align-items: center; gap: 10px; color: var(--accent-gold);"><i class="fa-solid fa-clapperboard"></i> AI Video Studio (HyperFrames Engine)</h2>
                 <span class="status-badge" style="background: rgba(197, 160, 89, 0.1); color: var(--accent-gold); border: 1px solid var(--accent-gold);">
@@ -422,6 +424,12 @@
             const iframe = document.getElementById('hyperframes-iframe');
             const titleSpan = document.getElementById('video-preview-title');
             
+            // Reset all audio
+            ['bg-music', 'voiceover-liquid', 'voiceover-premium'].forEach(id => {
+                const aud = document.getElementById(id);
+                if(aud) { aud.pause(); aud.currentTime = 0; }
+            });
+            
             if (promoType === 'liquid-promo') {
                 iframe.src = 'liquid-promo/index.html';
                 titleSpan.innerHTML = '<i class="fa-solid fa-play"></i> HyperFrames Live View: รุ่น Liquid Series (ความยาว 15 วินาที)';
@@ -442,32 +450,49 @@
         function closeVideoPreview() {
             document.getElementById('video-preview-container').style.display = 'none';
             document.getElementById('hyperframes-iframe').src = '';
-            const audio = document.getElementById('bg-music');
-            if (audio) {
-                audio.pause();
-                audio.currentTime = 0;
-            }
+            
+            // Stop all audio
+            ['bg-music', 'voiceover-liquid', 'voiceover-premium'].forEach(id => {
+                const aud = document.getElementById(id);
+                if(aud) { aud.pause(); aud.currentTime = 0; }
+            });
         }
 
         function controlTimeline(action) {
             const iframe = document.getElementById('hyperframes-iframe');
-            const audio = document.getElementById('bg-music');
+            const bgAudio = document.getElementById('bg-music');
+            let voiceover = null;
+            
+            if (iframe && iframe.src) {
+                if (iframe.src.includes('liquid-promo')) voiceover = document.getElementById('voiceover-liquid');
+                if (iframe.src.includes('premium-promo')) voiceover = document.getElementById('voiceover-premium');
+            }
+            
+            if (bgAudio) bgAudio.volume = 0.12;
+            if (voiceover) voiceover.volume = 1.0;
+
             if (iframe && iframe.contentWindow) {
                 const tl = iframe.contentWindow.__timelines ? iframe.contentWindow.__timelines["main"] : null;
                 if (tl) {
                     if (action === 'play') {
                         tl.play();
-                        if (audio) audio.play().catch(e => console.log("Audio play blocked:", e));
+                        if (bgAudio) bgAudio.play().catch(e => console.log("Audio play blocked:", e));
+                        if (voiceover) voiceover.play().catch(e => console.log("Voiceover play blocked:", e));
                     }
                     if (action === 'pause') {
                         tl.pause();
-                        if (audio) audio.pause();
+                        if (bgAudio) bgAudio.pause();
+                        if (voiceover) voiceover.pause();
                     }
                     if (action === 'restart') {
                         tl.restart();
-                        if (audio) {
-                            audio.currentTime = 0;
-                            audio.play().catch(e => console.log("Audio play blocked:", e));
+                        if (bgAudio) {
+                            bgAudio.currentTime = 0;
+                            bgAudio.play().catch(e => console.log("Audio play blocked:", e));
+                        }
+                        if (voiceover) {
+                            voiceover.currentTime = 0;
+                            voiceover.play().catch(e => console.log("Voiceover play blocked:", e));
                         }
                     }
                 } else {
@@ -475,14 +500,17 @@
                     if (iframeGsap) {
                         if (action === 'play') {
                             iframeGsap.globalTimeline.play();
-                            if (audio) audio.play().catch(e => console.log("Audio play blocked:", e));
+                            if (bgAudio) bgAudio.play().catch(e => console.log("Audio play blocked:", e));
+                            if (voiceover) voiceover.play().catch(e => console.log("Voiceover play blocked:", e));
                         }
                         if (action === 'pause') {
                             iframeGsap.globalTimeline.pause();
-                            if (audio) audio.pause();
+                            if (bgAudio) bgAudio.pause();
+                            if (voiceover) voiceover.pause();
                         }
                         if (action === 'restart') {
-                            if (audio) audio.currentTime = 0;
+                            if (bgAudio) bgAudio.currentTime = 0;
+                            if (voiceover) voiceover.currentTime = 0;
                             iframe.contentWindow.location.reload();
                         }
                     }

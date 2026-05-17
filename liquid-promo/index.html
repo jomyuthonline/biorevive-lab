@@ -366,11 +366,6 @@
       data-width="720"
       data-height="1280"
     >
-      <!-- Background music and Voiceover elements -->
-      <audio id="bg-music" src="../assets/audio_soundtrack.mp3" loop preload="auto"></audio>
-      <audio id="voiceover" src="../assets/voiceover_liquid.mp3" preload="auto"></audio>
-      
-      <!-- Background glows -->
       <div class="ambient-glow"></div>
       <div class="accent-blue-glow"></div>
       <div class="border-frame"></div>
@@ -412,8 +407,8 @@
         <div class="product-img-side">
           <div class="bottle-halo"></div>
           <div class="liquid-container">
-            <img id="product-liquid-5l" class="bottle-5l" src="../assets/ad_liquid_5l_nobg.png" alt="5 Liter Product">
-            <img id="product-liquid-1l" class="bottle-1l" src="../assets/ad_liquid_1l_nobg.png" alt="1 Liter Product">
+            <img id="product-liquid-5l" class="bottle-5l" src="../assets/catalog/catalog_liquid_5l.png" alt="5 Liter Product">
+            <img id="product-liquid-1l" class="bottle-1l" src="../assets/catalog/catalog_liquid_1l.png" alt="1 Liter Product">
           </div>
         </div>
       </div>
@@ -437,24 +432,6 @@
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-
-      // Audio Elements Setup
-      const bgMusic = document.getElementById('bg-music');
-      const voiceover = document.getElementById('voiceover');
-      
-      if (bgMusic) bgMusic.volume = 0.12; // Adjusted lower to prevent drowning out voiceover
-      if (voiceover) voiceover.volume = 1.0; // High volume for voiceover
-
-      // Sync Audio to GSAP events
-      tl.eventCallback("onPlay", () => {
-          if (bgMusic) bgMusic.play().catch(e => console.log("BG music blocked:", e));
-          if (voiceover) voiceover.play().catch(e => console.log("Voiceover blocked:", e));
-      });
-
-      tl.eventCallback("onPause", () => {
-          if (bgMusic) bgMusic.pause();
-          if (voiceover) voiceover.pause();
-      });
 
       // Frame 0 - 3s: Intro scene
       tl.fromTo("#scene-intro .intro-logo", { opacity: 0, scale: 0.8, rotation: -5 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.2, ease: "back.out(1.5)" }, 0)
@@ -490,14 +467,21 @@
 
       window.__timelines["main"] = tl;
 
-      // Handle direct timeline sync on time update (restart/scrubbing support)
+      // Handle timeline sync with parent window audio
       tl.eventCallback("onUpdate", () => {
-          const time = tl.time();
-          if (voiceover && Math.abs(voiceover.currentTime - time) > 0.3) {
-              voiceover.currentTime = time;
-          }
-          if (bgMusic && Math.abs(bgMusic.currentTime - time) > 0.3) {
-              bgMusic.currentTime = time % bgMusic.duration;
+          try {
+              const time = tl.time();
+              const bgMusic = window.parent.document.getElementById('bg-music');
+              const voiceover = window.parent.document.getElementById('voiceover-liquid');
+              
+              if (voiceover && !voiceover.paused && Math.abs(voiceover.currentTime - time) > 0.3) {
+                  voiceover.currentTime = time;
+              }
+              if (bgMusic && !bgMusic.paused && Math.abs(bgMusic.currentTime - time) > 0.3) {
+                  bgMusic.currentTime = time % bgMusic.duration;
+              }
+          } catch(e) {
+              // Ignore cross-origin errors if any
           }
       });
 
