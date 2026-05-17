@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioRevive Lab - B2B Storytelling Reels (Vertical)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Thai:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg-navy: #05050f;
+            --accent-gold: #C5A059;
+            --glass-bg: rgba(15, 15, 26, 0.75);
+            --border-glow: rgba(197, 160, 89, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+            color: white;
+            font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 9:16 Vertical Canvas Container */
+        #canvas {
+            position: relative;
+            width: 720px;
+            height: 1280px;
+            background: #000;
+            overflow: hidden;
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+        }
+
+        /* Background Images */
+        .bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .bg-layer.active {
+            opacity: 0.85;
+        }
+
+        /* Dark Vignette Overlay */
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.85) 90%),
+                        linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 20%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Border frame overlay */
+        .frame-overlay {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Centered Header Stamp */
+        .header-stamp {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            z-index: 15;
+            text-align: center;
+        }
+
+        .logo-img {
+            height: 45px;
+            border-radius: 4px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Active Episode Badge */
+        .ep-badge {
+            background: rgba(197, 160, 89, 0.2);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-size: 14px;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 50px;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* Main Content Container (Storytelling Cards) */
+        .story-container {
+            position: absolute;
+            bottom: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .headline {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: white;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.9);
+        }
+
+        .headline span {
+            color: var(--accent-gold);
+            background: linear-gradient(135deg, #FFF 0%, #C5A059 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .story-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .story-card p {
+            font-size: 24px;
+            line-height: 1.6;
+            color: #E2E8F0;
+        }
+
+        /* Interactive Footer Controls inside Canvas */
+        .canvas-footer {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .episode-tabs {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94A3B8;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: #05050f;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .playback-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background 0.2s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div id="canvas">
+    <!-- Vignette Shadows -->
+    <div class="vignette"></div>
+    <div class="frame-overlay"></div>
+
+    <!-- Backgrounds representing each location -->
+    <div id="bg-kitchen" class="bg-layer active" style="background-image: url('../assets/location_standard_kitchen.png');"></div>
+    <div id="bg-cafe" class="bg-layer" style="background-image: url('../assets/location_cozy_cafe.png');"></div>
+    <div id="bg-resort" class="bg-layer" style="background-image: url('../assets/location_food_court.png');"></div>
+
+    <!-- Persistent Header Logo -->
+    <div class="header-stamp">
+        <img class="logo-img" src="../assets/ใบเก็บเงิน.png" alt="Logo">
+        <span class="brand-name">BIOREVIVE LAB</span>
+        <div class="ep-badge" id="active-badge">EPISODE 7</div>
+    </div>
+
+    <!-- Main Dynamic Story Slider -->
+    <div class="story-container">
+        <h1 class="headline" id="main-title">วิกฤตครัวร้านอาหาร<br><span>น้ำระบายช้า & กลิ่นเหม็น</span></h1>
+        
+        <div class="story-card" id="story-card">
+            <p id="story-text">ช่วงพีคของร้านอาหาร ล้างแก้วล้างจานไม่ทัน ท่อเริ่มตันและมีกลิ่นเศษอาหารเน่าตีกลับมาทำลายบรรยากาศ!</p>
+        </div>
+    </div>
+
+    <!-- Bottom Interactive Controls -->
+    <div class="canvas-footer">
+        <div class="episode-tabs">
+            <button class="tab-btn active" onclick="switchEpisode(7)">🎥 EP.7: ร้านอาหาร</button>
+            <button class="tab-btn" onclick="switchEpisode(8)">🎥 EP.8: ร้านกาแฟ</button>
+            <button class="tab-btn" onclick="switchEpisode(9)">🎥 EP.9: โรงแรม/ศูนย์อาหาร</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const episodes = {
+        7: {
+            badge: "EPISODE 7: ครัวร้านอาหาร / ครัวกลาง",
+            bg: "bg-kitchen",
+            title: "วิกฤตครัวร้านอาหาร<br><span>น้ำระบายช้า & กลิ่นเหม็น</span>",
+            slides: [
+                "ช่วงพีคของร้านอาหาร ล้างแก้วล้างจานไม่ทัน ท่อเริ่มตันและมีกลิ่นเศษอาหารเน่าตีกลับมาทำลายบรรยากาศ!",
+                "คราบไขมันสะสมตามผนังท่อหนาเตอะ การใช้โซดาไฟรุนแรงทำให้ท่อพังและเกิดไอกรดอันตรายต่ออาหารในครัว",
+                "แก้ไขอย่างยั่งยืนด้วย BioRevive Liquid & Powder จุลินทรีย์สดธรรมชาติเข้าไปเกาะและกินคราบไขมันตลอดคืน!",
+                "เช้าวันถัดมา... ท่อระบายน้ำไหลคล่อง สะอาดไร้กลิ่น ผ่านการตรวจมาตรฐานสุขอนามัยในห้างฯ ได้แบบสบายใจ!"
+            ]
+        },
+        8: {
+            badge: "EPISODE 8: ร้านกาแฟ / คาเฟ่ทั่วไป",
+            bg: "bg-cafe",
+            title: "กลิ่นเนยนมบูดแฝงอยู่?<br><span>ภัยเงียบใต้ซิงค์บาร์กาแฟ</span>",
+            slides: [
+                "ร้านกาแฟสวยตกแต่งหรูหรา แต่กลับมีกลิ่นเปรี้ยวเน่าบูดของน้ำนมดิบแฝงอยู่ใต้บาร์ล้างแก้ว...",
+                "ไขมันนมและเนยมีความเหนียวพิเศษ ล้างออกยาก และเน่าบูดเร็วมาก ทำให้กลิ่นหอมของเมล็ดกาแฟ Specialty เสียไป",
+                "แก้ไขง่ายๆ ด้วย BioRevive Tea Bag เพียงวางถุงซองแช่ทิ้งไว้ในอ่างระบายน้ำในทุกๆ คืน",
+                "จุลินทรีย์ธรรมชาติจะตื่นตัวหลั่งเอนไซม์ย่อยคราบไขมันนมและเมือกผงกาแฟ รักษาความหอมธรรมชาติของร้านกาแฟคุณ!"
+            ]
+        },
+        9: {
+            badge: "EPISODE 9: โรงแรม / ศูนย์อาหาร",
+            bg: "bg-resort",
+            title: "ปัญหาระดับอาคาร!<br><span>คุมค่าน้ำ BOD & กลิ่นบ่อดัก</span>",
+            slides: [
+                "โรงแรมทั่วไปและศูนย์อาหารต้องเจอกับปัญหากลิ่นเหม็นจากบ่อดักรวม และการควบคุมค่าน้ำเสีย (BOD) ให้ผ่านเกณฑ์",
+                "การจ้างรถดูดไขมันบ่อยๆ มีราคาแพงและส่งเสียงรบกวนแขกที่เข้าพัก ทำลายภาพลักษณ์ธุรกิจอย่างรุนแรง",
+                "วิศวกรผู้ดูแลเลือกเทคโนโลยีชีวภาพ BioRevive เติมในบ่อบำบัดสม่ำเสมอเพื่อย่อยสลายน้ำมันและตะกอนสะสม",
+                "ช่วยลดกลิ่นเหม็น คุมค่า BOD ได้ตามมาตรฐานกฎหมาย เป็นมิตรต่อสิ่งแวดล้อมตามมาตรฐาน BCG Model!"
+            ]
+        }
+    };
+
+    let currentEpisode = 7;
+    let currentSlide = 0;
+    let slideInterval = null;
+
+    function switchEpisode(epNum) {
+        if(currentEpisode === epNum && slideInterval) return;
+        
+        currentEpisode = epNum;
+        currentSlide = 0;
+        
+        // Update tabs active state
+        document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+            if((idx + 7) === epNum) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+
+        // Switch background active
+        document.querySelectorAll('.bg-layer').forEach(layer => {
+            layer.classList.remove('active');
+        });
+        document.getElementById(episodes[epNum].bg).classList.add('active');
+
+        // Update Text
+        document.getElementById('active-badge').innerText = episodes[epNum].badge;
+        document.getElementById('main-title').innerHTML = episodes[epNum].title;
+
+        // Restart Story Sequence
+        playSequence();
+    }
+
+    function playSequence() {
+        if(slideInterval) clearInterval(slideInterval);
+        
+        const data = episodes[currentEpisode];
+        const card = document.getElementById('story-card');
+        const text = document.getElementById('story-text');
+
+        function showSlide(idx) {
+            gsap.to(card, { opacity: 0, y: 20, duration: 0.4, onComplete: () => {
+                text.innerText = data.slides[idx];
+                gsap.to(card, { opacity: 1, y: 0, duration: 0.6 });
+            }});
+        }
+
+        // Show first slide
+        showSlide(0);
+
+        let idx = 1;
+        slideInterval = setInterval(() => {
+            if(idx < data.slides.length) {
+                showSlide(idx);
+                idx++;
+            } else {
+                idx = 0; // Loop slide
+                showSlide(idx);
+                idx++;
+            }
+        }, 4500);
+    }
+
+    // Start on load
+    window.onload = () => {
+        playSequence();
+    };
+</script>
+</body>
+</html>
