@@ -221,12 +221,12 @@
                 </span>
             </div>
             <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">
-                จากัวร์ได้สร้างโปรเจกต์ต้นแบบวิดีโอแอนิเมชันสำหรับ <strong>รุ่นซองชา (20g Tea Bag)</strong> ในโฟลเดอร์ <code>tea-bag-promo/</code> สำเร็จแล้ว! คุณสามารถกดเปิดเล่นพรีวิววิดีโอจริงที่มีการเรนเดอร์แบบเฟรมต่อเฟรมด้วย GSAP Timeline ด้านล่างนี้ได้ทันที:
+                จากัวร์ได้สร้างโปรเจกต์ต้นแบบวิดีโอแอนิเมชันความยาว <strong>15 วินาทีระดับภาพยนตร์ (Cinema Quality)</strong> โดยแบ่งแยกเป็น 2 คลิปโฆษณาเพื่อเจาะกลุ่มลูกค้าเป้าหมายแต่ละรุ่นอย่างเด่นชัดสำเร็จแล้ว! คุณสามารถกดเลือกเปิดเล่นพรีวิวสดของทั้ง 2 คลิปด้านล่างนี้ได้ทันที:
             </p>
             
             <div id="video-preview-container" style="display: none; border-radius: 16px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.3); background: #000; margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);">
                 <div style="background: rgba(0, 0, 0, 0.5); padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 13px; color: var(--accent-gold); font-weight: 600;"><i class="fa-solid fa-play"></i> HyperFrames Live Composition View (1920x1080 Aspect Ratio)</span>
+                    <span id="video-preview-title" style="font-size: 13px; color: var(--accent-gold); font-weight: 600;"><i class="fa-solid fa-play"></i> HyperFrames Live Composition View</span>
                     <button onclick="closeVideoPreview()" style="background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 16px;"><i class="fa-solid fa-xmark"></i> ปิดหน้าต่างพรีวิว</button>
                 </div>
                 <div style="position: relative; width: 100%; padding-top: 56.25%;">
@@ -245,7 +245,8 @@
             </div>
 
             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                <button onclick="openVideoPreview()" style="background: var(--accent-gold); color: var(--primary-navy); border: none; border-radius: 12px; padding: 14px 28px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-solid fa-clapperboard"></i> พรีวิวคลิปโฆษณารุ่นซองชา (Live Preview)</button>
+                <button onclick="openVideoPreview('liquid-promo')" style="background: linear-gradient(135deg, #1A1A32 0%, #154734 100%); color: #FFF; border: 1px solid rgba(6, 199, 85, 0.4); border-radius: 12px; padding: 14px 28px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-solid fa-droplet" style="color: #60a5fa;"></i> 🎥 คลิปที่ 1: รุ่น Liquid (1 L / 5 L)</button>
+                <button onclick="openVideoPreview('premium-promo')" style="background: linear-gradient(135deg, #1A1A32 0%, #5C4033 100%); color: #FFF; border: 1px solid var(--accent-gold); border-radius: 12px; padding: 14px 28px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-solid fa-crown" style="color: #eab308;"></i> 🎥 คลิปที่ 2: รุ่น Premium (20g / 1 kg / 6 kg)</button>
                 <button onclick="alert('ระบบติดตั้ง HyperFrames CLI และพร้อมคอมไพล์แล้ว! (เมื่อติดตั้ง FFmpeg เพิ่มเติมในอนาคต จะสามารถแปลงเป็น MP4 ได้ทันที)')" style="background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 28px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-solid fa-gears"></i> ตรวจสอบโครงสร้างโปรเจกต์ (Compile Spec)</button>
             </div>
         </div>
@@ -416,10 +417,22 @@
         window.addEventListener('DOMContentLoaded', loadScheduledPosts);
 
         // HyperFrames Preview Controls
-        function openVideoPreview() {
+        function openVideoPreview(promoType) {
             const container = document.getElementById('video-preview-container');
             const iframe = document.getElementById('hyperframes-iframe');
-            iframe.src = 'tea-bag-promo/index.html';
+            const titleSpan = document.getElementById('video-preview-title');
+            
+            if (promoType === 'liquid-promo') {
+                iframe.src = 'liquid-promo/index.html';
+                titleSpan.innerHTML = '<i class="fa-solid fa-play"></i> HyperFrames Live View: รุ่น Liquid Series (ความยาว 15 วินาที)';
+            } else if (promoType === 'premium-promo') {
+                iframe.src = 'premium-promo/index.html';
+                titleSpan.innerHTML = '<i class="fa-solid fa-play"></i> HyperFrames Live View: รุ่น Premium Series (ความยาว 15 วินาที)';
+            } else {
+                iframe.src = 'tea-bag-promo/index.html';
+                titleSpan.innerHTML = '<i class="fa-solid fa-play"></i> HyperFrames Live View: รุ่นซองชาดั้งเดิม (ความยาว 10 วินาที)';
+            }
+            
             container.style.display = 'block';
             
             // Scroll to preview smoothly

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioRevive Lab - Premium Series Promo</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@400;600;800&family=Sarabun:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-navy: #05050f;
+        --accent-gold: #C5A059;
+        --glow-blue: rgba(30, 41, 150, 0.4);
+        --text-white: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #000;
+        color: var(--text-white);
+        font-family: 'Sarabun', 'Inter', sans-serif;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 16:9 Canvas container */
+      #root {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        background: linear-gradient(135deg, #05050f 0%, #0c0e29 100%);
+        overflow: hidden;
+        border: 2px solid rgba(197, 160, 89, 0.3);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Glowing background orbits */
+      .ambient-glow {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, rgba(197, 160, 89, 0) 70%);
+        top: -200px;
+        left: -200px;
+        pointer-events: none;
+      }
+
+      .accent-blue-glow {
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        background: radial-gradient(circle, rgba(30, 41, 150, 0.2) 0%, rgba(30, 41, 150, 0) 70%);
+        bottom: -150px;
+        right: -150px;
+        pointer-events: none;
+      }
+
+      /* Gold border frame overlay */
+      .border-frame {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        right: 25px;
+        bottom: 25px;
+        border: 1px solid rgba(197, 160, 89, 0.25);
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* Top persistent logo stamp */
+      .logo-stamp {
+        position: absolute;
+        top: 50px;
+        left: 60px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 15;
+      }
+
+      .logo-stamp img {
+        height: 38px;
+        border-radius: 4px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+      }
+
+      .logo-stamp span {
+        font-family: 'Outfit';
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 3px;
+        color: #C5A059;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+      }
+
+      /* Common Slide Styling */
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1280px;
+        height: 720px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 80px;
+      }
+
+      /* SCENE 1: Intro (0-3s) */
+      .scene-intro {
+        flex-direction: column;
+        text-align: center;
+        z-index: 5;
+      }
+
+      .intro-logo {
+        height: 100px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(197, 160, 89, 0.4));
+      }
+
+      .intro-gold-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 72px;
+        font-weight: 800;
+        letter-spacing: 12px;
+        color: transparent;
+        background: linear-gradient(135deg, #ffffff 0%, #D4AF37 50%, #C5A059 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+
+      .intro-subtitle {
+        font-size: 26px;
+        font-weight: 400;
+        letter-spacing: 6px;
+        color: #e0e0e0;
+        text-transform: uppercase;
+      }
+
+      /* SCENE 2: Product Showcase (3-11.5s) */
+      .scene-product {
+        justify-content: space-between;
+        z-index: 4;
+      }
+
+      .product-text-side {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .badge {
+        align-self: flex-start;
+        background: rgba(197, 160, 89, 0.15);
+        border: 1px solid var(--accent-gold);
+        color: var(--accent-gold);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .h-title {
+        font-size: 40px;
+        font-weight: 800;
+        line-height: 1.3;
+        color: #ffffff;
+      }
+
+      .h-highlight {
+        color: var(--accent-gold);
+        background: linear-gradient(135deg, #FFF 0%, #C5A059 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .desc-text {
+        font-size: 17px;
+        color: #b0b5d0;
+        line-height: 1.6;
+        font-weight: 300;
+      }
+
+      .bullets {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .bullet-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .bullet-icon {
+        color: var(--accent-gold);
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .bullet-item span {
+        font-size: 15px;
+        color: #e2e8f0;
+      }
+
+      .bullet-item strong {
+        color: #ffffff;
+      }
+
+      /* Product Visual Display side (3 products lineup!) */
+      .product-img-side {
+        width: 48%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lineup-container {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 15px;
+        height: 480px;
+        width: 100%;
+      }
+
+      .prod-box {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform-origin: bottom center;
+      }
+
+      .img-teabag {
+        height: 200px;
+        filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7));
+      }
+
+      .img-pouch {
+        height: 330px;
+        filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(197, 160, 89, 0.25));
+      }
+
+      .img-bucket {
+        height: 250px;
+        filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7));
+      }
+
+      .prod-label {
+        margin-top: 15px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(197, 160, 89, 0.4);
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--accent-gold);
+        letter-spacing: 1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      }
+
+      .gold-halo {
+        position: absolute;
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle, rgba(197, 160, 89, 0.12) 0%, rgba(197, 160, 89, 0) 70%);
+        bottom: 30px;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* SCENE 3: Outro / CTA (11.5-15s) */
+      .scene-outro {
+        flex-direction: column;
+        text-align: center;
+        z-index: 6;
+      }
+
+      .outro-logo {
+        height: 90px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+        filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(197, 160, 89, 0.45));
+      }
+
+      .outro-title {
+        font-size: 38px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 12px;
+      }
+
+      .outro-desc {
+        font-size: 20px;
+        color: #a0aec0;
+        margin-bottom: 35px;
+        font-weight: 300;
+      }
+
+      .qr-block {
+        display: flex;
+        align-items: center;
+        background: rgba(15, 15, 26, 0.6);
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        padding: 15px 30px;
+        border-radius: 12px;
+        gap: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      }
+
+      .qr-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 6px;
+      }
+
+      .qr-text {
+        text-align: left;
+      }
+
+      .qr-text h4 {
+        color: var(--accent-gold);
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .qr-text p {
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 16:9 HD Render Target -->
+    <div
+      id="root"
+      class="video-stage"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="15"
+      data-width="1280"
+      data-height="720"
+    >
+      <!-- Background music element -->
+      <audio id="bg-music" src="../assets/audio_soundtrack.mp3" loop preload="auto"></audio>
+      
+      <!-- Background glows -->
+      <div class="ambient-glow"></div>
+      <div class="accent-blue-glow"></div>
+      <div class="border-frame"></div>
+
+      <!-- Persistent Logo Stamp -->
+      <div id="top-logo-stamp" class="logo-stamp" style="opacity: 0;">
+        <img src="../assets/logo_bg.jpg" alt="BioRevive logo">
+        <span>BioRevive Lab</span>
+      </div>
+
+      <!-- SCENE 1: INTRO (0s - 3s) -->
+      <div id="scene-intro" class="slide scene-intro">
+        <img class="intro-logo" src="../assets/logo_bg.jpg" alt="BioRevive Logo">
+        <h1 class="intro-gold-title">BioRevive Lab</h1>
+        <p class="intro-subtitle">Premium Series</p>
+      </div>
+
+      <!-- SCENE 2: PRODUCT FEATURE (3s - 11.5s) -->
+      <div id="scene-product" class="slide scene-product" style="opacity: 0;">
+        <div class="product-text-side">
+          <div class="badge">Premium Granule 20g / 1kg / 6kg</div>
+          <h2 class="h-title">หัวเชื้อจุลินทรีย์ชนิดแห้ง<br><span class="h-highlight">เข้มข้นแอคทีฟสูงสุด</span></h2>
+          <p class="desc-text">เทคโนโลยีระดับบำบัดน้ำเสียสากลในรูปแบบเม็ดแห้ง อัดแน่นด้วยจุลินทรีย์ธรรมชาติทนสภาพกรดด่างสูง ขจัดหนาเตอะในบ่อ STP และถังดักได้ทรงพลัง</p>
+          <div class="bullets">
+            <div class="bullet-item">
+              <div class="bullet-icon">✓</div>
+              <span><strong>รุ่นซองชา (20 g):</strong> สะดวก ใช้ง่าย โยนลงถังดักได้ทันทีโดยไม่ต้องฉีกซอง</span>
+            </div>
+            <div class="bullet-item">
+              <div class="bullet-icon">✓</div>
+              <span><strong>รุ่นถุงขาว (1 kg):</strong> หัวเชื้อสูตรเข้มข้น ผสมน้ำทิ้งไว้ 4 ชม. ก่อนเทราดเพื่อเปิดใช้</span>
+            </div>
+            <div class="bullet-item">
+              <div class="bullet-icon">✓</div>
+              <span><strong>รุ่นถังใหญ่ (6 kg):</strong> คุ้มค่าสูงสุดสำหรับอาคารพาณิชย์ โรงแรม หรือบ่อ STP ขนาดใหญ่</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-img-side">
+          <div class="gold-halo"></div>
+          <div class="lineup-container">
+            <!-- 20g Tea bag box -->
+            <div id="prod-teabag" class="prod-box" style="opacity: 0;">
+              <img class="img-teabag" src="../assets/product_teabag_with_6teabags_nobg.png" alt="20g Teabag">
+              <div class="prod-label">ซองชา 20g</div>
+            </div>
+            
+            <!-- 1kg White pouch -->
+            <div id="prod-pouch" class="prod-box" style="opacity: 0;">
+              <img class="img-pouch" src="../assets/ad_pouch_white_1kg_nobg.png" alt="1kg Bag">
+              <div class="prod-label">ถุง 1 kg</div>
+            </div>
+            
+            <!-- 6kg Big bucket -->
+            <div id="prod-bucket" class="prod-box" style="opacity: 0;">
+              <img class="img-bucket" src="../assets/ad_bucket_6kg_nobg.png" alt="6kg Bucket">
+              <div class="prod-label">ถัง 6 kg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENE 3: OUTRO / CTA (11.5s - 15s) -->
+      <div id="scene-outro" class="slide scene-outro" style="opacity: 0;">
+        <img class="outro-logo" src="../assets/logo_bg.jpg" alt="BioRevive Logo">
+        <h2 class="outro-title">เปลี่ยนระบบบำบัดน้ำเสียให้เป็นระบบกรีนธรรมชาติ</h2>
+        <p class="outro-desc">เทคโนโลยีสุขอนามัยในอาคารเพื่อสิ่งแวดล้อมที่ยั่งยืน</p>
+        <div class="qr-block">
+          <img class="qr-img" src="../assets/qrcode_biorevive.png" alt="QR Code">
+          <div class="qr-text">
+            <h4>ปรึกษาปัญหาระบบน้ำทิ้งฟรี</h4>
+            <p>LINE OA: @biorevivelab</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Frame 0 - 3s: Intro scene
+      tl.fromTo("#scene-intro .intro-logo", { opacity: 0, scale: 0.8, rotation: -5 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.2, ease: "back.out(1.5)" }, 0)
+        .fromTo("#scene-intro .intro-gold-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 }, 0.4)
+        .fromTo("#scene-intro .intro-subtitle", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, 0.8)
+        .to("#scene-intro", { opacity: 0, y: -50, duration: 0.6 }, 2.4);
+
+      // Frame 3s - 11.5s: Product features
+      tl.to("#top-logo-stamp", { opacity: 1, duration: 0.4 }, 3.0)
+        .to("#scene-product", { opacity: 1, duration: 0.6 }, 3.0)
+        .fromTo("#scene-product .badge", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6 }, 3.3)
+        .fromTo("#scene-product .h-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, 3.5)
+        .fromTo("#scene-product .desc-text", { opacity: 0 }, { opacity: 1, duration: 0.8 }, 3.8)
+        .fromTo("#scene-product .bullet-item", { opacity: 0, x: -20 }, { opacity: 1, x: 0, stagger: 0.2, duration: 0.6 }, 4.1)
+        
+        // Staggered premium lineup reveal (Tea bag box -> White Pouch -> Bucket)
+        .fromTo("#prod-teabag", { opacity: 0, scale: 0.7, y: 40, rotation: -5 }, { opacity: 1, scale: 1, y: 0, rotation: 0, duration: 1, ease: "power2.out" }, 3.2)
+        .fromTo("#prod-pouch", { opacity: 0, scale: 0.7, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: "power2.out" }, 3.5)
+        .fromTo("#prod-bucket", { opacity: 0, scale: 0.7, y: 40, rotation: 5 }, { opacity: 1, scale: 1, y: 0, rotation: 0, duration: 1, ease: "power2.out" }, 3.8)
+        
+        // Custom float loops for lineup items
+        .to("#prod-teabag", { y: -10, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.3)
+        .to("#prod-pouch", { y: -16, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.6)
+        .to("#prod-bucket", { y: -12, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.9)
+        
+        .to("#top-logo-stamp", { opacity: 0, duration: 0.4 }, 11.0)
+        .to("#scene-product", { opacity: 0, duration: 0.6 }, 11.0);
+
+      // Frame 11.5s - 15s: Outro / Call to action
+      tl.to("#scene-outro", { opacity: 1, duration: 0.6 }, 11.5)
+        .fromTo("#scene-outro .outro-logo", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, 11.8)
+        .fromTo("#scene-outro .outro-title", { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6 }, 12.2)
+        .fromTo("#scene-outro .outro-desc", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 12.5)
+        .fromTo("#scene-outro .qr-block", { opacity: 0, scale: 0.95, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "power2.out" }, 12.8);
+
+      window.__timelines["main"] = tl;
+
+      // Responsive viewport scaling for iframe preview
+      function resizeVideo() {
+          const root = document.getElementById('root');
+          const scale = window.innerWidth / 1280;
+          root.style.transform = `scale(${scale})`;
+          root.style.transformOrigin = 'top left';
+          document.body.style.height = `${720 * scale}px`;
+      }
+      
+      window.addEventListener('resize', resizeVideo);
+      window.addEventListener('load', resizeVideo);
+      resizeVideo();
+    </script>
+  </body>
+</html>
