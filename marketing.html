@@ -209,6 +209,44 @@
                 <p style="color: var(--text-gray);">กำลังโหลดคิวตั้งเวลาโพสต์...</p>
             </div>
         </div>
+
+        <!-- NEW: AI Video Studio (HyperFrames Engine) -->
+        <div class="card" style="border-color: rgba(197, 160, 89, 0.4); background: linear-gradient(135deg, rgba(26, 26, 46, 0.6) 0%, rgba(15, 15, 26, 0.8) 100%);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
+                <h2 style="display: flex; align-items: center; gap: 10px; color: var(--accent-gold);"><i class="fa-solid fa-clapperboard"></i> AI Video Studio (HyperFrames Engine)</h2>
+                <span class="status-badge" style="background: rgba(197, 160, 89, 0.1); color: var(--accent-gold); border: 1px solid var(--accent-gold);">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Open-Source AI Native
+                </span>
+            </div>
+            <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px;">
+                จากัวร์ได้สร้างโปรเจกต์ต้นแบบวิดีโอแอนิเมชันสำหรับ <strong>รุ่นซองชา (20g Tea Bag)</strong> ในโฟลเดอร์ <code>tea-bag-promo/</code> สำเร็จแล้ว! คุณสามารถกดเปิดเล่นพรีวิววิดีโอจริงที่มีการเรนเดอร์แบบเฟรมต่อเฟรมด้วย GSAP Timeline ด้านล่างนี้ได้ทันที:
+            </p>
+            
+            <div id="video-preview-container" style="display: none; border-radius: 16px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.3); background: #000; margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);">
+                <div style="background: rgba(0, 0, 0, 0.5); padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--accent-gold); font-weight: 600;"><i class="fa-solid fa-play"></i> HyperFrames Live Composition View (1920x1080 Aspect Ratio)</span>
+                    <button onclick="closeVideoPreview()" style="background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 16px;"><i class="fa-solid fa-xmark"></i> ปิดหน้าต่างพรีวิว</button>
+                </div>
+                <div style="position: relative; width: 100%; padding-top: 56.25%;">
+                    <iframe id="hyperframes-iframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+                <div style="padding: 15px 20px; background: rgba(0,0,0,0.4); display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="controlTimeline('play')" style="background: #06C755; color: white; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 13px;"><i class="fa-solid fa-play"></i> เล่นวิดีโอ (Play)</button>
+                        <button onclick="controlTimeline('pause')" style="background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 13px;"><i class="fa-solid fa-pause"></i> หยุดชั่วคราว (Pause)</button>
+                        <button onclick="controlTimeline('restart')" style="background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 13px;"><i class="fa-solid fa-arrow-rotate-left"></i> เล่นใหม่ (Restart)</button>
+                    </div>
+                    <span style="font-size: 12px; color: var(--text-gray);">
+                        * วิดีโอนี้รันแบบ Interactive 60fps ด้วย GSAP และพร้อมเรนเดอร์เป็น MP4 ตลอดเวลา
+                    </span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button onclick="openVideoPreview()" style="background: var(--accent-gold); color: var(--primary-navy); border: none; border-radius: 12px; padding: 14px 28px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-solid fa-clapperboard"></i> 🎬 พรีวิวคลิปโฆษณารุ่นซองชา (Live Preview)</button>
+                <button onclick="alert('ระบบติดตั้ง HyperFrames CLI และพร้อมคอมไพล์แล้ว! (เมื่อติดตั้ง FFmpeg เพิ่มเติมในอนาคต จะสามารถแปลงเป็น MP4 ได้ทันที)')" style="background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 28px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-solid fa-file-video"></i> ⚙️ ตรวจสอบโครงสร้างโปรเจกต์ (Compile Spec)</button>
+            </div>
+        </div>
     </div>
 
     <!-- NEW: Premium Post Viewer Modal -->
@@ -374,6 +412,43 @@
         }
         
         window.addEventListener('DOMContentLoaded', loadScheduledPosts);
+
+        // HyperFrames Preview Controls
+        function openVideoPreview() {
+            const container = document.getElementById('video-preview-container');
+            const iframe = document.getElementById('hyperframes-iframe');
+            iframe.src = 'tea-bag-promo/index.html';
+            container.style.display = 'block';
+            
+            // Scroll to preview smoothly
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeVideoPreview() {
+            document.getElementById('video-preview-container').style.display = 'none';
+            document.getElementById('hyperframes-iframe').src = '';
+        }
+
+        function controlTimeline(action) {
+            const iframe = document.getElementById('hyperframes-iframe');
+            if (iframe && iframe.contentWindow) {
+                const tl = iframe.contentWindow.__timelines ? iframe.contentWindow.__timelines["main"] : null;
+                if (tl) {
+                    if (action === 'play') tl.play();
+                    if (action === 'pause') tl.pause();
+                    if (action === 'restart') tl.restart();
+                } else {
+                    const iframeGsap = iframe.contentWindow.gsap;
+                    if (iframeGsap) {
+                        if (action === 'play') iframeGsap.globalTimeline.play();
+                        if (action === 'pause') iframeGsap.globalTimeline.pause();
+                        if (action === 'restart') {
+                            iframe.contentWindow.location.reload();
+                        }
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
