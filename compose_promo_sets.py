@@ -35,12 +35,6 @@ def create_set_v3(name, products, output_filename):
     halo_draw.ellipse([w*0.2, h*0.2, w*0.8, h*0.8], fill=(197, 160, 89, 25))
     final.alpha_composite(halo.filter(ImageFilter.GaussianBlur(80)))
     
-    # Add subtle luxury geometric accent lines in gold
-    gold_color = (197, 160, 89, 40)
-    draw.line([(0, h*0.15), (w, h*0.05)], fill=gold_color, width=1)
-    draw.line([(0, h*0.85), (w, h*0.95)], fill=gold_color, width=1)
-    draw.arc([w*0.05, h*0.05, w*0.95, h*0.95], start=0, end=360, fill=(197, 160, 89, 15), width=1)
-
     # 2. Add realistic ground shadow / floor glow
     floor_glow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     fg_draw = ImageDraw.Draw(floor_glow)
