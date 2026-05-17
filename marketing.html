@@ -433,16 +433,36 @@
             const iframe = document.getElementById('hyperframes-iframe');
             if (iframe && iframe.contentWindow) {
                 const tl = iframe.contentWindow.__timelines ? iframe.contentWindow.__timelines["main"] : null;
+                const audio = iframe.contentWindow.document.getElementById('bg-music');
                 if (tl) {
-                    if (action === 'play') tl.play();
-                    if (action === 'pause') tl.pause();
-                    if (action === 'restart') tl.restart();
+                    if (action === 'play') {
+                        tl.play();
+                        if (audio) audio.play().catch(e => console.log("Audio play blocked:", e));
+                    }
+                    if (action === 'pause') {
+                        tl.pause();
+                        if (audio) audio.pause();
+                    }
+                    if (action === 'restart') {
+                        tl.restart();
+                        if (audio) {
+                            audio.currentTime = 0;
+                            audio.play().catch(e => console.log("Audio play blocked:", e));
+                        }
+                    }
                 } else {
                     const iframeGsap = iframe.contentWindow.gsap;
                     if (iframeGsap) {
-                        if (action === 'play') iframeGsap.globalTimeline.play();
-                        if (action === 'pause') iframeGsap.globalTimeline.pause();
+                        if (action === 'play') {
+                            iframeGsap.globalTimeline.play();
+                            if (audio) audio.play().catch(e => console.log("Audio play blocked:", e));
+                        }
+                        if (action === 'pause') {
+                            iframeGsap.globalTimeline.pause();
+                            if (audio) audio.pause();
+                        }
                         if (action === 'restart') {
+                            if (audio) audio.currentTime = 0;
                             iframe.contentWindow.location.reload();
                         }
                     }
