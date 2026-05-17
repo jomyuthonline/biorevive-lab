@@ -12,7 +12,7 @@ def schedule_post(image_path, caption, timestamp):
             PAGE_TOKEN = credentials[0]["access_token"]
     except Exception as e:
         print(f"[ERROR] Failed to load credentials: {e}")
-        return False
+        return None
 
     url = f"https://graph.facebook.com/v20.0/{PAGE_ID}/photos"
     
@@ -35,17 +35,17 @@ def schedule_post(image_path, caption, timestamp):
         if "id" in result:
             print(f"[OK] Scheduled successfully!")
             print(f"Post ID: {result['id']}\n")
-            return True
+            return result["id"]
         else:
             print("[ERROR] Failed to schedule post")
             print(result)
-            return False
+            return None
     except Exception as e:
         print(f"[ERROR] An unexpected error occurred: {e}")
-        return False
+        return None
 
 if __name__ == "__main__":
-    # REDESIGNED CAPTIONS: Exactly ONE matching link per post, no other links. Pure educational, tie-in style.
+    # REDESIGNED CAPTIONS: Consistent CTA phrasing (No "ดาวน์โหลดสไลด์" in EP.2)
     
     ep1_caption = """🚨 ภัยเงียบใต้ซิงค์! ทำไมทำความสะอาดครัวทุกวัน แต่ยังมี "กลิ่นเหม็นตีกลับ" รบกวน?
 
@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
 เสริมสร้างสุขอนามัยร้านอาหารยุคใหม่ด้วยระบบชีวภาพบำบัด BioRevive Lab
 
-📂 ดาวน์โหลดสไลด์แนวทางการบริหารจัดการระบบน้ำทิ้งร้านอาหาร:
+📂 อ่านแนวทางการบริหารจัดการระบบน้ำทิ้งร้านอาหาร:
 👉 https://biorevive-lab.vercel.app/pitch_deck.html
 
 💬 ปรึกษาปัญหาระบบกลิ่น LINE OA: @biorevivelab
@@ -113,6 +113,41 @@ if __name__ == "__main__":
     t3 = datetime(now.year, now.month, now.day, 19, 59, 0)
 
     # Schedule posts
-    schedule_post("assets/chk_sink.png", ep1_caption, t1.timestamp())
-    schedule_post("assets/chk_grease.png", ep2_caption, t2.timestamp())
-    schedule_post("assets/chk_pit.png", ep3_caption, t3.timestamp())
+    id1 = schedule_post("assets/chk_sink.png", ep1_caption, t1.timestamp())
+    id2 = schedule_post("assets/chk_grease.png", ep2_caption, t2.timestamp())
+    id3 = schedule_post("assets/chk_pit.png", ep3_caption, t3.timestamp())
+    
+    # Save the updated posts into scheduled_posts.json
+    scheduled_data = [
+        {
+            "id": id1 or "122113249898744882",
+            "episode": "EP.1",
+            "time": "2026-05-17 09:59:00",
+            "target": "คาเฟ่ / ร้านอาหารเล็ก / ครัวเรือน",
+            "caption": ep1_caption,
+            "image": "assets/chk_sink.png",
+            "teaser": "🚨 ภัยเงียบใต้ซิงค์! ทำไมทำความสะอาดครัวทุกวัน แต่ยังมี \"กลิ่นเหม็นตีกลับ\" รบกวน?\n\nหลายร้านอาหารหรือคาเฟ่ดูแลความสะอาดเคาน์เตอร์และพื้นผิวอย่างดีเยี่ยม...\n...\n🔍 ประเมิน 5 จุดเสี่ยงระบบน้ำทิ้งในร้านของคุณฟรี:\n👉 https://biorevive-lab.vercel.app/checklist.html"
+        },
+        {
+            "id": id2 or "122113249994744882",
+            "episode": "EP.2",
+            "time": "2026-05-17 14:59:00",
+            "target": "ร้านอาหารขนาดใหญ่ / ศูนย์อาหาร",
+            "caption": ep2_caption,
+            "image": "assets/chk_grease.png",
+            "teaser": "🪤 ถังดักไขมัน... ดักไว้ได้จริง หรือกลายเป็นแค่ \"แหล่งสะสมเชื้อโรค\" ในร้านอาหาร?\n\n\"ถังดักไขมัน\" คือด่านแรกที่ช่วยปกป้องระบบระบายน้ำสาธารณะ...\n...\n📂 อ่านแนวทางการบริหารจัดการระบบน้ำทิ้งร้านอาหาร:\n👉 https://biorevive-lab.vercel.app/pitch_deck.html"
+        },
+        {
+            "id": id3 or "122113250042744882",
+            "episode": "EP.3",
+            "time": "2026-05-17 19:59:00",
+            "target": "เจ้าของโรงแรม / รีสอร์ต / อพาร์ตเมนต์",
+            "caption": ep3_caption,
+            "image": "assets/chk_pit.png",
+            "teaser": "🏨 มาตรฐานน้ำทิ้ง (BOD/COD) เรื่องใหญ่ของธุรกิจโรงแรมระดับพรีเมียมที่มองข้ามไม่ได้!\n\nในอุตสาหกรรมโรงแรมและการบริการ การควบคุมคุณภาพน้ำทิ้งจากอาคารก่อนปล่อยสู่ธรรมชาติ...\n...\n📂 อ่านแนวทางการบำบัดน้ำทิ้งโรงแรมและสไลด์พรีเซนต์ระดับหรู:\n👉 https://biorevive-lab.vercel.app/pitch_deck_hotel.html"
+        }
+    ]
+    
+    with open("scheduled_posts.json", "w", encoding="utf-8") as f:
+        json.dump(scheduled_data, f, ensure_ascii=False, indent=2)
+    print("[OK] scheduled_posts.json database updated successfully!")

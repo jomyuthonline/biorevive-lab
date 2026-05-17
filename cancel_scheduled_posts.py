@@ -19,6 +19,6 @@ def delete_post(post_id):
         print(f"[ERROR] Failed to delete post {post_id}: {result}")
 
 if __name__ == "__main__":
-    post_ids = ["122113246652744882", "122113246700744882", "122113246748744882"]
+    post_ids = ["122113249898744882", "122113249994744882", "122113250042744882"]
     for pid in post_ids:
         delete_post(pid)
