@@ -53,6 +53,10 @@ def diecut_product(img_name, bbox, thresh_fn, name):
     full_mask = np.zeros((h, w), dtype=np.uint8)
     full_mask[y1:y2, x1:x2] = solid_mask_roi
     
+    # Erase the floating text region on the right side of the teabag image
+    if name == "teabag_with_6teabags":
+        full_mask[180:780, 580:1000] = 0
+    
     # 5. Anti-alias the mask edges with a soft Gaussian blur on the mask
     # We create a smooth alpha channel
     alpha = cv2.GaussianBlur(full_mask, (5, 5), 0)
@@ -133,14 +137,13 @@ diecut_product(
     name="pouch_white_1kg"
 )
 
-# 4. Premium 6KG Bucket
-# catalog_bucket_6kg.png - Bucket in the center
-diecut_product(
-    "catalog_bucket_6kg.png",
-    bbox=(210, 180, 810, 830),
-    thresh_fn=thresh_bucket,
-    name="bucket_6kg"
-)
+# 4. Premium 6KG Bucket (Commented out to keep the perfect git restored version)
+# diecut_product(
+#     "catalog_bucket_6kg.png",
+#     bbox=(210, 180, 810, 830),
+#     thresh_fn=thresh_bucket,
+#     name="bucket_6kg"
+# )
 
 # 5. Teabag
 # catalog_teabag.png - Pouch and teabags
