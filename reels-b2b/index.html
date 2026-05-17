@@ -238,6 +238,14 @@
     <div id="bg-cafe" class="bg-layer" style="background-image: url('../assets/location_cozy_cafe.png');"></div>
     <div id="bg-resort" class="bg-layer" style="background-image: url('../assets/location_food_court.png');"></div>
 
+    <!-- Local Audio Track for B2B Reels Background Music -->
+    <audio id="local-music" src="../assets/audio_soundtrack.mp3" loop preload="auto"></audio>
+
+    <!-- Floating Audio Control -->
+    <div style="position: absolute; top: 80px; right: 50px; z-index: 25;">
+        <button id="sound-btn" onclick="toggleSound()" style="background: rgba(197, 160, 89, 0.2); border: 1px solid var(--accent-gold); color: var(--accent-gold); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">🔇</button>
+    </div>
+
     <!-- Persistent Header Logo -->
     <div class="header-stamp">
         <img class="logo-img" src="../assets/ใบเก็บเงิน.png" alt="Logo">
@@ -361,6 +369,28 @@
         }, 4500);
     }
 
+    // Audio Controls for B2B Reels
+    let isMuted = true;
+    const localMusic = document.getElementById('local-music');
+    const soundBtn = document.getElementById('sound-btn');
+
+    function toggleSound() {
+        if (isMuted) {
+            localMusic.play().then(() => {
+                isMuted = false;
+                soundBtn.innerText = "🔊";
+                soundBtn.style.background = "var(--accent-gold)";
+                soundBtn.style.color = "#05050f";
+            }).catch(err => console.log("Audio play blocked by browser:", err));
+        } else {
+            localMusic.pause();
+            isMuted = true;
+            soundBtn.innerText = "🔇";
+            soundBtn.style.background = "rgba(197, 160, 89, 0.2)";
+            soundBtn.style.color = "var(--accent-gold)";
+        }
+    }
+
     // Responsive viewport scaling
     function resizeVideo() {
         const canvas = document.getElementById('canvas');
@@ -375,6 +405,13 @@
     window.onload = () => {
         resizeVideo();
         playSequence();
+        
+        // Try playing audio on first click on document to bypass autoplay policies
+        document.body.addEventListener('click', () => {
+            if (!isMuted && localMusic.paused) {
+                localMusic.play().catch(e => {});
+            }
+        }, { once: true });
     };
 </script>
 </body>
