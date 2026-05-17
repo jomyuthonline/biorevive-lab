@@ -504,10 +504,12 @@
       // Responsive viewport scaling for 9:16 vertical target
       function resizeVideo() {
           const root = document.getElementById('root');
-          const scale = window.innerWidth / 720;
-          root.style.transform = `scale(${scale})`;
-          root.style.transformOrigin = 'top left';
-          document.body.style.height = `${1280 * scale}px`;
+          const scale = Math.min(window.innerWidth / 720, window.innerHeight / 1280);
+          root.style.transform = `translate(-50%, -50%) scale(${scale})`;
+          root.style.transformOrigin = 'center center';
+          root.style.position = 'absolute';
+          root.style.left = '50%';
+          root.style.top = '50%';
       }
       
       window.addEventListener('resize', resizeVideo);
