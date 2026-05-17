@@ -234,13 +234,13 @@
                 <p id="modalCaption" style="margin: 0; font-size: 14px; color: #E2E8F0; line-height: 1.6; white-space: pre-wrap; user-select: text; text-align: left;"></p>
             </div>
 
-            <button onclick="copyModalCaption()" style="background: var(--accent-gold); color: var(--primary-navy); border: none; border-radius: 12px; padding: 14px; font-weight: 600; cursor: pointer; width: 100%; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-regular fa-copy"></i> คัดลอกข้อความทั้งหมด</button>
+            <button onclick="copyModalCaption()" style="background: var(--accent-gold); color: var(--primary-navy); border: none; border-radius: 12px; padding: 14px; font-weight: 600; cursor: pointer; width: 100%; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.2s;"><i class="fa-regular fa-copy"></i> คัดลอกข้อความย่อเพื่อแชร์ (Copy Teaser)</button>
         </div>
     </div>
 
     <script>
         let selectedImage = 'promo_set_s_lifestyle.png';
-        let activeModalCaption = '';
+        let activeModalTeaser = '';
 
         function selectAsset(el, imgName) {
             document.querySelectorAll('.asset-item').forEach(item => item.classList.remove('selected'));
@@ -262,14 +262,14 @@
         }
 
         // Modal Controls
-        function openModal(title, time, image, caption, id) {
+        function openModal(title, time, image, caption, id, teaser) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalTime').innerHTML = `<i class="fa-solid fa-clock"></i> ตั้งเวลาเผยแพร่: ${time}`;
             document.getElementById('modalImage').src = image;
             document.getElementById('modalImageName').innerText = image.split('/').pop();
             document.getElementById('modalId').innerText = `Facebook Post ID: ${id}`;
             document.getElementById('modalCaption').innerText = caption;
-            activeModalCaption = caption;
+            activeModalTeaser = teaser;
             
             document.getElementById('postModal').style.display = 'flex';
         }
@@ -279,8 +279,8 @@
         }
 
         function copyModalCaption() {
-            navigator.clipboard.writeText(activeModalCaption).then(() => {
-                alert('คัดลอกข้อความสำเร็จเรียบร้อยแล้วครับ!');
+            navigator.clipboard.writeText(activeModalTeaser).then(() => {
+                alert('คัดลอกข้อความโฆษณา (Teaser) สำเร็จเรียบร้อยแล้วครับ!');
             }).catch(err => {
                 console.error('Could not copy text: ', err);
             });
@@ -338,7 +338,7 @@
                             </p>
                             <span style="font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 5px; display: block; display: flex; justify-content: space-between;">
                                 <span>Facebook Post ID: ${post.id}</span>
-                                <span style="color: var(--accent-gold);"><i class="fa-solid fa-magnifying-glass"></i> คลิกเพื่ออ่านเต็ม</span>
+                                <span style="color: var(--accent-gold);"><i class="fa-solid fa-magnifying-glass"></i> คลิกเพื่ออ่านเต็ม/คัดลอกย่อ</span>
                             </span>
                         </div>
                     `;
@@ -360,7 +360,8 @@
                             post.time,
                             post.image,
                             post.caption,
-                            post.id
+                            post.id,
+                            post.teaser
                         );
                     };
 
