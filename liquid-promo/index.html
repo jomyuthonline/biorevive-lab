@@ -467,24 +467,6 @@
 
       window.__timelines["main"] = tl;
 
-      // Handle timeline sync with parent window audio
-      tl.eventCallback("onUpdate", () => {
-          try {
-              const time = tl.time();
-              const bgMusic = window.parent.document.getElementById('bg-music');
-              const voiceover = window.parent.document.getElementById('voiceover-liquid');
-              
-              if (voiceover && !voiceover.paused && Math.abs(voiceover.currentTime - time) > 0.3) {
-                  voiceover.currentTime = time;
-              }
-              if (bgMusic && !bgMusic.paused && Math.abs(bgMusic.currentTime - time) > 0.3) {
-                  bgMusic.currentTime = time % bgMusic.duration;
-              }
-          } catch(e) {
-              // Ignore cross-origin errors if any
-          }
-      });
-
       // Responsive viewport scaling for 9:16 vertical target
       function resizeVideo() {
           const root = document.getElementById('root');
