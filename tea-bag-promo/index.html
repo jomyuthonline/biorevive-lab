@@ -376,6 +376,18 @@
         .fromTo("#scene-outro .qr-block", { opacity: 0, scale: 0.9, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "power2.out" }, 7.8);
 
       window.__timelines["main"] = tl;
+
+      // Responsive viewport scaling for iframe preview
+      function resizeVideo() {
+          const root = document.getElementById('root');
+          const scale = window.innerWidth / 1920;
+          root.style.transform = `scale(${scale})`;
+          root.style.transformOrigin = 'top left';
+          document.body.style.height = `${1080 * scale}px`;
+      }
+      window.addEventListener('resize', resizeVideo);
+      window.addEventListener('load', resizeVideo);
+      resizeVideo();
     </script>
   </body>
 </html>
