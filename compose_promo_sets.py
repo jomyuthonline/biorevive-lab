@@ -97,8 +97,8 @@ create_set_v3("Set S", [
 # Set M
 create_set_v3("Set M", [
     (PROD_5L, (120, 280), 0.72),
-    (PROD_1KG, (390, 410), 0.60),
-    (PROD_TEABAG, (580, 480), 0.52)
+    (PROD_1KG, (390, 490), 0.48),
+    (PROD_TEABAG, (550, 480), 0.52)
 ], "promo_set_m_lifestyle.png")
 
 # Set L
