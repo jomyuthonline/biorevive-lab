@@ -96,23 +96,23 @@ def create_set_v3(name, products, output_filename):
 # Run Sets with Premium Navy Background and Catalog folder assets
 # Set S
 create_set_v3("Set S", [
-    (PROD_1L, (260, 260), 0.72),
-    (PROD_TEABAG, (480, 480), 0.68)
+    (PROD_1L, (180, 320), 0.85),
+    (PROD_TEABAG, (450, 440), 0.55)
 ], "promo_set_s_lifestyle.png")
 
 # Set M
 create_set_v3("Set M", [
-    (PROD_5L, (160, 230), 0.7),
-    (PROD_1KG, (460, 330), 0.72),
-    (PROD_TEABAG, (640, 520), 0.6)
+    (PROD_5L, (100, 260), 0.75),
+    (PROD_1KG, (380, 310), 0.75),
+    (PROD_TEABAG, (600, 480), 0.52)
 ], "promo_set_m_lifestyle.png")
 
 # Set L
 create_set_v3("Set L", [
-    (PROD_5L, (80, 330), 0.58),
-    (PROD_5L, (260, 330), 0.58),
-    (PROD_6KG, (520, 230), 0.8), 
-    (PROD_TEABAG, (180, 640), 0.44),
-    (PROD_TEABAG, (380, 640), 0.44),
-    (PROD_TEABAG, (580, 640), 0.44)
+    (PROD_5L, (60, 280), 0.65),
+    (PROD_5L, (220, 280), 0.65),
+    (PROD_6KG, (480, 260), 0.78), 
+    (PROD_TEABAG, (100, 600), 0.35),
+    (PROD_TEABAG, (360, 600), 0.35),
+    (PROD_TEABAG, (620, 600), 0.35)
 ], "promo_set_l_lifestyle.png")
