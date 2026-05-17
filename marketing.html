@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketing Hub | BioRevive Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+Thai:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-navy: #0F0F1A;
@@ -150,7 +151,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="dashboard.html" class="btn-back">← Back to Dashboard</a>
+            <a href="dashboard.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
             <div class="status-badge" id="fbStatus">● Facebook Connected (Permanent)</div>
         </div>
 
@@ -197,6 +198,17 @@
                 <button class="btn-post" onclick="handlePost()">Publish to Facebook Page</button>
             </div>
         </div>
+
+        <!-- NEW: Scheduled Posts Queue -->
+        <div class="card">
+            <h2>คิวตั้งเวลาโพสต์ของวันนี้ (Scheduled Posts Queue)</h2>
+            <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 20px;">
+                คอนเทนต์ให้ความรู้เพื่อสร้างการรับรู้แบรนด์ (Tie-in) 3 โพสต์ล่าสุดที่รอเผยแพร่อัตโนมัติ
+            </p>
+            <div id="queue-list" style="display: grid; gap: 20px;">
+                <p style="color: var(--text-gray);">กำลังโหลดคิวตั้งเวลาโพสต์...</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -219,10 +231,59 @@
             }
 
             alert('ระบบกำลังส่งข้อมูลไปยัง Facebook... (ฟีเจอร์นี้จะเชื่อมต่อกับ Daemon API ในขั้นตอนถัดไป)');
-            
-            // ในขั้นตอนถัดไป ผมจะเชื่อมต่อหน้าจอนี้กับ Backend 
-            // เพื่อให้กดปุ่มแล้วรัน Python Script ที่เราทำไว้ครับ
         }
+
+        // Load scheduled posts from JSON file
+        async function loadScheduledPosts() {
+            try {
+                const response = await fetch('scheduled_posts.json');
+                const posts = await response.json();
+                const container = document.getElementById('queue-list');
+                container.innerHTML = '';
+                
+                if (posts.length === 0) {
+                    container.innerHTML = '<p style="color: var(--text-gray);">ไม่มีโพสต์ที่ตั้งเวลาไว้ในขณะนี้</p>';
+                    return;
+                }
+                
+                posts.forEach(post => {
+                    const postCard = document.createElement('div');
+                    postCard.style.cssText = `
+                        display: flex;
+                        gap: 20px;
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid rgba(255, 255, 255, 0.05);
+                        border-radius: 16px;
+                        padding: 20px;
+                        align-items: center;
+                    `;
+                    
+                    postCard.innerHTML = `
+                        <div style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0;">
+                            <img src="${post.image}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px; flex-wrap: wrap; gap: 10px;">
+                                <span style="font-weight: bold; color: var(--accent-gold); font-size: 15px;">${post.episode} - ${post.target}</span>
+                                <span style="color: #06C755; font-size: 13px; font-weight: 600;">
+                                    <i class="fa-solid fa-clock"></i> ตั้งเวลา: ${post.time}
+                                </span>
+                            </div>
+                            <p style="margin: 0; font-size: 13px; color: var(--text-gray); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.5; white-space: pre-line;">
+                                ${post.caption}
+                            </p>
+                            <span style="font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 5px; display: block;">Facebook Post ID: ${post.id}</span>
+                        </div>
+                    `;
+                    container.appendChild(postCard);
+                });
+            } catch (e) {
+                console.error("Failed to load queue:", e);
+                document.getElementById('queue-list').innerHTML = '<p style="color: var(--text-gray);">ไม่สามารถโหลดคิวโพสต์ได้</p>';
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', loadScheduledPosts);
     </script>
 </body>
 </html>
