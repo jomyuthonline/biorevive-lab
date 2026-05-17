@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BioRevive Lab - Liquid Series Promo</title>
+    <title>BioRevive Lab - Liquid Series Promo (Vertical)</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,12 +36,12 @@
         justify-content: center;
       }
 
-      /* 16:9 Canvas container */
+      /* 9:16 Vertical Canvas container */
       #root {
         position: relative;
-        width: 1280px;
-        height: 720px;
-        background: linear-gradient(135deg, #05050f 0%, #0c0e29 100%);
+        width: 720px;
+        height: 1280px;
+        background: linear-gradient(180deg, #05050f 0%, #0c0e29 100%);
         overflow: hidden;
         border: 2px solid rgba(197, 160, 89, 0.3);
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
@@ -50,41 +50,44 @@
       /* Glowing background orbits */
       .ambient-glow {
         position: absolute;
-        width: 800px;
-        height: 800px;
+        width: 600px;
+        height: 600px;
         background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, rgba(197, 160, 89, 0) 70%);
-        top: -200px;
-        left: -200px;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
         pointer-events: none;
       }
 
       .accent-blue-glow {
         position: absolute;
-        width: 700px;
-        height: 700px;
-        background: radial-gradient(circle, rgba(30, 41, 150, 0.2) 0%, rgba(30, 41, 150, 0) 70%);
-        bottom: -150px;
-        right: -150px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(30, 41, 150, 0.25) 0%, rgba(30, 41, 150, 0) 70%);
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
         pointer-events: none;
       }
 
       /* Gold border frame overlay */
       .border-frame {
         position: absolute;
-        top: 25px;
-        left: 25px;
-        right: 25px;
-        bottom: 25px;
+        top: 30px;
+        left: 30px;
+        right: 30px;
+        bottom: 30px;
         border: 1px solid rgba(197, 160, 89, 0.25);
         pointer-events: none;
         z-index: 10;
       }
 
-      /* Top persistent logo stamp */
+      /* Top persistent logo stamp (Centered) */
       .logo-stamp {
         position: absolute;
-        top: 50px;
-        left: 60px;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         align-items: center;
         gap: 12px;
@@ -111,39 +114,40 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 1280px;
-        height: 720px;
+        width: 720px;
+        height: 1280px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0 80px;
+        padding: 0 50px;
+        box-sizing: border-box;
       }
 
       /* SCENE 1: Intro (0-3s) */
       .scene-intro {
-        flex-direction: column;
         text-align: center;
         z-index: 5;
       }
 
       .intro-logo {
-        height: 100px;
-        margin-bottom: 25px;
+        height: 110px;
+        margin-bottom: 30px;
         border-radius: 8px;
         filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(197, 160, 89, 0.4));
       }
 
       .intro-gold-title {
         font-family: 'Outfit', sans-serif;
-        font-size: 72px;
+        font-size: 60px;
         font-weight: 800;
-        letter-spacing: 12px;
+        letter-spacing: 8px;
         color: transparent;
         background: linear-gradient(135deg, #ffffff 0%, #D4AF37 50%, #C5A059 100%);
         -webkit-background-clip: text;
         background-clip: text;
         text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         text-transform: uppercase;
       }
 
@@ -155,37 +159,40 @@
         text-transform: uppercase;
       }
 
-      /* SCENE 2: Product Showcase (3-11.5s) */
+      /* SCENE 2: Product Showcase (3-11.5s) - Optimized Vertical */
       .scene-product {
-        justify-content: space-between;
+        justify-content: flex-start;
+        padding-top: 180px;
         z-index: 4;
       }
 
       .product-text-side {
-        width: 50%;
+        width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        margin-bottom: 40px;
       }
 
       .badge {
-        align-self: flex-start;
+        align-self: center;
         background: rgba(197, 160, 89, 0.15);
         border: 1px solid var(--accent-gold);
         color: var(--accent-gold);
         padding: 6px 16px;
         border-radius: 50px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 2px;
       }
 
       .h-title {
-        font-size: 42px;
+        font-size: 34px;
         font-weight: 800;
         line-height: 1.3;
         color: #ffffff;
+        text-align: center;
       }
 
       .h-highlight {
@@ -197,47 +204,57 @@
       }
 
       .desc-text {
-        font-size: 18px;
+        font-size: 15px;
         color: #b0b5d0;
-        line-height: 1.6;
+        line-height: 1.5;
         font-weight: 300;
+        text-align: center;
+        padding: 0 10px;
       }
 
       .bullets {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 18px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
       }
 
       .bullet-item {
         display: flex;
-        align-items: center;
-        gap: 12px;
+        align-items: flex-start;
+        gap: 10px;
       }
 
       .bullet-icon {
         color: var(--accent-gold);
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
+        margin-top: 2px;
       }
 
       .bullet-item span {
-        font-size: 16px;
+        font-size: 14px;
         color: #e2e8f0;
+        line-height: 1.4;
       }
 
       .bullet-item strong {
         color: #ffffff;
       }
 
-      /* Product Visual Display side */
+      /* Product Visual Display (Vertical layout) */
       .product-img-side {
-        width: 45%;
-        height: 100%;
+        width: 100%;
+        flex: 1;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 50px;
       }
 
       .liquid-container {
@@ -245,79 +262,83 @@
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        gap: 40px;
-        height: 500px;
+        gap: 30px;
+        height: 350px;
       }
 
       .bottle-5l {
-        height: 380px;
+        height: 270px;
         filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(30, 41, 150, 0.3));
         transform-origin: bottom center;
       }
 
       .bottle-1l {
-        height: 290px;
+        height: 200px;
         filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(197, 160, 89, 0.3));
         transform-origin: bottom center;
       }
 
       .bottle-halo {
         position: absolute;
-        width: 320px;
-        height: 320px;
+        width: 300px;
+        height: 300px;
         background: radial-gradient(circle, rgba(197, 160, 89, 0.15) 0%, rgba(197, 160, 89, 0) 70%);
-        bottom: 50px;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: -1;
         pointer-events: none;
       }
 
       /* SCENE 3: Outro / CTA (11.5-15s) */
       .scene-outro {
-        flex-direction: column;
         text-align: center;
         z-index: 6;
       }
 
       .outro-logo {
-        height: 90px;
-        margin-bottom: 25px;
+        height: 100px;
+        margin-bottom: 30px;
         border-radius: 8px;
         filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.7)) drop-shadow(0 2px 10px rgba(197, 160, 89, 0.45));
       }
 
       .outro-title {
-        font-size: 38px;
+        font-size: 32px;
         font-weight: 700;
         color: white;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
+        line-height: 1.4;
       }
 
       .outro-desc {
-        font-size: 20px;
+        font-size: 18px;
         color: #a0aec0;
-        margin-bottom: 35px;
+        margin-bottom: 45px;
         font-weight: 300;
       }
 
       .qr-block {
         display: flex;
+        flex-direction: column;
         align-items: center;
         background: rgba(15, 15, 26, 0.6);
         border: 1px solid rgba(197, 160, 89, 0.3);
-        padding: 15px 30px;
-        border-radius: 12px;
-        gap: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        padding: 25px 35px;
+        border-radius: 20px;
+        gap: 15px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
       }
 
       .qr-img {
-        width: 80px;
-        height: 80px;
-        border-radius: 6px;
+        width: 140px;
+        height: 140px;
+        border-radius: 8px;
+        border: 2px solid rgba(197, 160, 89, 0.3);
       }
 
       .qr-text {
-        text-align: left;
+        text-align: center;
       }
 
       .qr-text h4 {
@@ -335,25 +356,26 @@
     </style>
   </head>
   <body>
-    <!-- 16:9 HD Render Target -->
+    <!-- 9:16 Vertical HD Target -->
     <div
       id="root"
       class="video-stage"
       data-composition-id="main"
       data-start="0"
       data-duration="15"
-      data-width="1280"
-      data-height="720"
+      data-width="720"
+      data-height="1280"
     >
-      <!-- Background music element -->
+      <!-- Background music and Voiceover elements -->
       <audio id="bg-music" src="../assets/audio_soundtrack.mp3" loop preload="auto"></audio>
+      <audio id="voiceover" src="../assets/voiceover_liquid.mp3" preload="auto"></audio>
       
       <!-- Background glows -->
       <div class="ambient-glow"></div>
       <div class="accent-blue-glow"></div>
       <div class="border-frame"></div>
 
-      <!-- Persistent Logo Stamp (Active throughout product stage) -->
+      <!-- Centered Top Logo Stamp (Active throughout product stage) -->
       <div id="top-logo-stamp" class="logo-stamp" style="opacity: 0;">
         <img src="../assets/logo_bg.jpg" alt="BioRevive logo">
         <span>BioRevive Lab</span>
@@ -371,19 +393,19 @@
         <div class="product-text-side">
           <div class="badge">Liquid Series 1L & 5L</div>
           <h2 class="h-title">สูตรน้ำเข้มข้นแอคทีฟพิเศษ<br><span class="h-highlight">พร้อมใช้งานทันที</span></h2>
-          <p class="desc-text">นวัตกรรมจุลินทรีย์คัดสายพันธุ์ธรรมชาติเพื่อขจัดคราบไขมันสะสมในท่อส่งน้ำและถังดักได้อย่างเฉียบพลัน ปลอดภัย ไร้กลิ่นเหม็นรบกวน</p>
+          <p class="desc-text">นวัตกรรมจุลินทรีย์คัดสายพันธุ์ธรรมชาติ ขจัดคราบไขมันสะสมในท่อส่งน้ำและถังดักได้ทันที ปลอดภัย ไร้กลิ่นเหม็นเน่ากวนใจ</p>
           <div class="bullets">
             <div class="bullet-item">
               <div class="bullet-icon">✓</div>
-              <span><strong>พร้อมใช้ทันที:</strong> เทราดตรงจุด สะดวกรวดเร็วโดยไม่ต้องแช่น้ำหมัก</span>
+              <span><strong>พร้อมใช้ทันที:</strong> เทราดลงจุดที่เหม็น/ตัน สะดวก รวดเร็ว ไม่ต้องรอหมัก</span>
             </div>
             <div class="bullet-item">
               <div class="bullet-icon">✓</div>
-              <span><strong>ขจัดคราบสะสม:</strong> เจาะลึกละลายก้อนไขมันหนาในถังดักได้สิ้นซาก</span>
+              <span><strong>ขจัดคราบสะสม:</strong> สลายก้อนไขมันหนาเตอะในถังดักได้อย่างเฉียบพลัน</span>
             </div>
             <div class="bullet-item">
               <div class="bullet-icon">✓</div>
-              <span><strong>ขจัดกลิ่นเหม็นเน่า:</strong> ดักจับต้นเหตุกลิ่นเหม็นโชยตีกลับรวดเร็ว</span>
+              <span><strong>ขจัดกลิ่นเหม็นเน่า:</strong> ดับกลิ่นตีกลับจากซิงค์ล้างจานได้จากต้นตอ</span>
             </div>
           </div>
         </div>
@@ -415,6 +437,24 @@
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
+
+      // Audio Elements Setup
+      const bgMusic = document.getElementById('bg-music');
+      const voiceover = document.getElementById('voiceover');
+      
+      if (bgMusic) bgMusic.volume = 0.12; // Adjusted lower to prevent drowning out voiceover
+      if (voiceover) voiceover.volume = 1.0; // High volume for voiceover
+
+      // Sync Audio to GSAP events
+      tl.eventCallback("onPlay", () => {
+          if (bgMusic) bgMusic.play().catch(e => console.log("BG music blocked:", e));
+          if (voiceover) voiceover.play().catch(e => console.log("Voiceover blocked:", e));
+      });
+
+      tl.eventCallback("onPause", () => {
+          if (bgMusic) bgMusic.pause();
+          if (voiceover) voiceover.pause();
+      });
 
       // Frame 0 - 3s: Intro scene
       tl.fromTo("#scene-intro .intro-logo", { opacity: 0, scale: 0.8, rotation: -5 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.2, ease: "back.out(1.5)" }, 0)
@@ -450,13 +490,24 @@
 
       window.__timelines["main"] = tl;
 
-      // Responsive viewport scaling for iframe preview
+      // Handle direct timeline sync on time update (restart/scrubbing support)
+      tl.eventCallback("onUpdate", () => {
+          const time = tl.time();
+          if (voiceover && Math.abs(voiceover.currentTime - time) > 0.3) {
+              voiceover.currentTime = time;
+          }
+          if (bgMusic && Math.abs(bgMusic.currentTime - time) > 0.3) {
+              bgMusic.currentTime = time % bgMusic.duration;
+          }
+      });
+
+      // Responsive viewport scaling for 9:16 vertical target
       function resizeVideo() {
           const root = document.getElementById('root');
-          const scale = window.innerWidth / 1280;
+          const scale = window.innerWidth / 720;
           root.style.transform = `scale(${scale})`;
           root.style.transformOrigin = 'top left';
-          document.body.style.height = `${720 * scale}px`;
+          document.body.style.height = `${1280 * scale}px`;
       }
       
       window.addEventListener('resize', resizeVideo);
